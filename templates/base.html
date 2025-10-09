@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>leilão</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+
+</head>
+
+
+<body>
+
+    <header>
+        <h2>colecionáveis leilões</h2>
+        <h4>{{titulo}}</h4>
+    </header>
+
+    <nav>
+        <ul>
+            <a href="/">Página inicial</a>
+            <a href="/entrar">Entrar</a>
+            <a href="/cadastrar">Cadastrar</a>
+            <a href="/login_AR">Area Restrita</a>
+
+        </ul>
+    </nav>
+
+
+
+
+    {%block conteudo%}
+    {%endblock%}
+
+    <!-- <footer>
+        &#169; leilões sla
+    </footer> -->
+
+</body>
+
+</html>

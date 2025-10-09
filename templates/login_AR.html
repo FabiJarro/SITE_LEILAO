@@ -1,0 +1,43 @@
+{%extends "base.html"%}
+{%block conteudo%}
+    <h1>Area restrita- login</h1>
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul id="messages" class="list-unstyled">
+        {% for message in messages %}
+        <li class="alert alert-success">{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+
+    <div class="container">
+    
+        <div class="content">
+          <div id="login_arearestrita">
+    
+    
+            <form method="post" action="/login_AR">
+              <p>
+                <label for="nome_login">Email</label>
+                <input id="nome_login" name="nome_login" required="required" type="text"
+                  placeholder="ex. usuario@gmail.com" />
+              </p>
+    
+              <p>
+                <label for="email_login">Senha</label>
+                <input id="email_login" name="pass_login" required="required" type="password" placeholder="ex. senha" />
+              </p>
+    
+    
+              <p>
+                <input type="submit" value="Logar" />
+              </p>
+            </form>
+    
+          </div>
+    
+{%endblock%}

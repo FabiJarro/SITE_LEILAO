@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-
-<head>
-  <meta charset="UTF-8" />
-  <title>login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
+{%extends "base.html"%}
+{%block conteudo%}
 
 
-
-<body>
   <div class="container">
-    <a class="links" id="paracadastro"></a>
-    <a class="links" id="paralogin"></a>
+    <!-- <a class="links" id="paracadastro"></a>
+    <a class="links" id="paralogin"></a> -->
 
     <h1>Login</h1>
 
@@ -20,7 +12,7 @@
       <div id="login">
 
 
-        <form method="post" action="/login">
+        <form method="post" action="/entrar">
           <p>
             <label for="nome_login">Email</label>
             <input id="nome_login" name="nome_login" required="required" type="text"
@@ -46,4 +38,4 @@
 
 </body>
 
-</html>
+{%endblock%}
