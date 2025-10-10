@@ -17,6 +17,8 @@ def arearestrita():
     # cadastros= Cadastros.query.all
     return render_template('arearestrita.html', titulo="area restrita", cadastros=lista)
 
+
+
 @app.route("/login_AR", methods=['GET', 'POST'])
 def login_AR():
 
@@ -62,28 +64,35 @@ def entrar():
 
 
 
+
+@app.route('/entrar_usuario', methods=['POST',])
+def entrar_usuario():
+    email = request.form['email']
+    senha = request.form['senha']
+    
+    usuario=Cadastros.query.filter_by(email=email).first()
+    print(request.form)
+    if usuario and usuario.senha==senha:
+        session['usuario_logado'] = usuario.email
+        flash(f'{usuario.email} logado com sucesso!')
+        print("sucesso")
+        proxima_pagina = request.form.get('proxima') or url_for('paginainicial')
+        return redirect(proxima_pagina)
+    else:
+        flash('Usuário ou senha incorretos!')
+        return redirect(url_for('entrar'))
+    
+
+
+
+
+
 #@app.route('/cadastrar')
 #def cadastrar():
 #    return render_template('cadastrar.html', mostrar_opcoes=False)
 
 
-    
-# @app.route('/cadastrar_usuariffo', methods=['POST',])
-# def cadastrar_usuariffo():
-#     print('chegando a requisição...')
-#     # nome = request.form.get("nome")
-#     # cpf = request.form.get("cpf")
-#     # email = request.form.get("email")
-#     print(f'############ {request.form}')
-#     #adicionar informacoes
-#     #salvar banco
-#     #objeto salvo
-#     # objetoSalvo = {
-#     #     "nome": nome,
-#     #     "cpf": cpf,
-#     #     "email": email
-#     # }
-#     return jsonify()
+
 
 
 @app.route('/cadastrar_usuario', methods=['POST',])

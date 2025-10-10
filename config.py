@@ -9,4 +9,3 @@ database='leilao'
         
 SQLALCHEMY_DATABASE_URI= f'{SGBD}://{usuario}:{senha}@{servidor}/{database}'
 
-     
