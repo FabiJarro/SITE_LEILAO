@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, session,flash, url_for, make_response,jsonify
 from datetime import datetime
 from leilao import app,db
-from models import Cadastros, Adm
+from models import Cadastros, Adm, Produtos
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -14,8 +14,9 @@ def paginainicial():
 @app.route('/arearestrita')
 def arearestrita():
     lista=Cadastros.query.order_by(Cadastros.id_usuario)
+    lista_produto=Produtos.query.order_by(Produtos.id_produto)
     # cadastros= Cadastros.query.all
-    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista)
+    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto)
 
 
 
@@ -34,7 +35,7 @@ def login_AR():
             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
             return redirect(url_for('paginainicial'))
 
-    return render_template('login_AR.html')
+    return render_template('login_AR.html', titulo="login- area restrita")
 
 
 
@@ -60,7 +61,7 @@ def login_AR():
 
 @app.route('/entrar')
 def entrar():
-    return render_template('entrar.html')
+    return render_template('entrar.html', titulo="Login")
 
 
 
@@ -82,16 +83,6 @@ def entrar_usuario():
         flash('Usuário ou senha incorretos!')
         return redirect(url_for('entrar'))
     
-
-
-
-
-
-#@app.route('/cadastrar')
-#def cadastrar():
-#    return render_template('cadastrar.html', mostrar_opcoes=False)
-
-
 
 
 
@@ -123,13 +114,71 @@ def cadastrar_usuario():
 
 @app.route('/cadastrar')
 def cadastrar():
-    return render_template('cadastrar.html', titulo="sla")
+    return render_template('cadastrar.html', titulo="cadastro")
 
 
 @app.route('/salvar_produto', methods=['POST',])
 def salvar_produto():
     print('chegando a requisição...')
     print(f'############ {request.form}')
-    return jsonify()
+    nome_produto=request.form['nome_produto']
+    categoria_produto=request.form['categoria_produto']
+    preco_produto=request.form['preco_produto']
+    
+    produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
+    
+    if produto:
+        flash('produto existente')
+        return redirect(url_for('paginainicial'))
+    
+    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto)
+    db.session.add(novo_produto)
+    db.session.commit()
+    print("sucesso?")
+    return redirect(url_for('arearestrita'))
+
+
+
+@app.route('/atualizar', methods=['POST',])
+def atualizar():
+    cadastro= Cadastros.query.filter_by(id_usuario=request.form['id']).first()
+    cadastro.nome= request.form['nome']
+    cadastro.cpf=request.form['cpf']
+    cadastro.data_str = request.form['data_nascimento']
+    # cadastro.data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
+    cadastro.email=request.form['email']
+    cadastro.senha=request.form['senha']
+    cadastro.cep=request.form['cep']
+
+    
+    db.session.add(cadastro)
+    db.session.commit()
+    
+    # arquivo= request.files['arquivo']
+    # uploads_path=app.config['UPLOAD_PATH']
+    # timestamp=time.time()
+    # deleta_arquivo(cadastro.id)
+    # arquivo.save(f'{uploads_path}/capa{jogo.id}-{timestamp}.jpg')
+    
+    return redirect ( url_for('paginainicial'))
+
+
+
+@app.route('/deletar/<int:id_usuario>')
+def deletar(id_usuario):
+    Cadastros.query.filter_by(id_usuario=id_usuario).delete()
+    db.session.commit()
+    flash('Jogo deletado com sucesso!')
+    return redirect (url_for('arearestrita'))
+
+
+
+
+@app.route('/editar/<int:id_usuario>')
+def editar(id_usuario):
+    cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
+    # capa_jogo=recupera_imagem(id_usuario)
+    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
+    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 

@@ -44,6 +44,20 @@ TABLES['Adm'] = ('''
       PRIMARY KEY (`id_adm`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+
+TABLES['Produtos'] = ('''
+      CREATE TABLE `produtos` (
+      `id_produto` int NOT NULL AUTO_INCREMENT,
+      `nome_produto` varchar(255) NOT NULL,
+      `categoria_produto` varchar(100),
+      `preco_produto` decimal NOT NULL,
+      `id_usuario` int,
+      PRIMARY KEY (`id_produto`),
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+      
+      
+
 for tabela_nome in TABLES:
       tabela_sql = TABLES[tabela_nome]
       try:
@@ -82,6 +96,21 @@ cursor.execute('select * from leilao.cadastros')
 print(' -------------  Usuarios:  -------------')
 for cadastro in cursor.fetchall():
       print(cadastro[1])
+      
+#inserindo produtos na lista lá
+produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, id_usuario) VALUES (%s, %s, %s, %s)'
+produtos = [
+      ('caneca', 'casual', 20.99, 1)
+]
+cursor.executemany(produtos_sql, produtos)
+
+cursor.execute('select * from leilao.produtos')
+print(' -------------  Produtos:  -------------')
+for produto in cursor.fetchall():
+      print(produto[1])
+      
+    
+
 
 # commitando se não nada tem efeito
 conn.commit()

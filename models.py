@@ -20,3 +20,15 @@ class Adm(db.Model):
     
     def __repr__(self):
         return f'<Adm {self.email}>'
+
+class Produtos(db.Model):
+    id_produto=db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome_produto=db.Column(db.String(255), nullable=False)
+    categoria_produto=db.Column(db.String(255), nullable=False)
+    preco_produto=db.Column(db.String(255), nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
+    
+    usuario = db.relationship('Cadastros', backref='produtos', lazy=True)
+    
+    def __repr__(self):
+        return f'<Produto {self.nome_produto}>'
