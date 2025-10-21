@@ -22,6 +22,8 @@ class Adm(db.Model):
         return f'<Adm {self.email}>'
 
 class Produtos(db.Model):
+    __tablename__='produtos'
+    
     id_produto=db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome_produto=db.Column(db.String(255), nullable=False)
     categoria_produto=db.Column(db.String(255), nullable=False)

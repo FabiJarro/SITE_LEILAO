@@ -100,6 +100,13 @@ def cadastrar_usuario():
     # print(f'############ {request.form}')
     # return jsonify()
     
+    cadastro = Cadastros.query.filter_by(email=email).first()
+    if cadastro:
+        flash('Cadastro existente.')
+        return redirect(url_for('paginainicial'))
+    
+    
+    
     cadastro=Cadastros.query.filter_by(nome=nome).first()
     
     if cadastro:
@@ -109,7 +116,12 @@ def cadastrar_usuario():
     novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
     db.session.add(novo_cadastro)
     db.session.commit()
+    
+    session['id_usuario'] = novo_cadastro.id_usuario
+    
     print("sucesso?")
+    
+    flash ('usuario cadastrado com sucesso')
     return redirect(url_for('arearestrita'))
 
 @app.route('/cadastrar')
@@ -124,6 +136,7 @@ def salvar_produto():
     nome_produto=request.form['nome_produto']
     categoria_produto=request.form['categoria_produto']
     preco_produto=request.form['preco_produto']
+    id_usuario = session.get('id_usuario')
     
     produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
     
@@ -131,10 +144,24 @@ def salvar_produto():
         flash('produto existente')
         return redirect(url_for('paginainicial'))
     
-    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto)
+    if not id_usuario:
+        flash ("erro: usuario não identificado")
+        return redirect(url_for('entrar'))
+    
+    produto_existente = Produtos.query.filter_by(nome_produto=nome_produto).first()
+    if produto_existente:
+        flash('Produto já existente!')
+        return redirect(url_for('paginainicial'))
+    
+    # cursor.execute("INSERT INTO produtos (nome, preco, id_usuario) VALUES (%s, %s, %s)", (nome, preco, id_usuario))
+    # conexao.commit()
+    
+    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, id_usuario=id_usuario)
+    
     db.session.add(novo_produto)
     db.session.commit()
     print("sucesso?")
+    flash('Produto cadstrado com sucesso')
     return redirect(url_for('arearestrita'))
 
 
@@ -182,3 +209,6 @@ def editar(id_usuario):
     # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 
+@app.route('/detalhes_produto')
+def detalhes_produto():
+    return render_template('detalhes_produto.html', titulo="página do produto")

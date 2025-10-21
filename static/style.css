@@ -1,18 +1,98 @@
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 
 
 footer {
 
-    padding: 20px;
-    /* background: #868686; */
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    margin-top: 40px;
-    bottom:0; 
-    width: 100%;
-    
-  }
+  padding: 20px;
+  /* background: #868686; */
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  margin-top: 40px;
+  bottom: 0;
+  width: 100%;
 
-  
+}
+
+
+
+main {
+  padding: 70px;
+
+}
+
+p {
+  font-size: 20px;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: white;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px;
+  color: black;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin: 0;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+nav {
+  background: white;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 2px solid #eee;
+}
+
+
+
+
+.abraangecards {
+  /* background: white; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+}
+
+
+.card {
+  background: white;
+  border-radius: 13px;
+  padding: 13px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  max-width: 300px;
+  /* limite máximo */
+  width: 100%;
+  /* ocupa todo espaço permitido pelo grid */
+  margin: 0 auto;
+  /* garante centralização */
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #444;
+}
