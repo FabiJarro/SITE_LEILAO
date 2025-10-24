@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+{%block conteudo%}
+
+<style>
+    p {
+        font-size: 20px;
+    }
+</style>
+
+
+<p>{{produto.nome_produto}}</p>
+<p>{{produto.categoria_produto}}</p>
+<p>{{produto.preco_produto}}</p>
+
+<a href="{{ url_for('fazer_lance') }}">
+    <button>Fazer lance</button>
+</a>
+
+
+{%endblock%}

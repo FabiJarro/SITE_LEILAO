@@ -8,7 +8,9 @@ SENHA_ADM="1234"
 
 @app.route('/')
 def paginainicial():
-    return render_template('index.html')
+    produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
+    lista_produto=Produtos.query.order_by(Produtos.id_produto)
+    return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque)
 
 
 @app.route('/arearestrita')
@@ -209,6 +211,15 @@ def editar(id_usuario):
     # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 
-@app.route('/detalhes_produto')
-def detalhes_produto():
-    return render_template('detalhes_produto.html', titulo="página do produto")
+@app.route('/detalhes_produto/<int:id_produto>')
+def detalhes_produto(id_produto):
+    
+    produto=Produtos.query.filter_by(id_produto=id_produto).first()
+    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto)
+
+
+
+@app.route('/fazer_lance')
+def fazer_lance():
+    flash('lance registrado!')
+    return redirect(url_for('paginainicial'))

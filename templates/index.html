@@ -6,23 +6,17 @@
 
     <div class="abraangecards">
 
+    {%for produto in produtos%}
+
         <div class="card">
-            <a href="/detalhes_produto">
-                <img src="static/capa_padrao.jpeg" alt="nome do produto Y" />
+            <a href="{{url_for('detalhes_produto', id_produto=produto.id_produto)}}">
+                <img src="static/capa_padrao.jpeg" alt="{{produto.nome_produto}}" />
             </a>
         </div>
 
-        <div class="card">
-            <a href="/detalhes_produto">
-                <img src="static/capa_padrao.jpeg" alt="nome do produto X" />
-            </a>
-        </div>
-        
-        <div class="card">
-            <a href="/detalhes_produto">
-                <img src="static/capa_padrao.jpeg" alt="nome do produtos TALS" />
-            </a>
-        </div>
+
+    {%endfor%}
+
 
 
 
