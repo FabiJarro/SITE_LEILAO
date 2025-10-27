@@ -1,0 +1,43 @@
+out 26 
+PONTOS QUE AINDA TENHO QUE FAZER(lógica/backend)
+//o ultimo commit foi página com cards da página inicial
+
+//os tópicos não estão em ordem de prioridade,
+ '*' significa que o tópico é um dos próximos que tenho que fazer
+
+ainda tem que fazer pra essa semana:
+-conectar minha tabela de ADM
+-trbalhar com sessoes
+-os cookies
+-arrumar area restrita (não pode dar pra acessar se escrever /arearestrita!!!!! ) FEITO
+-criar table do lance (id_lance, (fk) id_usuario, (fk)id_produto, valor_lance, horário_lance)
+-lógica do lance 
+-imagem do produto*
+-botão "minha conta" (aqui o usuario vai poder editar seus dados(deve ter a mesma lógica do editar e area restrita né, aparece os leilões que a pessoa está participando))
+
+pra depois
+-docker
+-botao deletar
+-criptografia SENHA
+-implementar BUSCA (que nem do professor sabe)
+-páginação, minha página inicial não pode ser infinita kkkkk
+
+ajustes:
+-confirmar senha (tem que realmente confirmar a senha!)
+-mais campos (isso talvez um pouco mais tarde rs (pra não dar trabalho nos testes K))
+-um usuario tem qeu ser maior de idade!
+-um email tem que ser único! assim como o cpf
+-tipo password a senha FEITO
+
+-responsividade meu deus
+
+
+se der tempo (obs: MUITO IMPORTANTE: apenas APENAS fazer se TUDO, TUDINHO, já estiver funcionando (tudo mesmo!))
+-temas (escuro, claro(padrao), acessivel (amarelo e preto?))
+-botão favoritos (seria do banco de dados msm, uma página sabe)
+
+
+27 out
+concertei a area restrita usando referrer
+uma coisa que queria fazer é melhorar isso, pelo que eu pequisei (já sabia que a forma query já era pra uma segurança menor né)
+é usar sessões 

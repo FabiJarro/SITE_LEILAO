@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, session,flash, url_for, make_response,jsonify
+from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from datetime import datetime
 from leilao import app,db
 from models import Cadastros, Adm, Produtos
@@ -10,34 +10,46 @@ SENHA_ADM="1234"
 def paginainicial():
     produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
+    
+    # username=Cadastros.filter_by(nome=nome).first()
+    
     return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque)
 
 
 @app.route('/arearestrita')
 def arearestrita():
+    referer = request.referrer
+    if not referer or 'login_AR' not in referer:
+        return redirect(url_for('login_AR', proxima=url_for('arearestrita')))
+    
     lista=Cadastros.query.order_by(Cadastros.id_usuario)
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
-    # cadastros= Cadastros.query.all
-    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto)
+    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, )
 
+#esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
+
+@app.route('/produtos', methods=['GET'])
+def getProdutos():
+    #lista=Cadastros.query.order_by(Cadastros.id_usuario)
+    produtos=Produtos.query.all()
+    return jsonify(produtos)
 
 
 @app.route("/login_AR", methods=['GET', 'POST'])
 def login_AR():
-
+    proxima=request.args.get('proxima') or url_for('arearestrita')
+    
     if request.method == "POST":
-        usuario = request.form.get('nome_login')
+        adm= request.form.get('adm_login')
         senha = request.form.get('pass_login')
 
-        if usuario == ADMINISTRADOR and senha == SENHA_ADM:
-            resposta = make_response(redirect(url_for('arearestrita')))
-            # resposta.set_cookie('username', usuario, max_age=60*30)
-            return resposta
+        if adm== ADMINISTRADOR and senha == SENHA_ADM:
+            return redirect(proxima)
         else:
             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
-            return redirect(url_for('paginainicial'))
+            return redirect(url_for('login_AR'), proxima=proxima)
 
-    return render_template('login_AR.html', titulo="login- area restrita")
+    return render_template('login_AR.html', titulo="login- area restrita", proxima=proxima)
 
 
 
@@ -63,19 +75,23 @@ def login_AR():
 
 @app.route('/entrar')
 def entrar():
-    return render_template('entrar.html', titulo="Login")
+    proxima=request.args.get('proxima')
+    return render_template('entrar.html', titulo="Login", proxima=proxima)
 
 
 
-
-@app.route('/entrar_usuario', methods=['POST',])
+@app.route('/entrar_usuario', methods=['POST', 'GET'])
 def entrar_usuario():
     email = request.form['email']
     senha = request.form['senha']
     
     usuario=Cadastros.query.filter_by(email=email).first()
     print(request.form)
-    if usuario and usuario.senha==senha:
+    
+    if usuario==usuario and usuario.senha==senha:
+        resposta = make_response(redirect(url_for('paginainicial')))
+        resposta.set_cookie('email', email, max_age=60*30)
+        
         session['usuario_logado'] = usuario.email
         flash(f'{usuario.email} logado com sucesso!')
         print("sucesso")
@@ -85,6 +101,26 @@ def entrar_usuario():
         flash('Usuário ou senha incorretos!')
         return redirect(url_for('entrar'))
     
+#meu autenticar com nome diferente rs (to falando do de cima)
+
+# @app.route("/login", methods=['GET', 'POST'])
+# def login():
+
+#     if request.method == "POST":
+#         usuario = request.form.get('nome_login')
+#         senha = request.form.get('pass_login')
+
+#         if usuario == USUARIO_CADASTRADO and senha == SENHA_CADASTRADO:
+#             resposta = make_response(redirect(url_for('bemvindo')))
+#             resposta.set_cookie('username', usuario, max_age=60*30)
+#             return resposta
+#         else:
+#             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
+#             return redirect(url_for('login'))
+
+#     return render_template('login1.html')
+
+
 
 
 
@@ -212,8 +248,7 @@ def editar(id_usuario):
 
 
 @app.route('/detalhes_produto/<int:id_produto>')
-def detalhes_produto(id_produto):
-    
+def detalhes_produto(id_produto): 
     produto=Produtos.query.filter_by(id_produto=id_produto).first()
     return render_template('detalhes_produto.html', titulo="página do produto", produto=produto)
 
@@ -223,3 +258,13 @@ def detalhes_produto(id_produto):
 def fazer_lance():
     flash('lance registrado!')
     return redirect(url_for('paginainicial'))
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    session['usuario_logado']=None
+    flash("Você foi deslogado", "info")
+    resposta = make_response(redirect(url_for('entrar')))
+    resposta.set_cookie('username', '', expires=0)
+    return resposta
