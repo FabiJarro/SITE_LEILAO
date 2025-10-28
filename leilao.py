@@ -10,9 +10,11 @@ app.config.from_pyfile('config.py')
 db=SQLAlchemy(app)
 
 from views import * 
+from views_autenticacao import *
 
 if __name__ == '__main__':
     #app.run(debug=True, host='0.0.0.0', port=5000)
-    app.run(debug=True)
+    # app.permanent_session_lifetime = timedelta(hours=1)
+    app.run(debug=True, port=5001)
 
 

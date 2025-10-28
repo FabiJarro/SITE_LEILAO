@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+{%block conteudo%}
+
+{% if primeiro_nome %}
+    <h3>Olá, {{ primeiro_nome }}!</h3>
+{% endif%}
+
+
+
+<body>
+
+    <ul>
+        <a href="/meusdados">Meus dados</a>
+        <a href="/entrar">Meus lances</a>
+        <a href="/cadastrar">Favoritos</a>
+
+    </ul>
+
+</body>
+
+
+<footer>
+    <p>&copy; 2025 leilão</p>
+</footer>
+
+
+{%endblock%}

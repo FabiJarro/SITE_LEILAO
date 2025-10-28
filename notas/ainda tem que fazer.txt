@@ -7,8 +7,8 @@ PONTOS QUE AINDA TENHO QUE FAZER(lógica/backend)
 
 ainda tem que fazer pra essa semana:
 -conectar minha tabela de ADM
--trbalhar com sessoes
--os cookies
+-trbalhar com sessoes 
+-os cookies 
 -arrumar area restrita (não pode dar pra acessar se escrever /arearestrita!!!!! ) FEITO
 -criar table do lance (id_lance, (fk) id_usuario, (fk)id_produto, valor_lance, horário_lance)
 -lógica do lance 
@@ -41,3 +41,15 @@ se der tempo (obs: MUITO IMPORTANTE: apenas APENAS fazer se TUDO, TUDINHO, já e
 concertei a area restrita usando referrer
 uma coisa que queria fazer é melhorar isso, pelo que eu pequisei (já sabia que a forma query já era pra uma segurança menor né)
 é usar sessões 
+
+28 out
+não tenho certeza se os cookies estão funcionando kkk
+mas parece sabe
+- tenho que fazer esse botao de login desapareere quando a pessoa estiver 
+logada e ter um botao para logout(já funciona a rota)
+seção MinhaConta criada
+tenho qeu ver algum jeito de que haja seção DENTRO DO MinhaConta
+com: meus favoritos, meus dados (e ter como editar), meus lances(ainda não sei oque vai ter)
+ (acabei de ver, o melhor jeito é usando javascript msm aff, vou ter que fazer que nem a parte do cadastro)
+dividi o views.py em views_autenticacao (tava grande demais)
+to pensando em fazer um views_produtos

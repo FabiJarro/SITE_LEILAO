@@ -1,12 +1,18 @@
 {%extends "base.html"%}
 {%block conteudo%}
 
+{% if primeiro_nome %}
+    <h3>Bem-vindo, {{ primeiro_nome }}!</h3>
+{% endif%}
+
 
 <main>
 
+    
+
     <div class="abraangecards">
 
-    {%for produto in produtos%}
+        {%for produto in produtos%}
 
         <div class="card">
             <a href="{{url_for('detalhes_produto', id_produto=produto.id_produto)}}">
@@ -15,7 +21,7 @@
         </div>
 
 
-    {%endfor%}
+        {%endfor%}
 
 
 

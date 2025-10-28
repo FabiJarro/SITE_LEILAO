@@ -10,10 +10,20 @@ SENHA_ADM="1234"
 def paginainicial():
     produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
+    email_logado = session.get('usuario_logado')
+    primeiro_nome = None
     
-    # username=Cadastros.filter_by(nome=nome).first()
-    
-    return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque)
+    if email_logado:
+        usuario = Cadastros.query.filter_by(email=email_logado).first()
+        if usuario:
+            primeiro_nome = usuario.nome.split()[0]
+        print(primeiro_nome)
+    else:
+        email_cookie=request.cookies.get('usuario_email')
+        if email_cookie:
+            session['usuario_logado'] = email_cookie
+            email_logado = email_cookie
+    return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque, primeiro_nome=primeiro_nome)
 
 
 @app.route('/arearestrita')
@@ -35,94 +45,6 @@ def getProdutos():
     return jsonify(produtos)
 
 
-@app.route("/login_AR", methods=['GET', 'POST'])
-def login_AR():
-    proxima=request.args.get('proxima') or url_for('arearestrita')
-    
-    if request.method == "POST":
-        adm= request.form.get('adm_login')
-        senha = request.form.get('pass_login')
-
-        if adm== ADMINISTRADOR and senha == SENHA_ADM:
-            return redirect(proxima)
-        else:
-            flash('Usuário ou senha inválidos. Tente novamente.', "erro")
-            return redirect(url_for('login_AR'), proxima=proxima)
-
-    return render_template('login_AR.html', titulo="login- area restrita", proxima=proxima)
-
-
-
-# @app.route('/login_AR')
-# def login_AR():
-#     proxima=request.args.get('proxima')
-#     return render_template('arearestrita.html', proxima=proxima)
-
-
-# @app.route('/autenticar_AR', methods=['POST',])
-# def autenticar_AR():
-#     adm=Adm.query.filter_by(email=request.form['adm']).first()
-
-#     if adm and request.form['senha'] == adm.senha:
-#         session['adm_logado'] = adm.email
-#         flash(adm.email + ' logado com sucesso!')
-#         proxima_pagina = request.form.get('proxima')
-#         return redirect(proxima_pagina)
-#     else:
-#         flash('Usuário ou senha incorretos!')
-#         return redirect(url_for('login_AR'))
-
-
-@app.route('/entrar')
-def entrar():
-    proxima=request.args.get('proxima')
-    return render_template('entrar.html', titulo="Login", proxima=proxima)
-
-
-
-@app.route('/entrar_usuario', methods=['POST', 'GET'])
-def entrar_usuario():
-    email = request.form['email']
-    senha = request.form['senha']
-    
-    usuario=Cadastros.query.filter_by(email=email).first()
-    print(request.form)
-    
-    if usuario==usuario and usuario.senha==senha:
-        resposta = make_response(redirect(url_for('paginainicial')))
-        resposta.set_cookie('email', email, max_age=60*30)
-        
-        session['usuario_logado'] = usuario.email
-        flash(f'{usuario.email} logado com sucesso!')
-        print("sucesso")
-        proxima_pagina = request.form.get('proxima') or url_for('paginainicial')
-        return redirect(proxima_pagina)
-    else:
-        flash('Usuário ou senha incorretos!')
-        return redirect(url_for('entrar'))
-    
-#meu autenticar com nome diferente rs (to falando do de cima)
-
-# @app.route("/login", methods=['GET', 'POST'])
-# def login():
-
-#     if request.method == "POST":
-#         usuario = request.form.get('nome_login')
-#         senha = request.form.get('pass_login')
-
-#         if usuario == USUARIO_CADASTRADO and senha == SENHA_CADASTRADO:
-#             resposta = make_response(redirect(url_for('bemvindo')))
-#             resposta.set_cookie('username', usuario, max_age=60*30)
-#             return resposta
-#         else:
-#             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
-#             return redirect(url_for('login'))
-
-#     return render_template('login1.html')
-
-
-
-
 
 @app.route('/cadastrar_usuario', methods=['POST',])
 def cadastrar_usuario():
@@ -142,8 +64,6 @@ def cadastrar_usuario():
     if cadastro:
         flash('Cadastro existente.')
         return redirect(url_for('paginainicial'))
-    
-    
     
     cadastro=Cadastros.query.filter_by(nome=nome).first()
     
@@ -203,6 +123,13 @@ def salvar_produto():
     return redirect(url_for('arearestrita'))
 
 
+@app.route('/detalhes_produto/<int:id_produto>')
+def detalhes_produto(id_produto): 
+    produto=Produtos.query.filter_by(id_produto=id_produto).first()
+    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto)
+
+
+
 
 @app.route('/atualizar', methods=['POST',])
 def atualizar():
@@ -238,7 +165,6 @@ def deletar(id_usuario):
 
 
 
-
 @app.route('/editar/<int:id_usuario>')
 def editar(id_usuario):
     cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
@@ -247,24 +173,15 @@ def editar(id_usuario):
     # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 
-@app.route('/detalhes_produto/<int:id_produto>')
-def detalhes_produto(id_produto): 
-    produto=Produtos.query.filter_by(id_produto=id_produto).first()
-    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto)
-
-
-
 @app.route('/fazer_lance')
 def fazer_lance():
     flash('lance registrado!')
     return redirect(url_for('paginainicial'))
 
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    session['usuario_logado']=None
-    flash("Você foi deslogado", "info")
-    resposta = make_response(redirect(url_for('entrar')))
-    resposta.set_cookie('username', '', expires=0)
-    return resposta
+@app.route('/minhaconta')
+def minhaconta():
+    return render_template('minhaconta.html', titulo="Minha conta")
+
+
+
