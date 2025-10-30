@@ -1,0 +1,56 @@
+planejamento lógica
+//tentar sequir essa ordem de prioridade 
+
+na quinta
+sessões (a parte do "minha conta"
+
+na sexta
+parte do lance, banco de dados
+
+no sabado
+se tudo der certo, parte da criptografi da senh
+-implementar mais espaços nk cadastro e cadastro de produtos
+
+
+
+no domingo
+aqui eu já nao sei
+-mas eu tenho que concertar a relaçao entre usuario e produto
+
+na segunda e terça (espero que consiga fazer tudo isso até no maximo quarta)
+ajustes
+-confirmar senha
+-um usuario tem que ser maior de idade
+-cpf email tem que ser unicos
+-uma pessoa só pode fazer lance se estiver logada. 
+caso ela clique no fazer lance redireciona pra página do login
+
+oque eu queria muitooo fazer era aquelas caixinhas flutuantes do html sabe
+so que tenho medo de dar muito trabalho nessa altura do campeonado
+//a pagina de login nao ficaria extremamente vazia?
+//design é por ultimo calma
+
+-quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso)
+tem que desaparecer e aparecer aquele, olá t fulano 
+
+quinta ou sexta
+-IMAGENS
+temho que ver como que armazena essa porcaria aff
+se o tempo estiver apertado usa a logica do uploads ok?
+
+final de semana
+-implementaçao de paginaçao
+-implementaçao de busca
+-paginas de erro
+
+detalhes pra sla quando
+-logout na parte do minha conta
+-filtrar por catwgorias? (tenho que ver sobre isso
+
+a mais:
+tema claro/escuro
+favoritos
+
+
+
+
