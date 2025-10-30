@@ -12,12 +12,20 @@ se tudo der certo, parte da criptografi da senh
 -implementar mais espaços nk cadastro e cadastro de produtos
 
 
-
 no domingo
 aqui eu já nao sei
 -mas eu tenho que concertar a relaçao entre usuario e produto
 
-na segunda e terça (espero que consiga fazer tudo isso até no maximo quarta)
+na segunda e terça
+
+//acabei de perceber, deletar um leilao 
+o criador do produto tem que poder deletar ou seja apenas para ele teria que aparecer uma página onde mostraria 
+seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla
+//tbm esqueci da parte status de um leilao 
+e agr não faço ideia de como fazer isso...
+
+________________
+quarta e quinta e sexta
 ajustes
 -confirmar senha
 -um usuario tem que ser maior de idade
@@ -31,9 +39,11 @@ so que tenho medo de dar muito trabalho nessa altura do campeonado
 //design é por ultimo calma
 
 -quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso)
-tem que desaparecer e aparecer aquele, olá t fulano 
+tem que desaparecer e aparecer aquele, olá fulano 
 
-quinta ou sexta
+___________
+SABADO
+
 -IMAGENS
 temho que ver como que armazena essa porcaria aff
 se o tempo estiver apertado usa a logica do uploads ok?
@@ -50,7 +60,3 @@ detalhes pra sla quando
 a mais:
 tema claro/escuro
 favoritos
-
-
-
-
