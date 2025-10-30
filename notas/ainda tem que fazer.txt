@@ -87,3 +87,25 @@ pq meio que já tenho os códigos por conta das aulas de laboratorio né
 ai é só complementar...
 mas isso é um a mais msm
 vou fazer o commit "minha conta funcionando"
+
+30 out
+//sobre lances automaticos vou colar um texto dq é
+"
+    You enter a max bid of $1,000
+
+    The current bid is $500, with a $25 increment
+
+    Your proxy bid raises the price to $525
+
+    If someone else bids $600, the system automatically counters at $625
+
+    This continues until someone else tops your $1,000 - or the item closes with you as the winner
+"
+
+do lance automatico 
+produto(precisa de *lance minimo*)//pra isso daqui é a chave pro lance automatico
+ lance(id_lance, (fk) id_usuario, (fk)id_produto, valor_lance, horário_lance)
+
+//
+na página do produto embaixo pra não ficar tão vazio dá pra colocar alguns itens como sugestão
+-do html ()
