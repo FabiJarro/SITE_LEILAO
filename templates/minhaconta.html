@@ -2,19 +2,26 @@
 {%block conteudo%}
 
 {% if primeiro_nome %}
-    <h3>Olá, {{ primeiro_nome }}!</h3>
+<h3>Olá, {{ primeiro_nome }}!</h3>
 {% endif%}
 
 
 
 <body>
+    <div>
+        <ul>
+            <button id="meusDados" onclick="carregarConteudo('meus_dados')">Meus dados</button>
+            <button id="meusLances" onclick="carregarConteudo('meus_lances')">Meus Lances</button>
+            <button id="produtosLeiloados" onclick="carregarConteudo('produtos_leiloados')">Produtos Leiloados</button>
 
-    <ul>
-        <a href="/meusdados">Meus dados</a>
-        <a href="/entrar">Meus lances</a>
-        <a href="/cadastrar">Favoritos</a>
+            
+            <div id="conteudo-dinamico">
+                <p>Escolha uma seção acima.</p>
+            </div>
 
-    </ul>
+
+        </ul>
+    </div>
 
 </body>
 
@@ -23,5 +30,6 @@
     <p>&copy; 2025 leilão</p>
 </footer>
 
+<script src="static/script_minhaConta.js"></script>
 
 {%endblock%}

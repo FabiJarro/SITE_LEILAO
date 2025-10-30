@@ -1,8 +1,9 @@
-from leilao import app
+from leilao import app, db
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
-from leilao import app,db
 from models import Cadastros, Adm, Produtos
 
+ADMINISTRADOR="admin"
+SENHA_ADM="1234"
 
 @app.route('/entrar_usuario', methods=['POST', 'GET'])
 def entrar_usuario():

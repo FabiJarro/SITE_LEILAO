@@ -1,0 +1,11 @@
+
+
+
+<h2>Produtos leiloados</h2>
+<ul>
+{% for p in produtos %}
+    <li>{{ p.nome_produto }} - R$ {{ p.preco_produto }}</li>
+{% else %}
+    <p>Você ainda não cadastrou produtos.</p>
+{% endfor %}
+</ul>

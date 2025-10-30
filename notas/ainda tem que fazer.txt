@@ -36,11 +36,14 @@ se der tempo (obs: MUITO IMPORTANTE: apenas APENAS fazer se TUDO, TUDINHO, já e
 -temas (escuro, claro(padrao), acessivel (amarelo e preto?))
 -botão favoritos (seria do banco de dados msm, uma página sabe)
 
+_________________
 
 27 out
 concertei a area restrita usando referrer
 uma coisa que queria fazer é melhorar isso, pelo que eu pequisei (já sabia que a forma query já era pra uma segurança menor né)
 é usar sessões 
+
+________________
 
 28 out
 não tenho certeza se os cookies estão funcionando kkk
@@ -53,3 +56,34 @@ com: meus favoritos, meus dados (e ter como editar), meus lances(ainda não sei 
  (acabei de ver, o melhor jeito é usando javascript msm aff, vou ter que fazer que nem a parte do cadastro)
 dividi o views.py em views_autenticacao (tava grande demais)
 to pensando em fazer um views_produtos
+
+
+//acabei de perceber, deletar um leilao 
+o criador do produto tem que poder deletar ou seja apenas para ele teria que aparecer uma página onde mostraria 
+seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla
+
+//tbm esqueci da parte status de um leilao 
+e agr não faço ideia de como fazer isso...
+
+________________
+
+29 out
+//lembrei que a gente precisa notificar o usuario quanto as datas 
+se ele "ganhou" o leilão ou tals
+
+acho que seria interessante em colocar as mensagens como primerira coisa que usuario ver ao entrar no leilao
+
+OKAAY
+deu certo a parte do javascript agora o problema é tipo, meus dados oq vai aparecer
+os dados da pessoas logada certo?
+pra isso eu pensei em fazer o uso das sessões msm 
+agora só nãop sei como direito KKK 
+por enquanto eu usei uns id pra referenciar sabe, mas não queria usar isso sabe
+
+outra coisa que eu devia fazer
+páginas de erros, paginação e barra de pesquisa
+
+pq meio que já tenho os códigos por conta das aulas de laboratorio né
+ai é só complementar...
+mas isso é um a mais msm
+vou fazer o commit "minha conta funcionando"

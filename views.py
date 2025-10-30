@@ -179,9 +179,3 @@ def fazer_lance():
     return redirect(url_for('paginainicial'))
 
 
-@app.route('/minhaconta')
-def minhaconta():
-    return render_template('minhaconta.html', titulo="Minha conta")
-
-
-
