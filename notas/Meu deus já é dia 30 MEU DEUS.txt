@@ -12,61 +12,102 @@ se tudo der certo, parte da criptografi da senh
 -implementar mais espaços nk cadastro e cadastro de produtos*****************************************
 -mas eu tenho que concertar a relaçao entre usuario e produto*****************************************
 
+-logout na parte do minha conta ************************************************************************8
+
+___________________
+
 no domingo
-
-
-
-na segunda e terça
-
 o criador do produto tem que poder deletar ou seja apenas para ele teria que aparecer uma página onde mostraria 
 seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla********************************************************************
 //tbm esqueci da parte status de um leilao 
 e agr não faço ideia de como fazer isso...
 
-________________
-quarta e quinta e sexta
-ajustes
--confirmar senha
--um usuario tem que ser maior de idade
--cpf email tem que ser unicos
--uma pessoa só pode fazer lance se estiver logada. 
-caso ela clique no fazer lance redireciona pra página do login
 
-oque eu queria muitooo fazer era aquelas caixinhas flutuantes do html sabe
-so que tenho medo de dar muito trabalho nessa altura do campeonado
-//a pagina de login nao ficaria extremamente vazia?
-//design é por ultimo calma
+___________________________________________________________
+
+na segunda
+
+-uma pessoa só pode fazer lance se estiver logada (caso ela clique no fazer lance redireciona pra página do login)
+(esse tipo de coisa sabe, site intuitivo)
 
 -quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso)
 tem que desaparecer e aparecer aquele, olá fulano
 //ai aparece o "minha conta"
+(eu já não fiz isso, quando trabalhando com sessões)
+
+_______________________________________________________
+
+terça
+
+ajustes
+-confirmar senha
+-um usuario tem que ser maior de idade
+-cpf email tem que ser unicos
 
 
-___________
-SABADO
+_______________________________________________________
+quarta
 
--IMAGENS
+-IMAGENS*********************************************************************************************************************************
 temho que ver como que armazena essa porcaria aff
 se o tempo estiver apertado usa a logica do uploads ok?
 
-final de semana
+
+
+
+________________________________________________________
+Quinta
+-implemntação front-end
+
 -implementaçao de paginaçao
 -implementaçao de busca
--paginas de erro
+-paginas de erro****************************
 
-detalhes pra sla quando
--logout na parte do minha conta
+
+
+_________________________________________________________
+Sexta
+
+-
+isso daqui é a mais:
+-tema claro/escuro (isso daqui vai demorar horrores, se possivel começar antes)
+
 -filtrar por catwgorias? (tenho que ver sobre isso
 
-a mais:
-tema claro/escuro
-favoritos
 
+_________________________________________________________
+
+Sabado
+
+a mais:
+-favoritos
+
+
+
+
+
+
+___________________________________________________________
+
+Domingo
+-testes
+-coreção de erros
+
+
+
+____________________________________________________________
+
+
+oque eu queria muitooo fazer era aquelas caixinhas flutuantes do html sabe
+so que tenho medo de dar muito trabalho nessa altura do campeonado
+
+//a pagina de login nao ficaria extremamente vazia???
 
 _____________________________
 
 Depois:
 -sql injection
--tenho que projetar esse banco e código aff
+-tenho que proteger esse banco e código aff
 -ORM
+
 
