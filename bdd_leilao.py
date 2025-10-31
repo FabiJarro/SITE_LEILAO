@@ -51,6 +51,7 @@ TABLES['Produtos'] = ('''
       `nome_produto` varchar(255) NOT NULL,
       `categoria_produto` varchar(100),
       `preco_produto` decimal(10,2) NOT NULL,
+      `incremento_minimo` decimal(10,2) NOT NULL,
       `id_usuario` int,
       PRIMARY KEY (`id_produto`),
       FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`)
@@ -116,10 +117,10 @@ for cadastro in cursor.fetchall():
       print(cadastro[1])
       
 #inserindo produtos na lista de produtos lá
-produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, id_usuario) VALUES (%s, %s, %s, %s)'
+produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, incremento_minimo, id_usuario) VALUES (%s, %s, %s, %s, %s)'
 produtos = [
-      ('caneca', 'casual', 20.99, 2),
-      ('flor', 'casual', 45.99, 3)
+      ('caneca', 'casual', 20.99, 5.00, 2),
+      ('flor', 'casual', 45.99, 10.00, 3)
 ]
 cursor.executemany(produtos_sql, produtos)
 

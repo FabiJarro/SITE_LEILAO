@@ -47,6 +47,7 @@
             <th>nome Produto</th>
             <th>categoria</th>
             <th>preço</th>
+            <th>incremento_minimo</th>
 
         </tr>
     </thead>
@@ -59,6 +60,8 @@
             <td>{{ produto.nome_produto }}</td>
             <td>{{ produto.categoria_produto }}</td>
             <td>{{ produto.preco_produto }}</td>
+            <td>{{ produto.incremento_minimo}}</td>
+            
         </tr>
         {% endfor %}
     </tbody>
@@ -76,6 +79,7 @@
             <th>ID produto</th>
             <th>horario do lance</th>
             <th>valor do lance</th>
+            
 
         </tr>
     </thead>
@@ -87,6 +91,7 @@
             <td>{{ lance.id_produto }}</td>
             <td>{{ lance.horario_lance}}</td>
             <td>{{ lance.valor_lance }}</td>
+            
         </tr>
         {% endfor %}
     </tbody>

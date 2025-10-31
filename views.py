@@ -95,6 +95,7 @@ def salvar_produto():
     nome_produto=request.form['nome_produto']
     categoria_produto=request.form['categoria_produto']
     preco_produto=request.form['preco_produto']
+    incremento_minimo=request.form['incremento_minimo']
     id_usuario = session.get('id_usuario')
     
     produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
@@ -115,7 +116,7 @@ def salvar_produto():
     # cursor.execute("INSERT INTO produtos (nome, preco, id_usuario) VALUES (%s, %s, %s)", (nome, preco, id_usuario))
     # conexao.commit()
     
-    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, id_usuario=id_usuario)
+    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, incremento_minimo=incremento_minimo, id_usuario=id_usuario)
     
     db.session.add(novo_produto)
     db.session.commit()
@@ -176,9 +177,7 @@ def editar(id_usuario):
 
 @app.route('/fazer_lance')
 def fazer_lance():
-    lance_minimo
-    
-    
+    # incremento_minimo=
     flash('lance registrado!')
     return redirect(url_for('paginainicial'))
 
