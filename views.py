@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from datetime import datetime
 from leilao import app,db
-from models import Cadastros, Adm, Produtos
+from models import Cadastros, Adm, Produtos, Lances
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -34,7 +34,8 @@ def arearestrita():
     
     lista=Cadastros.query.order_by(Cadastros.id_usuario)
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
-    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, )
+    lances=Lances.query.order_by(Lances.id_lance)
+    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, lances=lances )
 
 #esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
 
@@ -175,6 +176,9 @@ def editar(id_usuario):
 
 @app.route('/fazer_lance')
 def fazer_lance():
+    lance_minimo
+    
+    
     flash('lance registrado!')
     return redirect(url_for('paginainicial'))
 

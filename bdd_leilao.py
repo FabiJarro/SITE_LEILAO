@@ -57,6 +57,18 @@ TABLES['Produtos'] = ('''
       
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       
+TABLES['Lances'] = ('''
+      CREATE TABLE `lances` (
+      `id_lance` int NOT NULL AUTO_INCREMENT,
+      `valor_lance` decimal(10,2) NOT NULL,
+      `horario_lance` datetime NOT NULL,
+      `id_usuario` int,
+      `id_produto` int,
+      PRIMARY KEY (`id_lance`),
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`),
+      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`)
+      
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       
 
 for tabela_nome in TABLES:
@@ -103,7 +115,7 @@ print(' -------------  Usuarios:  -------------')
 for cadastro in cursor.fetchall():
       print(cadastro[1])
       
-#inserindo produtos na lista lá
+#inserindo produtos na lista de produtos lá
 produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, id_usuario) VALUES (%s, %s, %s, %s)'
 produtos = [
       ('caneca', 'casual', 20.99, 2),
@@ -117,6 +129,20 @@ for produto in cursor.fetchall():
       print(produto[1])
       
     
+#inserindo os lances
+lances_sql = 'INSERT INTO lances (valor_lance, horario_lance, id_usuario, id_produto) VALUES (%s, %s, %s, %s)'
+lances = [
+      (21.99, '2025-10-27 14:36:00 ', 2, 1),
+      (46.99, '2025-10-27 14:30:00 ', 3, 2),
+
+]
+cursor.executemany(lances_sql, lances)
+
+cursor.execute('select * from leilao.lances')
+print(' -------------  Lances:  -------------')
+for lance in cursor.fetchall():
+      print(lance[1])
+
 
 
 # commitando se não nada tem efeito

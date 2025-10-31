@@ -10,11 +10,44 @@
 
 <p>{{produto.nome_produto}}</p>
 <p>{{produto.categoria_produto}}</p>
+
+<br>
+<p>valor inicial:</p>
 <p>{{produto.preco_produto}}</p>
 
-<a href="{{ url_for('fazer_lance') }}">
-    <button>Fazer lance</button>
-</a>
 
+<p>tempo restante:</p>
+<p>status</p>
+
+<p>valor atual</p>
+<p>o update (ultimo_lance)</p>
+
+
+<p>o lance minimo é de: </p>
+<p>___________________________</p>
+
+
+<div class="container">
+    <div class="content">
+        <div id="login">
+
+
+            <form method="post" action="{{url_for('fazer_lance')}}">
+                <p>
+                    <label for="email">Fazer Lance</label>
+                    <input id="email" name="lance_minimo" required="required" type="text">
+                </p>
+
+                <p>
+                    <button onclick="salva(event)" type="submit" class="btn btn-primary btn-salvar" onsubmit="return validarFormulario()">Fazer Lance</button>
+                </p>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="static/script_cadastrarElance.js"></script>
 
 {%endblock%}

@@ -1,0 +1,11 @@
+o valor_produto é o inicial (to com preguiça de mudar tudo)
+
+o valor_atual é o valor atual 
+(isso daqui eu já não sei)
+
+
+31 out
+//esqueci da parte do pagamento 
+tipo regras do leilão o leilao vai pegtar tipo 5% do valor total algo assim aff
+
+parece que qunato mais eu avanço mais tem coisas pra fazer meu deus 

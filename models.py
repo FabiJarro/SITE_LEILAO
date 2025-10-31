@@ -34,3 +34,18 @@ class Produtos(db.Model):
     
     def __repr__(self):
         return f'<Produto {self.nome_produto}>'
+    
+class Lances(db.Model):
+    __tablename__='lances'
+    
+    id_lance=db.Column(db.Integer, primary_key=True, autoincrement=True)
+    valor_lance=db.Column(db.String(255), nullable=False)
+    horario_lance=db.Column(db.String(255), nullable=False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
+    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'))
+    
+    usuario = db.relationship('Cadastros', backref='lances', lazy=True)
+    produto = db.relationship('Produtos', backref='lances', lazy=True)
+    
+    def __repr__(self):
+        return f'<Lance {self.valor_lance}>'

@@ -7,9 +7,6 @@ from models import Cadastros, Adm, Produtos
 
 @app.route('/minhaconta')
 def minha_conta():
-    email_logado = session.get('usuario_logado')
-    usuario = Cadastros.query.filter_by(email=session['usuario_logado']).first()
-    print(email_logado)
     return render_template('minhaconta.html', titulo="minha conta")
 
 
@@ -34,8 +31,6 @@ def meus_dados():
 #DEU CERTO CARAMBA
 
 
-
-
 @app.route('/minhaconta/produtos_leiloados')
 def produtos_leiloados():
     
@@ -54,3 +49,4 @@ def produtos_leiloados():
 @app.route('/minhaconta/meus_lances')
 def meus_lances():
     abort(404)
+    

@@ -55,7 +55,7 @@
         <tr>
             <td>{{ produto.id_produto }}</td>
             <td>{{ produto.id_usuario }}</td>
-            <td>{{ produto.usuario.nome }}</td> 
+            <td>{{ produto.usuario.nome }}</td>
             <td>{{ produto.nome_produto }}</td>
             <td>{{ produto.categoria_produto }}</td>
             <td>{{ produto.preco_produto }}</td>
@@ -63,5 +63,37 @@
         {% endfor %}
     </tbody>
 </table>
+
+
+<br><br>
+
+<h2>Lista de Lances</h2>
+<table class="table table-striped table-responsive table-bordered">
+    <thead class="thead-default">
+        <tr>
+            <th>ID Lance</th>
+            <th>ID usuario</th>
+            <th>ID produto</th>
+            <th>horario do lance</th>
+            <th>valor do lance</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for lance in lances %}
+        <tr>
+            <td>{{ lance.id_lance }}</td>
+            <td>{{ lance.id_usuario }}</td>
+            <td>{{ lance.id_produto }}</td>
+            <td>{{ lance.horario_lance}}</td>
+            <td>{{ lance.valor_lance }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<br><br>
+
 
 {% endblock %}
