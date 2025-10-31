@@ -38,6 +38,6 @@ async function carregarConteudo(secao) {
         conteudoDiv.innerHTML = html;
 
     } catch (error) {
-        conteudoDiv.innerHTML = `<p style="color:red;">Erro: ${error.message}</p>`;
+        conteudoDiv.innerHTML = `${error.message}`;
     }
 }

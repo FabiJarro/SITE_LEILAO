@@ -12,6 +12,8 @@ db=SQLAlchemy(app)
 from views import * 
 from views_autenticacao import *
 from views_minhaConta import *
+from views_erros import *
+
 
 if __name__ == '__main__':
     #app.run(debug=True, host='0.0.0.0', port=5000)

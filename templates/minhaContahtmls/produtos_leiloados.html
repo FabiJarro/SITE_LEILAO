@@ -3,9 +3,9 @@
 
 <h2>Produtos leiloados</h2>
 <ul>
-{% for p in produtos %}
-    <li>{{ p.nome_produto }} - R$ {{ p.preco_produto }}</li>
+{% for produto in produtos %}
+    <li>{{ produto.nome_produto }} - R$ {{ produto.preco_produto }}</li>
 {% else %}
-    <p>Você ainda não cadastrou produtos.</p>
+    <p>Você ainda não cadastrou produtos</p>
 {% endfor %}
 </ul>

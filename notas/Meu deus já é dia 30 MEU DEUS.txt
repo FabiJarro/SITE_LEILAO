@@ -2,7 +2,7 @@ planejamento lógica
 //tentar sequir essa ordem de prioridade 
 
 na quinta
-sessões (a parte do "minha conta"
+sessões (a parte do "minha conta") *FEITO*
 
 na sexta
 parte do lance, banco de dados
@@ -39,7 +39,9 @@ so que tenho medo de dar muito trabalho nessa altura do campeonado
 //design é por ultimo calma
 
 -quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso)
-tem que desaparecer e aparecer aquele, olá fulano 
+tem que desaparecer e aparecer aquele, olá fulano
+//ai aparece o "minha conta"
+
 
 ___________
 SABADO

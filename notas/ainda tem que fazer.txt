@@ -88,6 +88,11 @@ ai é só complementar...
 mas isso é um a mais msm
 vou fazer o commit "minha conta funcionando"
 
+
+_____________________
+
+
+
 30 out
 //sobre lances automaticos vou colar um texto dq é
 "
@@ -109,3 +114,6 @@ produto(precisa de *lance minimo*)//pra isso daqui é a chave pro lance automati
 //
 na página do produto embaixo pra não ficar tão vazio dá pra colocar alguns itens como sugestão
 -do html ()
+
+
+o "minha conta" não deveria apoarecer pra todos, só pra quando ela estiver em sessão(logada)

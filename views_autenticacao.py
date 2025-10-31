@@ -17,7 +17,7 @@ def entrar_usuario():
         session['usuario_logado'] = usuario.email
         session.permanent = True 
         resposta = make_response(redirect(url_for('paginainicial')))
-        resposta.set_cookie('usuario_email', usuario.email, max_age=60*30)
+        resposta.set_cookie('usuario_email', usuario.email)
         flash(f'{usuario.nome.split()[0]} logado com sucesso!')
         print("sucesso")
         proxima_pagina = request.form.get('proxima') or url_for('paginainicial')
@@ -67,7 +67,6 @@ def login_AR():
             return redirect(url_for('login_AR'), proxima=proxima)
 
     return render_template('login_AR.html', titulo="login- area restrita", proxima=proxima)
-
 
 
 @app.route('/logout')

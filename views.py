@@ -178,4 +178,3 @@ def fazer_lance():
     flash('lance registrado!')
     return redirect(url_for('paginainicial'))
 
-
