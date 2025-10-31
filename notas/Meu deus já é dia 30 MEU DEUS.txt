@@ -5,22 +5,21 @@ na quinta
 sessões (a parte do "minha conta") *FEITO*
 
 na sexta
-parte do lance, banco de dados
+parte do lance, banco de dados *************************************
 
 no sabado
 se tudo der certo, parte da criptografi da senh
--implementar mais espaços nk cadastro e cadastro de produtos
-
+-implementar mais espaços nk cadastro e cadastro de produtos*****************************************
+-mas eu tenho que concertar a relaçao entre usuario e produto*****************************************
 
 no domingo
-aqui eu já nao sei
--mas eu tenho que concertar a relaçao entre usuario e produto
+
+
 
 na segunda e terça
 
-//acabei de perceber, deletar um leilao 
 o criador do produto tem que poder deletar ou seja apenas para ele teria que aparecer uma página onde mostraria 
-seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla
+seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla********************************************************************
 //tbm esqueci da parte status de um leilao 
 e agr não faço ideia de como fazer isso...
 
@@ -69,3 +68,5 @@ _____________________________
 Depois:
 -sql injection
 -tenho que projetar esse banco e código aff
+-ORM
+
