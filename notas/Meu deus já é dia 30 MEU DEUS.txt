@@ -62,3 +62,10 @@ detalhes pra sla quando
 a mais:
 tema claro/escuro
 favoritos
+
+
+_____________________________
+
+Depois:
+-sql injection
+-tenho que projetar esse banco e código aff
