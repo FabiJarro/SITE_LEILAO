@@ -24,7 +24,7 @@ def entrar_usuario():
         return resposta
     else:
         flash('Usuário ou senha incorretos!')
-        return redirect(url_for('entrar'))
+        return "erro", 401
     
 @app.route('/entrar')
 def entrar():

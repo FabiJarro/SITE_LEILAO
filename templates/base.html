@@ -22,7 +22,7 @@
             /* Full width */
             height: 100%;
             /* Full height */
-            overflow: auto;
+            overflow: hidden;
             /* Enable scroll if needed */
             background-color: rgb(0, 0, 0);
             /* Fallback color */
@@ -37,7 +37,7 @@
             /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 50%;
             /* Could be more or less, depending on screen size */
         }
 
@@ -69,8 +69,6 @@
     <nav>
         <ul>
             <a href="/">Página inicial</a>
-            <a href="/entrar">Entrar</a>
-            <a href="/cadastrar">Cadastrar</a>
             <a href="/login_AR">Area Restrita</a>
             <a href="/minhaconta">Minha conta</a>
 
@@ -80,12 +78,34 @@
             <div id="myModal" class="modal">
 
                 <!-- Modal content -->
-                <div class="modal-content">
+                <div class="modal-content" id="modal-login">
                     <span class="close">&times;</span>
-                    <p>
-                        
-                    </p>
-                </div>
+                  
+                    <div style="display: flex; flex-wrap: wrap;">
+                      <!-- Lado esquerdo: login -->
+                      <div style="flex: 1; min-width: 280px; padding: 20px; border-right: 1px solid #ddd;">
+                        <h3>Acessar a Minha Conta</h3>
+                        <form id="loginForm">
+                          <label for="email">Digite seu Email:</label><br>
+                          <input type="email" id="email" name="email" required style="width: 100%; padding: 5px;"><br><br>
+                  
+                          <label for="senha">Digite sua Senha:</label><br>
+                          <input type="password" id="senha" name="senha" required style="width: 100%; padding: 5px;"><br><br>
+                  
+                          <button type="submit" id="btnLogin" class="btn btn-primary">Fazer login</button>
+                        </form>
+                  
+                        <p id="loginMsg" style="color:red; margin-top:10px;"></p>
+                      </div>
+                  
+                      <!-- Lado direito: cadastro -->
+                      <div style="flex: 1; min-width: 280px; padding: 20px; text-align:center;">
+                        <h3>Faça seu cadastro!</h3>
+                        <p>Ainda não tem cadastro?</p>
+                        <a href="{{ url_for('cadastrar') }}" style="color: blue; text-decoration: underline;">Cadastre-se aqui</a>
+                      </div>
+                    </div>
+                  </div>
 
             </div>
 
