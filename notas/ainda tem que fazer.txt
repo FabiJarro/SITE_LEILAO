@@ -117,3 +117,23 @@ na página do produto embaixo pra não ficar tão vazio dá pra colocar alguns i
 
 
 o "minha conta" não deveria apoarecer pra todos, só pra quando ela estiver em sessão(logada)
+
+___________________________________
+
+31 out
+
+//esqueci da parte do pagamento 
+tipo regras do leilão o leilao vai pegtar tipo 5% do valor total algo assim aff
+
+parece que qunato mais eu avanço mais tem coisas pra fazer meu deus 
+
+tava vendo isso de horario(demorou horrores)
+não tá funcionando 100% mas foi um progresso
+
+finalmente usei esse .gitignore 
+aff achei que seria complicado de usar mais foi mt fácil, devia ter usado antes ai
+
+sobre a parte do lance, ainda há problemas com o relacionamento entre usuario e produto
+-ainda tem muito problemas com sessões afe(tem que fazer logout, e tbm uma pessoa sem login não pode fazer lance mas não tá cuncionando msm assim tá registrando)
+
+_____________________________________________

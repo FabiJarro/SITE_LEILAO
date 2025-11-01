@@ -1,5 +1,5 @@
-{%extends "base.html"%}
-{%block conteudo%}
+{% extends "base.html" %}
+{% block conteudo %}
 
 <style>
     p {
@@ -7,47 +7,47 @@
     }
 </style>
 
-
-<p>{{produto.nome_produto}}</p>
-<p>{{produto.categoria_produto}}</p>
+<p>{{ produto.nome_produto }}</p>
+<p>{{ produto.categoria_produto }}</p>
 
 <br>
-<p>valor inicial:</p>
-<p>{{produto.preco_produto}}</p>
+<p>Valor inicial:</p>
+<p>{{ produto.preco_produto }}</p>
 
+<p>Tempo restante:</p>
+<p>Status</p>
 
-<p>tempo restante:</p>
-<p>status</p>
+<p>Valor atual:</p>
+<p> <!-- Aqui depois você pode exibir o último lance --> </p>
 
-<p>valor atual</p>
-<p>o update (ultimo_lance)</p>
-
-
-<p>o lance minimo é de: </p>
-<p>{{produto.incremento_minimo}}</p>
-
+<p>O lance mínimo é de:</p>
+<p>{{ produto.incremento_minimo }}</p>
 
 <div class="container">
     <div class="content">
         <div id="login">
-
-
-            <form method="post" action="{{url_for('fazer_lance')}}">
-                <p>
-                    <label for="email">Fazer Lance</label>
-                    <input id="email" name="lance_minimo" required="required" type="text">
-                </p>
-
-                <p>
-                    <button onclick="salva(event)" type="submit" class="btn btn-primary btn-salvar" onsubmit="return validarFormulario()">Fazer Lance</button>
-                </p>
+            <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}">
+                <label for="valor_lance">Valor do lance:</label>
+                <input id="valor_lance" name="valor_lance" type="number" required>
+                <button type="submit" class="btn btn-primary btn-salvar">Fazer Lance</button>
             </form>
-
         </div>
     </div>
 </div>
 
+<p><b>Horário do lance (local):</b> <span id="horario-lance"></span></p>
 
-<script src="static/script_cadastrarElance.js"></script>
+<script>
+    // Exemplo: pega o horário UTC que veio do servidor (ajuste conforme seu backend)
+    const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z"; // Flask renderiza isso
 
-{%endblock%}
+    // Converte para o horário local do navegador
+    const dataLocal = new Date(horarioServidor);
+    if (!isNaN(dataLocal)) {
+        document.getElementById("horario-lance").textContent = dataLocal.toLocaleString();
+    } else {
+        document.getElementById("horario-lance").textContent = "Erro ao converter horário";
+    }
+</script>
+
+{% endblock %}

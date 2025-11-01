@@ -1,70 +1,89 @@
 function mostrarFormularioProduto() {
-    let form = document.getElementById('form-produto');
+  let form = document.getElementById('form-produto');
 
-    // esconde e mostra
-    if (form.style.display === 'none') {
-        form.style.display = 'block';}
+  // esconde e mostra
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+  }
 
-    // } else {
-    //     form.style.display = 'none';
-    // }
+  // } else {
+  //     form.style.display = 'none';
+  // }
 }
 
 function validarFormulario() {
-    const campos = document.querySelectorAll('input[required]');
-    let todosPreenchidos = true;
+  const campos = document.querySelectorAll('input[required]');
+  let todosPreenchidos = true;
 
-    for (let i = 0; i < campos.length; i++) {
-      if (campos[i].value.trim() === '') { // O método trim() remove espaços em branco
-        alert(`O campo "${campos[i].id}" é obrigatório.`);
-        todosPreenchidos = false;
-        break; // Sai do loop assim que encontrar um campo vazio
-      }
+  for (let i = 0; i < campos.length; i++) {
+    if (campos[i].value.trim() === '') { // O método trim() remove espaços em branco
+      alert(`O campo "${campos[i].id}" é obrigatório.`);
+      todosPreenchidos = false;
+      break; // Sai do loop assim que encontrar um campo vazio
     }
-
-    return todosPreenchidos;
   }
 
+  return todosPreenchidos;
+}
 
-async function mostraOpcoesEsalva(event){
 
-  if (validarFormulario()){
+async function mostraOpcoesEsalva(event) {
+
+  if (validarFormulario()) {
     console.log('chamando a função mostra opcoes e salva', event);
-    if(event){
-        event.preventDefault();
-        const form = document.getElementById('formulario_cadastro');
-        const formData = new FormData(form); 
-        const response = await fetch("/cadastrar_usuario", {
-            method: "POST",
-            mode: 'no-cors',
-            body: formData
-          });
+    if (event) {
+      event.preventDefault();
+      const form = document.getElementById('formulario_cadastro');
+      const formData = new FormData(form);
+      const response = await fetch("/cadastrar_usuario", {
+        method: "POST",
+        mode: 'no-cors',
+        body: formData
+      });
     }
-    let opcoes=document.getElementById('opcoes')
+    let opcoes = document.getElementById('opcoes')
 
     if (opcoes.style.display === 'none') {
-        opcoes.style.display = 'block';}
+      opcoes.style.display = 'block';
+    }
 
   }
 
 }
 
 
-async function salvaProduto(event){
+async function salvaProduto(event) {
 
-  if (validarFormulario()){
+  if (validarFormulario()) {
     console.log('chamando a salvar produto', event);
-    if(event){
-        event.preventDefault();
-        const form = document.getElementById('formulario_produto');
-        const formData = new FormData(form); 
-        const response = await fetch("/salvar_produto", {
-            method: "POST",
-            mode: 'no-cors',
-            body: formData
-          });
+    if (event) {
+      event.preventDefault();
+      const form = document.getElementById('formulario_produto');
+      const formData = new FormData(form);
+      const response = await fetch("/salvar_produto", {
+        method: "POST",
+        mode: 'no-cors',
+        body: formData
+      });
     }
   }
 
 }
 
+
+
+// Exemplo: horário vindo do servidor (em UTC)
+const horarioUTC = "{{ lance.horario_lance.strftime('%Y-%m-%dT%H:%M:%S') }}Z"; // no seu template Flask
+const localTime = new Date(horarioUTC);
+
+// Formata pro horário local do usuário
+const horarioLocal = localTime.toLocaleString(undefined, {
+  dateStyle: "short",
+  timeStyle: "medium"
+});
+
+console.log("UTC recebido:", horarioUTC);
+console.log("Objeto Date:", localTime);
+
+
+document.getElementById("horario-lance").textContent = horarioLocal;

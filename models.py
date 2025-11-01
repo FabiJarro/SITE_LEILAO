@@ -1,4 +1,6 @@
 from leilao import db
+from datetime import datetime, timezone
+
 
 class Cadastros(db.Model):
     id_usuario = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -35,18 +37,19 @@ class Produtos(db.Model):
     
     def __repr__(self):
         return f'<Produto {self.nome_produto}>'
-    
+
 class Lances(db.Model):
-    __tablename__='lances'
-    
-    id_lance=db.Column(db.Integer, primary_key=True, autoincrement=True)
-    valor_lance=db.Column(db.String(255), nullable=False)
-    horario_lance=db.Column(db.String(255), nullable=False)
-    id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
-    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'))
-    
+    __tablename__ = 'lances'
+
+    id_lance = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    valor_lance = db.Column(db.Numeric(10, 2), nullable=False)
+    horario_lance = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
+    id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario', ondelete='CASCADE'))
+    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto', ondelete='CASCADE'))
+
     usuario = db.relationship('Cadastros', backref='lances', lazy=True)
     produto = db.relationship('Produtos', backref='lances', lazy=True)
-    
+
     def __repr__(self):
-        return f'<Lance {self.valor_lance}>'
+        return f'<Lance {self.valor_lance:.2f} - Usuario {self.id_usuario}>'
+    

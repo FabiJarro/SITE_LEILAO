@@ -1,7 +1,9 @@
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
-from datetime import datetime
+from datetime import datetime, timezone
 from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances
+# import time
+
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -128,7 +130,18 @@ def salvar_produto():
 @app.route('/detalhes_produto/<int:id_produto>')
 def detalhes_produto(id_produto): 
     produto=Produtos.query.filter_by(id_produto=id_produto).first()
-    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto)
+    
+    ultimo_lance = (
+        Lances.query.filter_by(id_produto=id_produto)
+        .order_by(Lances.horario_lance.desc())
+        .first()
+    )
+    proximo_lance = produto.preco_produto
+    if ultimo_lance:
+        proximo_lance = ultimo_lance.valor_lance + produto.incremento_minimo
+
+    
+    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto, ultimo_lance=ultimo_lance, proximo_lance=proximo_lance, datetime=datetime)
 
 
 
@@ -175,9 +188,46 @@ def editar(id_usuario):
     # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 
-@app.route('/fazer_lance')
-def fazer_lance():
-    # incremento_minimo=
-    flash('lance registrado!')
-    return redirect(url_for('paginainicial'))
+
+@app.route('/fazer_lance/<int:id_produto>', methods=['POST'])
+def fazer_lance(id_produto):
+    if 'usuario_logado' not in session:
+        flash('Você precisa estar logado para dar um lance.')
+        return redirect(url_for('entrar'))
+
+    produto = Produtos.query.get(id_produto)
+    if not produto:
+        abort(404)
+
+    valor_lance = float(request.form['valor_lance'])
+    id_usuario = session.get('id_usuario')
+
+    # último lance registrado no produto (pelo horário mais recente)
+    ultimo_lance = (
+        Lances.query.filter_by(id_produto=id_produto)
+        .order_by(Lances.horario_lance.desc())
+        .first()
+    )
+
+    # valor mínimo permitido
+    lance_minimo = float(produto.preco_produto)
+    if ultimo_lance:
+        lance_minimo = float(ultimo_lance.valor_lance) + float(produto.incremento_minimo)
+
+    # valida se o lance é válido
+    if valor_lance < lance_minimo:
+        flash(f'O valor mínimo para este lance é R$ {lance_minimo:.2f}')
+        return redirect(url_for('detalhes_produto', id_produto=id_produto))
+
+    # salva novo lance com data/hora automática
+    novo_lance = Lances(
+        valor_lance=valor_lance,
+        id_usuario=id_usuario,
+        id_produto=id_produto
+    )
+    db.session.add(novo_lance)
+    db.session.commit()
+
+    flash('Lance registrado com sucesso!')
+    return redirect(url_for('detalhes_produto', id_produto=id_produto))
 

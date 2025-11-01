@@ -66,8 +66,8 @@ TABLES['Lances'] = ('''
       `id_usuario` int,
       `id_produto` int,
       PRIMARY KEY (`id_lance`),
-      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`),
-      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`)
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE,
+      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE
       
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       
@@ -133,7 +133,7 @@ for produto in cursor.fetchall():
 #inserindo os lances
 lances_sql = 'INSERT INTO lances (valor_lance, horario_lance, id_usuario, id_produto) VALUES (%s, %s, %s, %s)'
 lances = [
-      (21.99, '2025-10-27 14:36:00 ', 2, 1),
+      (21.99, '', 2, 1),
       (46.99, '2025-10-27 14:30:00 ', 3, 2),
 
 ]
