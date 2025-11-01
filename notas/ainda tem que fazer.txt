@@ -137,3 +137,9 @@ sobre a parte do lance, ainda há problemas com o relacionamento entre usuario e
 -ainda tem muito problemas com sessões afe(tem que fazer logout, e tbm uma pessoa sem login não pode fazer lance mas não tá cuncionando msm assim tá registrando)
 
 _____________________________________________
+
+1 novembro
+-agora tá funcionando isso dos horarios
+-eu, eu esqueci da data limite do leilao :////// ai que ódio, espero que seja a msm lógica do outro senhorr
+-eu quria muito implementar a parte do lotes e catalogos
+//se der tempo...
