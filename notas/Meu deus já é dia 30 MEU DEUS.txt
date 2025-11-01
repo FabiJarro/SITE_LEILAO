@@ -3,21 +3,25 @@ planejamento lógica
 
 na quinta
 sessões (a parte do "minha conta") *FEITO*
+___________________
 
 na sexta
-parte do lance, banco de dados *************************************
+parte do lance, banco de dados *FEITO (em partes vai)*
+
+_________________
 
 no sabado
-se tudo der certo, parte da criptografi da senh
--implementar mais espaços nk cadastro e cadastro de produtos*****************************************
+
+-implementar mais espaços nk cadastro e cadastro de produtos*
 -mas eu tenho que concertar a relaçao entre usuario e produto*****************************************
 
--logout na parte do minha conta ************************************************************************8
+-logout na parte do minha conta ************************************************************************
 
 ___________________
 
 
 no domingo
+se tudo der certo, parte da criptografi da SENHA(coloquei aqui pq tudo tem que funcionar antes de criptografar a senha)
 o criador do produto tem que poder deletar ou seja apenas para ele teria que aparecer uma página onde mostraria 
 seus leilões criados, tipo um "leiloes criados" ou "meus produtos leiloados" sla********************************************************************
 //tbm esqueci da parte status de um leilao 

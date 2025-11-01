@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from datetime import datetime, timezone
 from leilao import app,db
+
 from models import Cadastros, Adm, Produtos, Lances
 # import time
 
@@ -37,7 +38,7 @@ def arearestrita():
     lista=Cadastros.query.order_by(Cadastros.id_usuario)
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
     lances=Lances.query.order_by(Lances.id_lance)
-    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, lances=lances )
+    return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, lances=lances)
 
 #esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
 
@@ -129,13 +130,9 @@ def salvar_produto():
 
 @app.route('/detalhes_produto/<int:id_produto>')
 def detalhes_produto(id_produto): 
-    produto=Produtos.query.filter_by(id_produto=id_produto).first()
+    produto=Produtos.query.get_or_404(id_produto)
     
-    ultimo_lance = (
-        Lances.query.filter_by(id_produto=id_produto)
-        .order_by(Lances.horario_lance.desc())
-        .first()
-    )
+    ultimo_lance = Lances.query.filter_by(id_produto=id_produto).order_by(Lances.horario_lance.desc()).first()
     proximo_lance = produto.preco_produto
     if ultimo_lance:
         proximo_lance = ultimo_lance.valor_lance + produto.incremento_minimo
