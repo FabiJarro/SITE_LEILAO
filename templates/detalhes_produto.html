@@ -1,48 +1,56 @@
 {% extends "base.html" %}
 {% block conteudo %}
 
+<main class="detalhes-produto">
+  <section class="produto-info">
+    <h2>{{ produto.nome_produto }}</h2>
+    <p><b>Categoria:</b> {{ produto.categoria_produto }}</p>
 
-<p>{{ produto.nome_produto }}</p>
-<p>{{ produto.categoria_produto }}</p>
+    <p><b>Valor inicial:</b> R$ {{ produto.preco_produto }}</p>
+    <p><b>O lance mínimo é de:</b> R$ {{produto.lance_minimo }}</p>
 
-<br>
-<p>Valor inicial:</p>
-<p>{{ produto.preco_produto }}</p>
+    <p><b>Valor atual:</b> <!-- Aqui depois você pode exibir o último lance --> </p>
+    <p><b>Tempo restante:</b> <!-- Exemplo: 3h 15min --> </p>
+    <!-- <p><b>Status:</b></p> -->
 
-<p>Tempo restante:</p>
-<p>Status</p>
+    <hr>
 
-<p>Valor atual:</p>
-<p> <!-- Aqui depois você pode exibir o último lance --> </p>
+    <h3>Fazer um lance</h3>
 
-<p>O lance mínimo é de:</p>
-<p>{{ produto.incremento_minimo }}</p>
+    {% if 'usuario_logado' in session and session['usuario_logado'] %}
+      <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}" class="form-lance">
+        <label for="valor_lance">Valor do lance:</label>
+        <input id="valor_lance" name="valor_lance" type="number" step="0.01" required>
+        <button type="submit" class="btn btn-primary">Fazer Lance</button>
+      </form>
+    {% else %}
+      <p>Para fazer um lance, é necessário estar logado.</p>
+      <button id="abrirModalLogin" class="btn btn-secundario">Entrar ou Cadastrar</button>
+    {% endif %}
 
-<div class="container">
-    <div class="content">
-        <div id="login">
-            <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}">
-                <label for="valor_lance">Valor do lance:</label>
-                <input id="valor_lance" name="valor_lance" type="number" required>
-                <button type="submit" class="btn btn-primary btn-salvar">Fazer Lance</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<p><b>Horário do lance (local):</b> <span id="horario-lance"></span></p>
+    <p><b>Horário do lance (local):</b> <span id="horario-lance"></span></p>
+  </section>
+</main>
 
 <script>
-    // Exemplo: pega o horário UTC que veio do servidor (ajuste conforme seu backend)
-    const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z"; // Flask renderiza isso
+  // Exibe o horário local
+  const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
+  const dataLocal = new Date(horarioServidor);
+  document.getElementById("horario-lance").textContent =
+    !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
 
-    // Converte para o horário local do navegador
-    const dataLocal = new Date(horarioServidor);
-    if (!isNaN(dataLocal)) {
-        document.getElementById("horario-lance").textContent = dataLocal.toLocaleString();
-    } else {
-        document.getElementById("horario-lance").textContent = "Erro ao converter horário";
-    }
+  // Reaproveita o mesmo modal de login da base.html
+  const modal1 = document.getElementById("myModal");
+  const btnAbrirModal = document.getElementById("abrirModalLogin");
+  const spanFechar = document.getElementsByClassName("close")[0];
+
+  if (btnAbrirModal && moda1 && spanFechar) {
+    btnAbrirModal.onclick = () => modal.style.display = "block";
+    spanFechar.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target === modal) modal.style.display = "none";
+    };
+  }
 </script>
 
 {% endblock %}

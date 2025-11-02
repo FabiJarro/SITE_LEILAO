@@ -191,7 +191,7 @@ def editar(id_usuario):
 def fazer_lance(id_produto):
     if 'usuario_logado' not in session:
         flash('Você precisa estar logado para dar um lance.')
-        return redirect(url_for('entrar'))
+        return redirect(url_for('paginainicial'))
 
     produto = Produtos.query.get(id_produto)
     if not produto:
@@ -215,7 +215,7 @@ def fazer_lance(id_produto):
     # valida se o lance é válido
     if valor_lance < lance_minimo:
         flash(f'O valor mínimo para este lance é R$ {lance_minimo:.2f}')
-        return redirect(url_for('detalhes_produto', id_produto=id_produto))
+        return redirect(url_for('detalhes_produto', id_produto=id_produto, lance_minimo=lance_minimo))
 
     # salva novo lance com data/hora automática
     novo_lance = Lances(
@@ -223,6 +223,8 @@ def fazer_lance(id_produto):
         id_usuario=id_usuario,
         id_produto=id_produto
     )
+    
+    print(f"Lance recebido: R${valor_lance}")
     db.session.add(novo_lance)
     db.session.commit()
 

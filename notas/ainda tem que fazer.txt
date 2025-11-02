@@ -7,13 +7,9 @@ PONTOS QUE AINDA TENHO QUE FAZER(lógica/backend)
 
 ainda tem que fazer pra essa semana:
 -conectar minha tabela de ADM
--trbalhar com sessoes 
--os cookies 
--arrumar area restrita (não pode dar pra acessar se escrever /arearestrita!!!!! ) FEITO
 -criar table do lance (id_lance, (fk) id_usuario, (fk)id_produto, valor_lance, horário_lance)
 -lógica do lance 
 -imagem do produto*
--botão "minha conta" (aqui o usuario vai poder editar seus dados(deve ter a mesma lógica do editar e area restrita né, aparece os leilões que a pessoa está participando))
 
 pra depois
 -docker
@@ -143,3 +139,6 @@ _____________________________________________
 -eu, eu esqueci da data limite do leilao :////// ai que ódio, espero que seja a msm lógica do outro senhorr
 -eu quria muito implementar a parte do lotes e catalogos
 //se der tempo...
+
+-fiz um pouco do front (da primeria página ks (modal))
+-agr tá a parte das sessões tá funcionando
