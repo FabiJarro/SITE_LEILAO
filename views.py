@@ -11,6 +11,7 @@ SENHA_ADM="1234"
 
 @app.route('/')
 def paginainicial():
+    print(session)
     produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
     email_logado = session.get('usuario_logado')

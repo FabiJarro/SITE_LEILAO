@@ -35,18 +35,20 @@ na segunda
 -uma pessoa só pode fazer lance se estiver logada (caso ela clique no fazer lance redireciona pra página do login)
 (esse tipo de coisa sabe, site intuitivo)
 
--quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso)
-tem que desaparecer e aparecer aquele, olá fulano
+-quando a pessoa fazer login o botao "entrar ou fazer login"(tenho que pensar um pouco mais sobre isso) *FEITO*
+tem que desaparecer e aparecer aquele, olá fulano*FEITO*
 //ai aparece o "minha conta"
-(eu já não fiz isso, quando trabalhando com sessões)
+(eu já não fiz isso, quando trabalhando com sessões? (a parte do desaparecer sim))
 
 _______________________________________________________
 
 terça
 
 ajustes
+(na parte do cadastro)
 -confirmar senha
 -um usuario tem que ser maior de idade
+
 -cpf email tem que ser unicos
 
 

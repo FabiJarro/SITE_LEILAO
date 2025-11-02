@@ -37,21 +37,58 @@ header {
   text-align: center;
   padding: 40px 20px;
   color: black;
+  border-bottom: 2px solid #eee;
 }
 
 header h1 {
   font-size: 3rem;
   margin: 0;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+
 }
 
 
-nav {
-  background: white;
+.navPrincipal {
+  display: flex;
+  justify-content: center; /* centraliza o menu na horizontal */
+  margin: 15px 0;
+  border-bottom: 2px solid #eee;
+  padding: 15px 
+  
+}
+
+.navPrincipal ul {
+  list-style: none; /* tira as bolinhas */
   display: flex;
   justify-content: center;
-  padding: 15px;
-  border-bottom: 2px solid #eee;
+  align-items: center;
+  gap: 30px; /* espaçamento entre os itens */
+  padding: 0;
+  margin: 0;
+}
+
+.navPrincipal a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+
+
+.navPrincipal button {
+  background-color: white;
+  /* border: 2px solid rgb(0, 0, 0); */
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Quicksand';
+}
+
+.navPrincipal button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 
@@ -96,3 +133,84 @@ nav {
   font-size: 1.1rem;
   color: #444;
 }
+
+/* modal */
+
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#senha {
+  width: 100%;
+  padding: 5px;
+}
+
+#email {
+  width: 100%;
+  padding: 5px;
+
+}
+
+#ladoDireito {
+  flex: 1;
+  min-width: 280px;
+  padding: 20px;
+  text-align: center
+}
+
+#lados {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#ladoEsquerdo {
+  flex: 1;
+  min-width: 280px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+

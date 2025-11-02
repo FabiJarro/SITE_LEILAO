@@ -64,7 +64,7 @@ def login_AR():
             return redirect(proxima)
         else:
             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
-            return redirect(url_for('login_AR'), proxima=proxima)
+            return redirect(url_for('login_AR'))
 
     return render_template('login_AR.html', titulo="login- area restrita", proxima=proxima)
 
@@ -72,7 +72,6 @@ def login_AR():
 @app.route('/logout')
 def logout():
     session.clear()
-    session['usuario_logado']=None
     flash("Você foi deslogado", "info")
     resposta = make_response(redirect(url_for('paginainicial')))
     resposta.set_cookie('usuario_email', '', expires=0)
