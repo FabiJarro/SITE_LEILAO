@@ -54,8 +54,10 @@ TABLES['Produtos'] = ('''
       `incremento_minimo` decimal(10,2) NOT NULL,
       `id_usuario` int,
       PRIMARY KEY (`id_produto`),
-      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`)
-      
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) 
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+            
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       
 TABLES['Lances'] = ('''
@@ -66,8 +68,8 @@ TABLES['Lances'] = ('''
       `id_usuario` int,
       `id_produto` int,
       PRIMARY KEY (`id_lance`),
-      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE,
-      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE
       
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       

@@ -20,8 +20,10 @@
     {% if 'usuario_logado' in session and session['usuario_logado'] %}
       <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}" class="form-lance">
         <label for="valor_lance">Valor do lance:</label>
+
         <input id="valor_lance" name="valor_lance" type="number" step="0.01" required>
         <button type="submit" class="btn btn-primary">Fazer Lance</button>
+        
       </form>
     {% else %}
       <p>Para fazer um lance, é necessário estar logado.</p>

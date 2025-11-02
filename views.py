@@ -171,7 +171,8 @@ def atualizar():
 
 @app.route('/deletar/<int:id_usuario>')
 def deletar(id_usuario):
-    Cadastros.query.filter_by(id_usuario=id_usuario).delete()
+    usuario = Cadastros.query.get_or_404(id_usuario)
+    # Cadastros.query.filter_by(id_usuario=id_usuario).delete()
     db.session.commit()
     flash('Jogo deletado com sucesso!')
     return redirect (url_for('arearestrita'))
@@ -198,34 +199,26 @@ def fazer_lance(id_produto):
         abort(404)
 
     valor_lance = float(request.form['valor_lance'])
-    id_usuario = session.get('id_usuario')
+    id_usuario = session.get('usuario_logado')
 
-    # último lance registrado no produto (pelo horário mais recente)
+
     ultimo_lance = (
         Lances.query.filter_by(id_produto=id_produto)
         .order_by(Lances.horario_lance.desc())
         .first()
     )
 
-    # valor mínimo permitido
     lance_minimo = float(produto.preco_produto)
     if ultimo_lance:
         lance_minimo = float(ultimo_lance.valor_lance) + float(produto.incremento_minimo)
-
-    # valida se o lance é válido
-    if valor_lance < lance_minimo:
+    if valor_lance <lance_minimo:
         flash(f'O valor mínimo para este lance é R$ {lance_minimo:.2f}')
         return redirect(url_for('detalhes_produto', id_produto=id_produto, lance_minimo=lance_minimo))
 
-    # salva novo lance com data/hora automática
-    novo_lance = Lances(
-        valor_lance=valor_lance,
-        id_usuario=id_usuario,
-        id_produto=id_produto
-    )
-    
+    novo_lance = Lances( valor_lance=valor_lance, id_produto=id_produto, id_usuario=id_usuario)
+
     print(f"Lance recebido: R${valor_lance}")
-    db.session.add(novo_lance)
+    db.session.add(novo_lance) #problema aqui
     db.session.commit()
 
     flash('Lance registrado com sucesso!')

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block conteudo %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style_areaRestrita.css')}}">
 
 
 <h2>Lista de Usuários</h2>
-<table class="table table-striped table-responsive table-bordered">
+<table>
     <thead class="thead-default">
         <tr>
             <th>ID</th>
@@ -38,7 +39,7 @@
 <br><br>
 
 <h2>Lista de Produtos</h2>
-<table class="table table-striped table-responsive table-bordered">
+<table>
     <thead class="thead-default">
         <tr>
             <th>ID Produto</th>
@@ -48,6 +49,9 @@
             <th>categoria</th>
             <th>preço</th>
             <th>incremento_minimo</th>
+            <th></th>
+            <th></th>
+
 
         </tr>
     </thead>
@@ -61,6 +65,7 @@
             <td>{{ produto.categoria_produto }}</td>
             <td>{{ produto.preco_produto }}</td>
             <td>{{ produto.incremento_minimo}}</td>
+ -->
             
         </tr>
         {% endfor %}
@@ -79,7 +84,8 @@
             <th>ID produto</th>
             <th>horario do lance</th>
             <th>valor do lance</th>
-            
+            <th></th>
+            <th></th>
 
         </tr>
     </thead>
@@ -91,7 +97,7 @@
             <td>{{ lance.id_produto }}</td>
             <td>{{ (lance.horario_lance ) }}</td>
             <td>{{ lance.valor_lance }}</td>
-            
+
         </tr>
         {% endfor %}
     </tbody>

@@ -43,7 +43,7 @@ class Lances(db.Model):
 
     id_lance = db.Column(db.Integer, primary_key=True, autoincrement=True)
     valor_lance = db.Column(db.Numeric(10, 2), nullable=False)
-    horario_lance = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now)
+    horario_lance = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now())
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario', ondelete='CASCADE'))
     id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto', ondelete='CASCADE'))
 

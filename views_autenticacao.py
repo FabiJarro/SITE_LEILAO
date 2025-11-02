@@ -14,7 +14,9 @@ def entrar_usuario():
     print(request.form)
     
     if usuario==usuario and usuario.senha==senha:
-        session['usuario_logado'] = usuario.email
+        session['usuario_email']= usuario.email
+        session['usuario_logado'] = usuario.id_usuario
+
         session.permanent = True 
         resposta = make_response(redirect(url_for('paginainicial')))
         resposta.set_cookie('usuario_email', usuario.email)

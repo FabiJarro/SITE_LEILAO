@@ -7,7 +7,6 @@ PONTOS QUE AINDA TENHO QUE FAZER(lógica/backend)
 
 ainda tem que fazer pra essa semana:
 -conectar minha tabela de ADM
--criar table do lance (id_lance, (fk) id_usuario, (fk)id_produto, valor_lance, horário_lance)
 -lógica do lance 
 -imagem do produto*
 

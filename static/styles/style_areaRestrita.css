@@ -1,0 +1,60 @@
+/* ====== Estilo Geral ====== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    padding: 20px;
+}
+
+/* ====== Títulos ====== */
+h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+/* ====== Tabelas ====== */
+table {
+    width: 90%;
+    margin: 0 auto 40px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+thead {
+    background-color: #f1f1f1;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* ====== Links ====== */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ====== Ajuste Responsivo ====== */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+}

@@ -1,6 +1,0 @@
-o valor_produto é o inicial (to com preguiça de mudar tudo)
-
-o valor_atual é o valor atual 
-(isso daqui eu já não sei)
-
-
