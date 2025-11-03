@@ -13,6 +13,7 @@ from views import *
 from views_autenticacao import *
 from views_minhaConta import *
 from views_erros import *
+from views_deletarEditar import *
 
 
 if __name__ == '__main__':

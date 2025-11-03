@@ -1,7 +1,6 @@
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from datetime import datetime, timezone
 from leilao import app,db
-
 from models import Cadastros, Adm, Produtos, Lances
 # import time
 
@@ -14,7 +13,7 @@ def paginainicial():
     print(session)
     produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
-    email_logado = session.get('usuario_logado')
+    email_logado = session.get('usuario_email')
     primeiro_nome = None
     
     if email_logado:
@@ -38,7 +37,17 @@ def arearestrita():
     
     lista=Cadastros.query.order_by(Cadastros.id_usuario)
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
+    
     lances=Lances.query.order_by(Lances.id_lance)
+    
+    # lances = db.session.query(
+    # Lances.id_lance,
+    # Lances.id_usuario,
+    # Lances.id_produto,
+    # Lances.valor_lance,
+    # Lances.horario_lance,
+    # ).join(Produtos, Lances.id_produto == Produtos.id_produto) .join(Cadastros, Lances.id_usuario == Cadastros.id_usuario).order_by(Lances.id_lance.desc()).all()
+    
     return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, lances=lances)
 
 #esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
@@ -168,23 +177,6 @@ def atualizar():
     return redirect ( url_for('paginainicial'))
 
 
-
-@app.route('/deletar/<int:id_usuario>')
-def deletar(id_usuario):
-    usuario = Cadastros.query.get_or_404(id_usuario)
-    # Cadastros.query.filter_by(id_usuario=id_usuario).delete()
-    db.session.commit()
-    flash('Jogo deletado com sucesso!')
-    return redirect (url_for('arearestrita'))
-
-
-
-@app.route('/editar/<int:id_usuario>')
-def editar(id_usuario):
-    cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
-    # capa_jogo=recupera_imagem(id_usuario)
-    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
-    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
 
 
 

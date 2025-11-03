@@ -3,8 +3,6 @@
 <div id="cadastrar" class="formulario">
 
 
-
-
   <form action="{{url_for('cadastrar_usuario')}}" method="post" enctype="multipart/form-data" id="formulario_cadastro">
 
     <h3>Dados Pessoais</h3>
@@ -97,7 +95,7 @@
 
 </div>
 
-  <script src="static/script_cadastrarElance.js"></script>
+<script src="{{ url_for('static', filename='/scripts/script_cadastrarElance.js')}}"></script>
 
 
   {%endblock%}

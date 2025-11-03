@@ -1,0 +1,65 @@
+from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
+from datetime import datetime, timezone
+from leilao import app,db
+
+from models import Cadastros, Adm, Produtos, Lances
+
+
+
+
+
+@app.route('/deletar/<int:id_usuario>')
+def deletarUsuario(id_usuario):
+    usuario = Cadastros.query.get_or_404(id_usuario)
+    # Cadastros.query.filter_by(id_usuario=id_usuario).delete()
+    db.session.delete(usuario)
+    db.session.commit()
+    flash('usuario deletado')
+    return redirect (url_for('arearestrita'))
+
+
+
+@app.route('/editar/<int:id_usuario>')
+def editarUsuario(id_usuario):
+    cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
+    # capa_jogo=recupera_imagem(id_usuario)
+    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
+    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
+    
+    
+#_______________________________________________________________________________
+
+@app.route('/deletar/<int:id_produto>')
+def deletarProduto(id_produto):
+    produto= Produtos.query.get_or_404(id_lance)
+    db.session.delete(produto)
+    db.session.commit()
+    flash('produto deletado')
+    return redirect (url_for('arearestrita'))
+
+
+@app.route('/editar/<int:id_produto>')
+def editarProduto(id_produto):
+    cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
+    # capa_jogo=recupera_imagem(id_usuario)
+    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
+    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
+    
+#_______________________________________________________
+
+@app.route('/deletarLance/<int:id_lance>')
+def deletarLance(id_lance):
+    lance= Lances.query.get_or_404(id_lance)
+    db.session.delete(lance)
+    db.session.commit()
+    flash('lance deletado')
+    return redirect (url_for('arearestrita'))
+
+
+@app.route('/editarLance/<int:id_lance>')
+def editarLance(id_lance):
+    cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
+    # capa_jogo=recupera_imagem(id_usuario)
+    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
+    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
+

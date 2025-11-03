@@ -15,15 +15,14 @@ def minha_conta():
 
 @app.route('/minhaconta/meus_dados')
 def meus_dados():
-    email_logado = session.get('usuario_logado')
+    email_logado = session.get('usuario_email')
     
-    if 'usuario_logado' not in session:
-        return redirect(url_for('nao_autorizado'))
+    # if 'usuario_email' not in session:
+    #     return redirect(url_for('nao_autorizado'))
     
     usuario = Cadastros.query.filter_by(email=session['usuario_logado']).first()
     cadastro = Cadastros.query.filter_by(email=email_logado).first()
     if not cadastro:
-        return redirect(url_for('page_not_found'))
         print("acessado")
     return render_template('minhaContahtmls/meus_dados.html', cadastro=cadastro)
 
