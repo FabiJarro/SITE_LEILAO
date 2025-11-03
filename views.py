@@ -142,13 +142,22 @@ def salvar_produto():
 def detalhes_produto(id_produto): 
     produto=Produtos.query.get_or_404(id_produto)
     
+    if not produto:
+        abort(404)
+        
+    lance_minimo = request.args.get('lance_minimo')
+    
     ultimo_lance = Lances.query.filter_by(id_produto=id_produto).order_by(Lances.horario_lance.desc()).first()
+    
     proximo_lance = produto.preco_produto
     if ultimo_lance:
         proximo_lance = ultimo_lance.valor_lance + produto.incremento_minimo
 
-    
-    return render_template('detalhes_produto.html', titulo="página do produto", produto=produto, ultimo_lance=ultimo_lance, proximo_lance=proximo_lance, datetime=datetime)
+    lance_minimo = float(produto.preco_produto)
+    if ultimo_lance:
+        lance_minimo = float(ultimo_lance.valor_lance) + float(produto.incremento_minimo)
+
+    return render_template('detalhes_produto.html', produto=produto, ultimo_lance=ultimo_lance, proximo_lance=proximo_lance, datetime=datetime, lance_minimo=lance_minimo)
 
 
 
