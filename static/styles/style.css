@@ -71,6 +71,7 @@ header h1 {
   text-decoration: none;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+
 }
 
 
@@ -214,3 +215,108 @@ header h1 {
   border-right: 1px solid #ddd;
 }
 
+
+/* 
+divisão */
+
+
+/* Rodapé */
+.rodape {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 30px 60px;
+  color: #444;
+}
+
+.rodape-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.rodape-secao {
+  flex: 1 1 200px;
+  min-width: 180px;
+  font-size: 15px;
+}
+
+.rodape-secao h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #b41c1c;
+  font-weight: 600;
+}
+
+.rodape-secao a {
+  color: #444;
+  text-decoration: none;
+}
+
+.rodape-secao a:hover {
+  color: #b41c1c;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link i {
+  font-size:18px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-link:hover i {
+  color: #b41c1c;
+  transform: scale(1.1);
+}
+
+.botao-tema {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.botao-tema:hover {
+  background-color: #f5f5f5;
+}
+
+.direitos {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin-top: 30px;
+}
+
+
+.botao-sair {
+  background: #f5f5f5;
+  color: #000;
+  margin-left: 11px;
+}
+
+
+
+/* Modo escuro*/
+.modo-escuro {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.modo-escuro .rodape {
+  background-color: #222;
+  color: #ddd;
+}
+
+.modo-escuro a {
+  color: #ddd;
+}
+
+.modo-escuro .botao-tema {
+  border-color: #555;
+}

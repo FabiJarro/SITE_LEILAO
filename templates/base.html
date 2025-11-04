@@ -6,8 +6,9 @@
   <title>leilão</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='/styles/style.css')}}">
-
+  <link href="{{ url_for('static', filename='/styles/style.css')}}" rel="stylesheet" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 </head>
 
 
@@ -15,13 +16,14 @@
 
   <header>
     <h2>Leilão</h2>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo">
   </header>
 
   <nav class="navPrincipal">
     <ul>
       <li><a href="/">Página inicial</a></li>
-      <li><a href="/login_AR">Área Restrita</a></li>
-  
+      <li><a href="/sobre">Sobre nós</a></li>
+
       {% if 'usuario_logado' in session %}
       <li><a href="/minhaconta">Minha conta</a></li>
       {% else %}
@@ -79,7 +81,7 @@
   {% endif %}
   {% endwith %}
 
-  
+
 
 
 
@@ -87,11 +89,57 @@
   {%block conteudo%}
   {%endblock%}
 
-  <!-- <footer>
-        &#169; leilões sla
-    </footer> -->
+
+  <footer class="rodape">
+    <div class="rodape-container">
+
+      <div class="rodape-secao">
+        <h4>Área Restrita</h4>
+          <a href="{{ url_for('login_AR') }}">Entrar</a>
+      </div>
+
+      <div class="rodape-secao">
+        <h4>Contato</h4>
+        <p><i class="fa-solid fa-envelope"></i> <a href="leilao@gmail.com" style="font-size: 15px;">sac@leilao.gmail.com</a></p>
+        <p style="font-size: 15px;"><i class="fa-solid fa-phone"></i> (35) 99999-0000</p>
+      </div>
+
+      <div class="rodape-secao">
+        <h4>Redes Sociais</h4>
+        <div class="social-icons">
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <!-- tema -->
+      <div class="rodape-secao tema">
+        <h4>Tema</h4>
+        <button class="botao-tema" onclick="trocarTema()">
+          <i class="fa-regular fa-moon"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <p class="direitos"> &#169leilao 2025</p>
+  </footer>
 
 </body>
 
+
 </html>
 <script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
+<script>
+  // 🎨 Função ilustrativa de troca de tema
+  function trocarTema() {
+    document.body.classList.toggle('modo-escuro');
+  }
+
+  // 🪟 Função para abrir o modal de login (você já deve ter no HTML principal)
+  function abrirModalLogin() {
+    const modal = document.getElementById('modalLogin');
+    if (modal) modal.style.display = 'block';
+  }
+</script>

@@ -1,35 +1,42 @@
 {%extends "base.html"%}
 {%block conteudo%}
 
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style_minhaConta.css')}}">
+
 {% if primeiro_nome %}
 <h3>Olá, {{ primeiro_nome }}!</h3>
 {% endif%}
 
 
 
-<body>
-    <div>
+<div class="container-conta">
+    <aside class="menu-conta">
+        <h2>Minha conta</h2>
         <ul>
-            <button id="meusDados" onclick="carregarConteudo('meus_dados')">Meus dados</button>
-            <button id="meusLances" onclick="carregarConteudo('meus_lances')">Meus Lances</button>
-            <button id="produtosLeiloados" onclick="carregarConteudo('produtos_leiloados')">Produtos Leiloados</button>
-
-            
-            <div id="conteudo-dinamico">
-                <p>Escolha uma seção acima.</p>
-            </div>
-
-
+            <li><button onclick="carregarConteudo('meus_dados')"><i class="fa fa-user"></i> Meus dados</button></li>
+            <li><button onclick="carregarConteudo('meus_lances')"><i class="fa fa-gavel"></i> Meus lances</button></li>
+            <li><button onclick="carregarConteudo('produtos_leiloados')"><i class="fa fa-cube"></i> Produtos leiloados</button></li>
+            <br>
+            <a href="{{ url_for('logout') }}" class="botao-sair"><i class="fa fa-sign-out-alt"></i> Sair</a>
         </ul>
-    </div>
+    </aside>
 
-</body>
+    <main class="conteudo-conta">
+        {% if primeiro_nome %}
+        <h3>Olá, {{ primeiro_nome }}!</h3>
+        {% endif %}
+        
+        <div id="conteudo-dinamico" class="conteudo-dinamico">
+            <p>Escolha uma seção ao lado.</p>
+        </div>
+    </main>
+</div>
 
-
-<footer>
-    <p>&copy; 2025 leilão</p>
-</footer>
 
 <script src="{{ url_for('static', filename='/scripts/script_minhaConta.js')}}"></script>
+<script src="https://kit.fontawesome.com/a2d9d5a5df.js" crossorigin="anonymous"></script>
+
+
 
 {%endblock%}

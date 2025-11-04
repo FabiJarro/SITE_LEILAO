@@ -7,7 +7,7 @@ from models import Cadastros, Adm, Produtos
 
 @app.route('/minhaconta')
 def minha_conta():
-    return render_template('minhaconta.html', titulo="minha conta")
+    return render_template('minhaconta.html')
 
 
 

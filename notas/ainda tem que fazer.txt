@@ -141,3 +141,30 @@ _____________________________________________
 
 -fiz um pouco do front (da primeria página ks (modal))
 -agr tá a parte das sessões tá funcionando
+
+________________
+
+2 novembro
+não lembro direito pq esqueci de anotar ontem aff
+se eu não me engando o deletar um usuario tá funcionado 
+agora as sessões ESTÂO funcionando msm
+tive alguns varios imprevistos
+inclusive
+usuario_logado antes era usuario.email
+agora usuario_logado é usuario.id
+
+isso tava ferrando muito essa mudança que fiz, mas agr tudo funciona
+agr tem o usurio_email = usuario.email
+
+chatgpt é muito burro meu deus
+
+_____________________
+
+3 novembro
+
+tive uns problemas com a parte de não pegar, tipo o lance minimo 
+mas agr tá indo
+vou colocar um pouco maais de css e trabalhar na parte da "minaConta"
+
+eu prometi pra mim msm que vou terminar esse curso amanha ent..
+né

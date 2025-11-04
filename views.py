@@ -29,6 +29,12 @@ def paginainicial():
     return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque, primeiro_nome=primeiro_nome)
 
 
+@app.route('/sobre')
+def sobre():
+    return render_template('sobre.html')
+
+
+
 @app.route('/arearestrita')
 def arearestrita():
     referer = request.referrer
