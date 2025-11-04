@@ -1,2 +1,97 @@
-<h2>Meus lances</h2>
-<p>Você ainda não fez nenhum lance.</p>
+<style>
+    .meus-lances {
+        margin-top: 2rem;
+    }
+
+    .tabela-lances {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+
+    .tabela-lances th,
+    .tabela-lances td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 12px;
+        text-align: left;
+    }
+
+    .tabela-lances th {
+        background-color: #f7f7f7;
+        font-weight: 600;
+    }
+
+    .status.ativo {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .status.finalizado {
+        color: #999;
+        font-weight: bold;
+    }
+
+    .btn-deletar {
+        background: none;
+        border: 1px solid #ff4d4d;
+        color: #ff4d4d;
+        padding: 4px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-deletar:hover {
+        background-color: #ff4d4d;
+        color: #fff;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<div class="meus-lances">
+    <h3>Meus Lances</h3>
+
+    {% if lances %}
+    <table class="tabela-lances">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Valor do Lance</th>
+                <th>Data/Hora</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lance in lances %}
+            <tr>
+                <td>{{ lance.produto.nome_produto }}</td>
+                <td>R$ {{ "%.2f"|format(lance.valor_lance) }}</td>
+                <td>{{ lance.horario_lance.strftime("%d/%m/%Y %H:%M") }}</td>
+                <td>
+                    {% if lance.produto.ativo %}
+                    <span class="status ativo">Em andamento</span>
+                    {% else %}
+                    <span class="status finalizado">Finalizado</span>
+                    {% endif %}
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum lance foi encontrado.</p>
+    {% endif %}
+</div>

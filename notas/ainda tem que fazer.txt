@@ -168,3 +168,18 @@ vou colocar um pouco maais de css e trabalhar na parte da "minaConta"
 
 eu prometi pra mim msm que vou terminar esse curso amanha ent..
 né
+
+mais front
+e agora avanços na parte da "minhaConta uwu"
+
+fazer páginas
+//sobre
+//como vender
+//como comprar(regras e tals)
+
+//e colocar o deletar um lance na parte do usuario
+
+fazer um botao de cadastrar produto
+e colocar mais espaços amanha
+
+depois eu vejo como fica a parte do "status de um leilao"

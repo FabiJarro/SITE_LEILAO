@@ -1,0 +1,6 @@
+
+                        <form action="{{ url_for('deletar_lance', id_lance=lance.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-deletar">Excluir</button>
+                        </form>
+
+                        
