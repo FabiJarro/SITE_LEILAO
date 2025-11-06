@@ -35,9 +35,13 @@ body {
 
 header {
   text-align: center;
-  padding: 40px 20px;
+  padding: 10px 20px;
   color: black;
   border-bottom: 2px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
 }
 
 header h1 {
@@ -51,9 +55,9 @@ header h1 {
 .navPrincipal {
   display: flex;
   justify-content: center; /* centraliza o menu na horizontal */
-  margin: 15px 0;
+  margin: 10px 0;
   border-bottom: 2px solid #eee;
-  padding: 15px 
+  padding: 8px 
   
 }
 
@@ -65,12 +69,14 @@ header h1 {
   gap: 30px; /* espaçamento entre os itens */
   padding: 0;
   margin: 0;
+  font-size: 15px;
 }
 
 .navPrincipal a {
   text-decoration: none;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+  font-size: 15px;
 
 }
 

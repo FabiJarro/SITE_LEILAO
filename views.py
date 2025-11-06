@@ -26,12 +26,8 @@ def paginainicial():
         if email_cookie:
             session['usuario_logado'] = email_cookie
             email_logado = email_cookie
-    return render_template('index.html', titulo="página inicial", produtos=lista_produto, produto_destaque=produto_destaque, primeiro_nome=primeiro_nome)
+    return render_template('index.html', produtos=lista_produto, produto_destaque=produto_destaque, primeiro_nome=primeiro_nome)
 
-
-@app.route('/sobre')
-def sobre():
-    return render_template('sobre.html')
 
 
 
