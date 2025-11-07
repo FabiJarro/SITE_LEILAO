@@ -58,7 +58,7 @@
         <!-- Lado direito: cadastro -->
         <div id="ladoDireito">
           <p>Ainda não tem cadastro?</p>
-          <a href="{{ url_for('cadastrar') }}" style="color: blue; text-decoration: underline;">Cadastre-se aqui</a>
+          <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se aqui</a>
         </div>
       </div>
     </div>
@@ -66,10 +66,6 @@
   </div>
 
 
-
-
-
-  <h2>{{titulo}}</h2>
 
   {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -80,11 +76,6 @@
   </ul>
   {% endif %}
   {% endwith %}
-
-
-
-
-
 
   {%block conteudo%}
   {%endblock%}
@@ -121,6 +112,12 @@
         </button>
       </div>
 
+      <div class="rodape-secao">
+        <h4>cadastrar um produto</h4>
+          <a href="{{ url_for('cadastro_produto') }}">Cadastrar um produto</a>
+      </div>
+      
+
     </div>
 
     <p class="direitos"> &#169leilao 2025</p>
@@ -132,14 +129,9 @@
 </html>
 <script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
 <script>
-  // 🎨 Função ilustrativa de troca de tema
+  // funçção que troca o tema(n funciona direito)
   function trocarTema() {
     document.body.classList.toggle('modo-escuro');
   }
 
-  // 🪟 Função para abrir o modal de login (você já deve ter no HTML principal)
-  function abrirModalLogin() {
-    const modal = document.getElementById('modalLogin');
-    if (modal) modal.style.display = 'block';
-  }
 </script>

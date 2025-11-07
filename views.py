@@ -2,8 +2,7 @@ from flask import render_template, request, redirect, session, flash, url_for, m
 from datetime import datetime, timezone
 from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances
-# import time
-
+from helpers import UsuarioForm
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -64,88 +63,108 @@ def getProdutos():
 
 @app.route('/cadastrar_usuario', methods=['POST',])
 def cadastrar_usuario():
-    print('chegando a requisição cadastrando usuário...')
-    nome=request.form['nome']
-    cpf=request.form['cpf']
-    data_str = request.form['data_nascimento']
-    data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
-    email=request.form['email']
-    senha=request.form['senha']
-    cep=request.form['cep']
+    usuarioForm = UsuarioForm(request.form)
+    try:
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        usuarioForm.validar()
+    except ValueError as e:
+        flash(str(e))
+        print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
+        return render_template('cadastrar_usuario.html',form=usuarioForm)   
+    
+    nome=usuarioForm.nome
+    cpf=usuarioForm.cpf
+    data_str = usuarioForm.data_nascimento
+    email=usuarioForm.email
+    senha=usuarioForm.senha
+    cep=usuarioForm.cep
+    
+    try:
+        data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
+    except ValueError:
+        flash('Data de nascimento inválida. Use o formato YYYY-MM-DD.')
+        return render_template('cadastrar_usuario.html', form=usuarioForm)
+    
+    
+    if Cadastros.query.filter_by(email=email).first():
+        flash('Já existe um cadastro com esse e-mail.')
+        return render_template('cadastrar_usuario.html', form=usuarioForm)
+            
+    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
+    
+    db.session.add(novo_cadastro)
+    db.session.commit()
+        
+    session['id_usuario'] = novo_cadastro.id_usuario
+        
+    print("sucesso?")
+    flash('Usuário cadastrado com sucesso!')
     print("dados recebidos:", nome, cep, data_str, email, senha, cep)
     # print(f'############ {request.form}')
     # return jsonify()
-    
-    cadastro = Cadastros.query.filter_by(email=email).first()
-    if cadastro:
-        flash('Cadastro existente.')
-        return redirect(url_for('paginainicial'))
-    
-    cadastro=Cadastros.query.filter_by(nome=nome).first()
-    
-    if cadastro:
-        flash('cadastro existente')
-        return redirect(url_for('paginainicial'))
-    
-    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
-    db.session.add(novo_cadastro)
-    db.session.commit()
-    
-    session['id_usuario'] = novo_cadastro.id_usuario
-    
-    print("sucesso?")
-    
+        
     flash ('usuario cadastrado com sucesso')
-    return redirect(url_for('arearestrita'))
+    return redirect(url_for('paginainicial'))
 
-@app.route('/cadastrar')
-def cadastrar():
-    return render_template('cadastrar.html', titulo="cadastro")
+    return redirect(url_for('paginainicial'))
 
 
-@app.route('/salvar_produto', methods=['POST',])
-def salvar_produto():
-    print('chegando a requisição...')
-    print(f'############ {request.form}')
-    nome_produto=request.form['nome_produto']
-    categoria_produto=request.form['categoria_produto']
-    preco_produto=request.form['preco_produto']
-    incremento_minimo=request.form['incremento_minimo']
-    id_usuario = session.get('id_usuario')
+@app.route('/cadastro_usuario')
+def cadastro_usuario():
+    usuarioForm = UsuarioForm(request.form)
+    return render_template('cadastrar_usuario.html', form=usuarioForm)
+
+
+
+@app.route('/cadastrar_produto')
+def cadastro_produto():
+    formProduto=FormularioProduto(request.form)
+    return render_template('cadastrar_produto.html', formProduto=formProduto)
+
+
+# @app.route('/cadastrar_produto', methods=['POST',])
+# def salvar_produto():
+#     print('chegando a requisição...')
+#     print(f'############ {request.form}')
+#     nome_produto=request.form['nome_produto']
+#     categoria_produto=request.form['categoria_produto']
+#     preco_produto=request.form['preco_produto']
+#     incremento_minimo=request.form['incremento_minimo']
+#     id_usuario = session.get('id_usuario')
     
-    produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
+#     produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
     
-    if produto:
-        flash('produto existente')
-        return redirect(url_for('paginainicial'))
+#     if produto:
+#         flash('produto existente')
+#         return redirect(url_for('paginainicial'))
     
-    if not id_usuario:
-        flash ("erro: usuario não identificado")
-        return redirect(url_for('entrar'))
+#     if not id_usuario:
+#         flash ("erro: usuario não identificado")
+#         return redirect(url_for('entrar'))
     
-    produto_existente = Produtos.query.filter_by(nome_produto=nome_produto).first()
-    if produto_existente:
-        flash('Produto já existente!')
-        return redirect(url_for('paginainicial'))
+#     produto_existente = Produtos.query.filter_by(nome_produto=nome_produto).first()
+#     if produto_existente:
+#         flash('Produto já existente!')
+#         return redirect(url_for('paginainicial'))
     
-    # cursor.execute("INSERT INTO produtos (nome, preco, id_usuario) VALUES (%s, %s, %s)", (nome, preco, id_usuario))
-    # conexao.commit()
+#     # cursor.execute("INSERT INTO produtos (nome, preco, id_usuario) VALUES (%s, %s, %s)", (nome, preco, id_usuario))
+#     # conexao.commit()
     
-    novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, incremento_minimo=incremento_minimo, id_usuario=id_usuario)
+#     novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, 
+#                           incremento_minimo=incremento_minimo, id_usuario=id_usuario)
     
-    db.session.add(novo_produto)
-    db.session.commit()
-    print("sucesso?")
-    flash('Produto cadstrado com sucesso')
-    return redirect(url_for('arearestrita'))
+#     db.session.add(novo_produto)
+#     db.session.commit()
+#     print("sucesso?")
+#     flash('Produto cadstrado com sucesso')
+#     return redirect(url_for('arearestrita'))
+
+
 
 
 @app.route('/detalhes_produto/<int:id_produto>')
 def detalhes_produto(id_produto): 
     produto=Produtos.query.get_or_404(id_produto)
-    
-    if not produto:
-        abort(404)
         
     lance_minimo = request.args.get('lance_minimo')
     
@@ -159,7 +178,8 @@ def detalhes_produto(id_produto):
     if ultimo_lance:
         lance_minimo = float(ultimo_lance.valor_lance) + float(produto.incremento_minimo)
 
-    return render_template('detalhes_produto.html', produto=produto, ultimo_lance=ultimo_lance, proximo_lance=proximo_lance, datetime=datetime, lance_minimo=lance_minimo)
+    return render_template('detalhes_produto.html', produto=produto, ultimo_lance=ultimo_lance, 
+                           proximo_lance=proximo_lance, datetime=datetime, lance_minimo=lance_minimo)
 
 
 
@@ -179,12 +199,6 @@ def atualizar():
     db.session.add(cadastro)
     db.session.commit()
     
-    # arquivo= request.files['arquivo']
-    # uploads_path=app.config['UPLOAD_PATH']
-    # timestamp=time.time()
-    # deleta_arquivo(cadastro.id)
-    # arquivo.save(f'{uploads_path}/capa{jogo.id}-{timestamp}.jpg')
-    
     return redirect ( url_for('paginainicial'))
 
 
@@ -193,13 +207,11 @@ def atualizar():
 
 @app.route('/fazer_lance/<int:id_produto>', methods=['POST'])
 def fazer_lance(id_produto):
+    produto=Produtos.query.get_or_404(id_produto)
+    
     if 'usuario_logado' not in session:
-        flash('Você precisa estar logado para dar um lance.')
-        return redirect(url_for('paginainicial'))
-
-    produto = Produtos.query.get(id_produto)
-    if not produto:
-        abort(404)
+        flash('login_requerido')
+    return redirect(url_for('paginainicial'))
 
     valor_lance = float(request.form['valor_lance'])
     id_usuario = session.get('usuario_logado')
@@ -221,7 +233,7 @@ def fazer_lance(id_produto):
     novo_lance = Lances( valor_lance=valor_lance, id_produto=id_produto, id_usuario=id_usuario)
 
     print(f"Lance recebido: R${valor_lance}")
-    db.session.add(novo_lance) #problema aqui
+    db.session.add(novo_lance) 
     db.session.commit()
 
     flash('Lance registrado com sucesso!')

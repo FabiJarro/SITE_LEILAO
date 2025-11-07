@@ -31,6 +31,7 @@ class Produtos(db.Model):
     categoria_produto=db.Column(db.String(255), nullable=False)
     preco_produto=db.Column(db.String(255), nullable=False)
     incremento_minimo=db.Column(db.String(255), nullable=False)
+    descricao_produto=db.Column(db.String(4000), nullable=False)
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
     
     usuario = db.relationship('Cadastros', backref='produtos', lazy=True)

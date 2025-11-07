@@ -49,6 +49,7 @@ TABLES['Produtos'] = ('''
       CREATE TABLE `produtos` (
       `id_produto` int NOT NULL AUTO_INCREMENT,
       `nome_produto` varchar(255) NOT NULL,
+      `descricao_produto` varchar(255),
       `categoria_produto` varchar(100),
       `preco_produto` decimal(10,2) NOT NULL,
       `incremento_minimo` decimal(10,2) NOT NULL,
@@ -64,7 +65,7 @@ TABLES['Lances'] = ('''
       CREATE TABLE `lances` (
       `id_lance` int NOT NULL AUTO_INCREMENT,
       `valor_lance` decimal(10,2) NOT NULL,
-      `horario_lance` datetime NOT NULL,
+      `horario_lance` DATETIME DEFAULT CURRENT_TIMESTAMP,
       `id_usuario` int,
       `id_produto` int,
       PRIMARY KEY (`id_lance`),
@@ -119,10 +120,10 @@ for cadastro in cursor.fetchall():
       print(cadastro[1])
       
 #inserindo produtos na lista de produtos lá
-produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, incremento_minimo, id_usuario) VALUES (%s, %s, %s, %s, %s)'
+produtos_sql = 'INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, incremento_minimo, descricao_produto, id_usuario) VALUES (%s, %s, %s, %s, %s, %s)'
 produtos = [
-      ('caneca', 'casual', 20.99, 5.00, 2),
-      ('flor', 'casual', 45.99, 10.00, 3)
+      ('caneca', 'casual', 20.99, 5.00,'descricao muitolongaaaaaaaaaaaaaa', 2),
+      ('flor', 'casual', 45.99, 10.00, 'descricao mais longa aindaaaaaaaa',3)
 ]
 cursor.executemany(produtos_sql, produtos)
 
@@ -135,8 +136,8 @@ for produto in cursor.fetchall():
 #inserindo os lances
 lances_sql = 'INSERT INTO lances (valor_lance, horario_lance, id_usuario, id_produto) VALUES (%s, %s, %s, %s)'
 lances = [
-      (21.99, '', 2, 1),
-      (46.99, '2025-10-27 14:30:00 ', 3, 2),
+      (21.99, '2025-10-26 14:30:00', 2, 1),
+      (46.99, '2025-10-27 14:30:00', 3, 2),
 
 ]
 cursor.executemany(lances_sql, lances)

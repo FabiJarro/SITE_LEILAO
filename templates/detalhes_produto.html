@@ -13,12 +13,13 @@
     {% endif %}
   </div>
 
+
   <section class="produto-info">
     <h2>{{ produto.nome_produto }}</h2>
     <p><b>Categoria:</b> {{ produto.categoria_produto }}</p>
 
     <p><b>Valor inicial:</b> R$ {{ produto.preco_produto }}</p>
-    <p><b>Lance mínimo:</b> R$ {{ produto.lance_minimo }}</p>
+    <p><b>Lance mínimo:</b> R$ {{ lance_minimo }}</p>
     <p><b>Incremento:</b> R$ {{ produto.incremento_minimo }}</p>
 
     <p><b>Valor atual:</b> R${{lance_minimo}}</p>
@@ -33,7 +34,7 @@
       <label for="valor_lance">Valor do lance:</label>
 
       <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ produto.lance_minimo }}"
-        value="{{ produto.lance_minimo }}">
+        value="{{ lance_minimo }}">
 
       <small>O valor mínimo para este lance é <b>R$ {{ produto.lance_minimo }}</b>.<br>
         O incremento é de <b>R$ {{ produto.incremento or 0 }}</b>.</small>
@@ -41,35 +42,32 @@
       <button type="submit">Fazer Lance</button>
     </form>
     {% else %}
-    <p>Para fazer um lance, é necessário estar logado.</p>
-    <button id="abrirModalLogin" class="btn-secundario">Entrar ou Cadastrar</button>
+      <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}" class="form-lance">
+      <label for="valor_lance">Valor do lance:</label>
+
+      <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ produto.lance_minimo }}"
+        value="{{ lance_minimo }}">
+
+      <button type="submit">Fazer Lance</button>
+
     {% endif %}
 
-    <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
+      <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
   </section>
 
 </main>
 
 
-<script>
-  // Exibe o horário local
-  const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
-  const dataLocal = new Date(horarioServidor);
-  document.getElementById("horario-lance").textContent =
-    !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
+  <script>
+    const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
+    const dataLocal = new Date(horarioServidor);
+    document.getElementById("horario-lance").textContent =
+      !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
 
-  // Reaproveita o mesmo modal de login da base.html
-  const modal1 = document.getElementById("myModal");
-  const btnAbrirModal = document.getElementById("abrirModalLogin");
-  const spanFechar = document.getElementsByClassName("close")[0];
+    //meu deus não sei oq tá acontecendo
 
-  if (btnAbrirModal && moda1 && spanFechar) {
-    btnAbrirModal.onclick = () => modal.style.display = "block";
-    spanFechar.onclick = () => modal.style.display = "none";
-    window.onclick = (event) => {
-      if (event.target === modal) modal.style.display = "none";
-    };
-  }
-</script>
+  </script>
+
+
 
 {% endblock %}

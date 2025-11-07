@@ -2,10 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, PasswordField, validators
 
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')   
+app.config.from_pyfile('config.py')
+   
 
 
 db=SQLAlchemy(app)
