@@ -5,17 +5,7 @@ from wtforms import StringField, validators, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Length, Email
 import re    
 
-# class FormularioUsuario(FlaskForm):
-#     nome = StringField('Nome', [validators.DataRequired(), validators.Length(min=1, max=255)])
-#     cpf = StringField('CPF', [validators.DataRequired(), validators.Length(min=1, max=14)])
-#     data_nascimento = StringField('Data de nascimento', [DataRequired()])
-#     email = StringField('Email', [validators.DataRequired(), validators.Length(min=1, max=320)])
-#     senha = StringField('Senha', [validators.DataRequired(), validators.Length(min=1, max=255)])
-#     cep = StringField('CEP', [validators.DataRequired(), validators.Length(min=1, max=255)])
-#     salvar = SubmitField('Salvar')
-    
-#     def hello(self):
-#         print('hello')
+
         
 class UsuarioForm():
     
@@ -53,12 +43,12 @@ class UsuarioForm():
         return True
 
 
-class FormularioProduto(FlaskForm):
-    nome_produto=('Nome do produto', [validators.DataRequired(), validators.Length(min=1, max=255)])
-    descricao_produto=('Descrição do produto', [validators.DataRequired(), validators.Length(min=1, max=4000)])
-    categoria_produto=('Categoria', [validators.DataRequired(), validators.Length(min=1, max=100)])
-    preco_produto=('preço inicial', [validators.DataRequired(), validators.Length(min=1, max=100)])
-    incremento_minimo=('incremento minimo', [validators.DataRequired(), validators.Length(min=1, max=255)])
+# class FormularioProduto(FlaskForm):
+#     nome_produto=('Nome do produto', [validators.DataRequired(), validators.Length(min=1, max=255)])
+#     descricao_produto=('Descrição do produto', [validators.DataRequired(), validators.Length(min=1, max=4000)])
+#     categoria_produto=('Categoria', [validators.DataRequired(), validators.Length(min=1, max=100)])
+#     preco_produto=('preço inicial', [validators.DataRequired(), validators.Length(min=1, max=100)])
+#     incremento_minimo=('incremento minimo', [validators.DataRequired(), validators.Length(min=1, max=255)])
 
 
 # class UsuarioForm():

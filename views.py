@@ -61,52 +61,76 @@ def getProdutos():
 
 
 
-@app.route('/cadastrar_usuario', methods=['POST',])
+# @app.route('/cadastrar_usuario', methods=['POST',])
+# def cadastrar_usuario():
+#     usuarioForm = UsuarioForm(request.form)
+#     try:
+#         print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+#         usuarioForm.validar()
+#     except ValueError as e:
+#         print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
+#         return jsonify({"status": False, "mensagem": str(e)})  
+    
+#     nome=usuarioForm.nome
+#     cpf=usuarioForm.cpf
+#     data_str = usuarioForm.data_nascimento
+#     email=usuarioForm.email
+#     senha=usuarioForm.senha
+#     cep=usuarioForm.cep
+    
+#     try:
+#         data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
+#     except ValueError:
+#         return jsonify({"status": False, "mensagem": "Data de nascimento inválida. Use o formato YYYY-MM-DD"}), 
+    
+    
+#     if Cadastros.query.filter_by(email=email).first():
+#         return jsonify({"status": "erro", "mensagem": "Já existe um cadastro com esse e-mail."}), 400
+            
+#     novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
+    
+#     db.session.add(novo_cadastro)
+#     db.session.commit()
+        
+#     session['id_usuario'] = novo_cadastro.id_usuario
+        
+#     print("sucesso?")
+#     flash('Usuário cadastrado com sucesso!')
+#     print("dados recebidos:", nome, cep, data_str, email, senha, cep)
+#     print("Usuário cadastrado com sucesso:", nome)
+#     return jsonify({"status": True, "mensagem": "Usuário cadastrado com sucesso!"}), 200
+
+@app.route('/cadastrar_usuario', methods=['POST'])
 def cadastrar_usuario():
     usuarioForm = UsuarioForm(request.form)
+    
     try:
-        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         usuarioForm.validar()
     except ValueError as e:
-        flash(str(e))
-        print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
-        return render_template('cadastrar_usuario.html',form=usuarioForm)   
-    
-    nome=usuarioForm.nome
-    cpf=usuarioForm.cpf
-    data_str = usuarioForm.data_nascimento
-    email=usuarioForm.email
-    senha=usuarioForm.senha
-    cep=usuarioForm.cep
-    
-    try:
-        data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
-    except ValueError:
-        flash('Data de nascimento inválida. Use o formato YYYY-MM-DD.')
-        return render_template('cadastrar_usuario.html', form=usuarioForm)
-    
-    
-    if Cadastros.query.filter_by(email=email).first():
-        flash('Já existe um cadastro com esse e-mail.')
-        return render_template('cadastrar_usuario.html', form=usuarioForm)
-            
-    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
-    
-    db.session.add(novo_cadastro)
-    db.session.commit()
-        
-    session['id_usuario'] = novo_cadastro.id_usuario
-        
-    print("sucesso?")
-    flash('Usuário cadastrado com sucesso!')
-    print("dados recebidos:", nome, cep, data_str, email, senha, cep)
-    # print(f'############ {request.form}')
-    # return jsonify()
-        
-    flash ('usuario cadastrado com sucesso')
-    return redirect(url_for('paginainicial'))
+        # Retorna JSON com a mensagem de erro
+        return jsonify({"sucesso": False, "mensagem": str(e)}), 400
 
-    return redirect(url_for('paginainicial'))
+    # verifica duplicidade de e-mail
+    if Cadastros.query.filter_by(email=usuarioForm.email).first():
+        return jsonify({"sucesso": False, "mensagem": "Já existe um cadastro com esse e-mail."}), 400
+
+    # se tudo estiver certo, cria o usuário
+    try:
+        data_nascimento = datetime.strptime(usuarioForm.data_nascimento, "%Y-%m-%d").date()
+        novo_cadastro = Cadastros(
+            nome=usuarioForm.nome,
+            cpf=usuarioForm.cpf,
+            data_nascimento=data_nascimento,
+            email=usuarioForm.email,
+            senha=usuarioForm.senha,
+            cep=usuarioForm.cep
+        )
+        db.session.add(novo_cadastro)
+        db.session.commit()
+    except Exception as e:
+        return jsonify({"sucesso": False, "mensagem": f"Erro ao salvar no banco: {e}"}), 500
+
+    return jsonify({"sucesso": True, "mensagem": "Usuário cadastrado com sucesso!"}), 200
 
 
 @app.route('/cadastro_usuario')

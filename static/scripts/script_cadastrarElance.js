@@ -1,35 +1,41 @@
-function mostrarFormularioProduto() {
-  let form = document.getElementById('form-produto');
-  // esconde e mostra
-  if (form.style.display === 'none') {
-    form.style.display = 'block';
-  }
-}
 
 function validarFormulario() {
   const campos = document.querySelectorAll('input[required]');
   let todosPreenchidos = true;
-
-  // for (let i = 0; i < campos.length; i++) {
-  //   if (campos[i].value.trim() === '') { // O método trim() remove espaços em branco
-  //     alert(`O campo "${campos[i].id}" é obrigatório.`);
-  //     todosPreenchidos = false;
-  //     break; // Sai do loop assim que encontrar um campo vazio
-  //   }
-  // }
-
   return todosPreenchidos;
 }
 
 
-async function salva(event) {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".form-control");
+
+  inputs.forEach((input, index) => {
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+
+        const nextIndex = index + 1;
+
+        if (nextIndex < inputs.length) {
+          inputs[nextIndex].focus();
+        } else {
+          document.getElementById("btn-enviar").focus();
+          console.log("Último campo. Pressione Enviar ou faça outra ação.");
+        }
+      }
+    });
+  });
+});
+
+
+
+async function enviarFormulario(event) {
+  event.preventDefault(); // impede reload da página
 
   if (validarFormulario()) {
-    console.log('Enviando dados de cadastro...');
-
-    const form = document.getElementById('formulario_cadastro');
-    const formData = new FormData(form);
+    const form = document.getElementById('formulario_cadastro')
+    const formData = new FormData(form)
+    const mensagemDiv = document.getElementById("mensagem")
 
     try {
       const response = await fetch("/cadastrar_usuario", {
@@ -37,22 +43,25 @@ async function salva(event) {
         body: formData
       });
 
-      if (response.ok) {
-        const data = await response.text();
-        console.log('Cadastro realizado com sucesso:');
-        alert('Usuário cadastrado com sucesso!')
-        ;
-        window.location.href = "/"; // redireciona se quiser
-      } else {
-        alert('Erro ao cadastrar o usuário.');
-      }
+      const data = await response.json();
+      mensagemDiv.textContent = "";
 
-    } catch (error) {
-      console.error('Erro no envio:', error);
-      alert('Falha na comunicação com o servidor.');
+      if (data.sucesso) {
+        mensagemDiv.textContent = data.mensagem;
+        form.reset();
+      } else {
+        mensagemDiv.textContent = data.mensagem;
+      }
+    }
+    catch (error) {
+      console.error("Erro ao enviar formulário:", error);
+      alert("Erro inesperado ao cadastrar o usuário.");
     }
   }
 }
+
+
+
 
 
 
