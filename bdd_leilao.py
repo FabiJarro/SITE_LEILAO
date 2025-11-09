@@ -49,7 +49,7 @@ TABLES['Produtos'] = ('''
       CREATE TABLE `produtos` (
       `id_produto` int NOT NULL AUTO_INCREMENT,
       `nome_produto` varchar(255) NOT NULL,
-      `descricao_produto` varchar(255),
+      `descricao_produto` text,
       `categoria_produto` varchar(100),
       `preco_produto` decimal(10,2) NOT NULL,
       `incremento_minimo` decimal(10,2) NOT NULL,

@@ -60,6 +60,38 @@ async function enviarFormulario(event) {
   }
 }
 
+async function enviarFormularioProduto(event) {
+  event.preventDefault(); // impede reload da página
+
+  if (validarFormulario()) {
+    const form = document.getElementById('formulario_produto')
+    const formData = new FormData(form)
+    const mensagemDiv = document.getElementById("mensagem")
+
+    try {
+      const response = await fetch("/cadastrar_produto", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      mensagemDiv.textContent = "";
+
+      if (data.sucesso) {
+        mensagemDiv.textContent = data.mensagem;
+        form.reset();
+      } else {
+        mensagemDiv.textContent = data.mensagem;
+      }
+    }
+    catch (error) {
+      console.error("Erro ao enviar formulário:", error);
+      alert("Erro inesperado ao cadastrar o usuário.");
+    }
+  }
+}
+
+
 
 
 

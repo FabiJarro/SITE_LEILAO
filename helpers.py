@@ -1,8 +1,5 @@
 
 from leilao import app
-from flask_wtf import FlaskForm
-from wtforms import StringField, validators, SubmitField, PasswordField
-from wtforms.validators import DataRequired, Length, Email
 import re    
 
 
@@ -30,7 +27,6 @@ class UsuarioForm():
         if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', self.data_nascimento):  # formato do input type="date"
             raise ValueError('A data de nascimento deve estar no formato AAAA-MM-DD.')
         
-        
         if '@' not in self.email or '.' not in self.email:
             raise ValueError('O email informado é inválido.')
 
@@ -43,21 +39,30 @@ class UsuarioForm():
         return True
 
 
-# class FormularioProduto(FlaskForm):
-#     nome_produto=('Nome do produto', [validators.DataRequired(), validators.Length(min=1, max=255)])
-#     descricao_produto=('Descrição do produto', [validators.DataRequired(), validators.Length(min=1, max=4000)])
-#     categoria_produto=('Categoria', [validators.DataRequired(), validators.Length(min=1, max=100)])
-#     preco_produto=('preço inicial', [validators.DataRequired(), validators.Length(min=1, max=100)])
-#     incremento_minimo=('incremento minimo', [validators.DataRequired(), validators.Length(min=1, max=255)])
-
-
-# class UsuarioForm():
-        
-#     def __init__(self, form):
-#         self.form = form
-#         self.nome = form.get('nome')
-#         self.cpf = form.get('cpf')
-#         self.email = form.get('email')
-#         self.cep = form.get('cep')
-#         self.data_nascimento = form.get('data_nascimento')
+class ProdutoForm():
     
+    def __init__(self, form):
+        self.form = form
+        self.nome_produto = form.get('nome_produto')
+        self.categoria_produto = form.get('categoria_produto')
+        self.descricao_produto = form.get('descricao_produto')
+        self.preco_produto = form.get('preco_produto')
+        self.incremento_minimo = form.get('incremento_minimo')
+        
+    
+    def validarProduto(self):
+        if len(self.nome_produto) < 1 or len(self.nome_produto) > 255:
+            raise ValueError('O valor do nome do produto deve ser entre 1 e 255 caracteres')
+        
+        if len(self.categoria_produto) < 1 or len(self.categoria_produto) > 100:
+            raise ValueError('O valor da categoria do produto deve ser entre 1 e 100 caracteres')
+
+        if len(self.descricao_produto) < 1:
+            raise ValueError('A descrição do produto é obrigatória')
+        
+        if self.preco_produto.isalpha():
+            raise ValueError('Digite um valor válido')
+        
+        if self.incremento_minimo.isalpha():
+            raise ValueError('Digite um valor válido')
+        return True

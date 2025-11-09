@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, session, flash, url_for, m
 from datetime import datetime, timezone
 from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances
-from helpers import UsuarioForm
+from helpers import UsuarioForm, ProdutoForm
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -41,17 +41,10 @@ def arearestrita():
     
     lances=Lances.query.order_by(Lances.id_lance)
     
-    # lances = db.session.query(
-    # Lances.id_lance,
-    # Lances.id_usuario,
-    # Lances.id_produto,
-    # Lances.valor_lance,
-    # Lances.horario_lance,
-    # ).join(Produtos, Lances.id_produto == Produtos.id_produto) .join(Cadastros, Lances.id_usuario == Cadastros.id_usuario).order_by(Lances.id_lance.desc()).all()
-    
     return render_template('arearestrita.html', titulo="area restrita", cadastros=lista, produtos=lista_produto, lances=lances)
 
 #esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
+
 
 @app.route('/produtos', methods=['GET'])
 def getProdutos():
@@ -61,128 +54,86 @@ def getProdutos():
 
 
 
-# @app.route('/cadastrar_usuario', methods=['POST',])
-# def cadastrar_usuario():
-#     usuarioForm = UsuarioForm(request.form)
-#     try:
-#         print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-#         usuarioForm.validar()
-#     except ValueError as e:
-#         print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
-#         return jsonify({"status": False, "mensagem": str(e)})  
-    
-#     nome=usuarioForm.nome
-#     cpf=usuarioForm.cpf
-#     data_str = usuarioForm.data_nascimento
-#     email=usuarioForm.email
-#     senha=usuarioForm.senha
-#     cep=usuarioForm.cep
-    
-#     try:
-#         data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
-#     except ValueError:
-#         return jsonify({"status": False, "mensagem": "Data de nascimento inválida. Use o formato YYYY-MM-DD"}), 
-    
-    
-#     if Cadastros.query.filter_by(email=email).first():
-#         return jsonify({"status": "erro", "mensagem": "Já existe um cadastro com esse e-mail."}), 400
-            
-#     novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
-    
-#     db.session.add(novo_cadastro)
-#     db.session.commit()
-        
-#     session['id_usuario'] = novo_cadastro.id_usuario
-        
-#     print("sucesso?")
-#     flash('Usuário cadastrado com sucesso!')
-#     print("dados recebidos:", nome, cep, data_str, email, senha, cep)
-#     print("Usuário cadastrado com sucesso:", nome)
-#     return jsonify({"status": True, "mensagem": "Usuário cadastrado com sucesso!"}), 200
-
-@app.route('/cadastrar_usuario', methods=['POST'])
+@app.route('/cadastrar_usuario', methods=['POST',])
 def cadastrar_usuario():
     usuarioForm = UsuarioForm(request.form)
-    
     try:
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         usuarioForm.validar()
     except ValueError as e:
-        # Retorna JSON com a mensagem de erro
-        return jsonify({"sucesso": False, "mensagem": str(e)}), 400
-
-    # verifica duplicidade de e-mail
-    if Cadastros.query.filter_by(email=usuarioForm.email).first():
-        return jsonify({"sucesso": False, "mensagem": "Já existe um cadastro com esse e-mail."}), 400
-
-    # se tudo estiver certo, cria o usuário
+        print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
+        return jsonify({"status": "erro" , "mensagem": str(e)})  
+    
+    nome=usuarioForm.nome
+    cpf=usuarioForm.cpf
+    data_str = usuarioForm.data_nascimento
+    email=usuarioForm.email
+    senha=usuarioForm.senha
+    cep=usuarioForm.cep
+    
     try:
-        data_nascimento = datetime.strptime(usuarioForm.data_nascimento, "%Y-%m-%d").date()
-        novo_cadastro = Cadastros(
-            nome=usuarioForm.nome,
-            cpf=usuarioForm.cpf,
-            data_nascimento=data_nascimento,
-            email=usuarioForm.email,
-            senha=usuarioForm.senha,
-            cep=usuarioForm.cep
-        )
-        db.session.add(novo_cadastro)
-        db.session.commit()
-    except Exception as e:
-        return jsonify({"sucesso": False, "mensagem": f"Erro ao salvar no banco: {e}"}), 500
+        data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"status": "erro", "mensagem": "Data de nascimento inválida. Use o formato YYYY-MM-DD"}), 
+    
+    
+    if Cadastros.query.filter_by(email=email).first():
+        return jsonify({"status": "erro", "mensagem": "Já existe um cadastro com esse e-mail."}), 400
+            
+    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
+    
+    db.session.add(novo_cadastro)
+    db.session.commit()
+        
+    session['id_usuario'] = novo_cadastro.id_usuario
+        
+    print("sucesso?")
+    print("dados recebidos:", nome, cep, data_str, email, senha, cep)
+    print("Usuário cadastrado com sucesso:", nome)
+    return jsonify({"status": True, "mensagem": "Usuário cadastrado com sucesso!"}), 200
 
-    return jsonify({"sucesso": True, "mensagem": "Usuário cadastrado com sucesso!"}), 200
 
 
 @app.route('/cadastro_usuario')
 def cadastro_usuario():
     usuarioForm = UsuarioForm(request.form)
-    return render_template('cadastrar_usuario.html', form=usuarioForm)
+    return render_template('cadastrar_usuario.html', usuarioForm=usuarioForm)
 
 
 
-@app.route('/cadastrar_produto')
+@app.route('/cadastro_produto')
 def cadastro_produto():
-    formProduto=FormularioProduto(request.form)
-    return render_template('cadastrar_produto.html', formProduto=formProduto)
+    produtoForm=ProdutoForm(request.form)
+    return render_template('cadastrar_produto.html', produto=produtoForm)
 
 
-# @app.route('/cadastrar_produto', methods=['POST',])
-# def salvar_produto():
-#     print('chegando a requisição...')
-#     print(f'############ {request.form}')
-#     nome_produto=request.form['nome_produto']
-#     categoria_produto=request.form['categoria_produto']
-#     preco_produto=request.form['preco_produto']
-#     incremento_minimo=request.form['incremento_minimo']
-#     id_usuario = session.get('id_usuario')
+@app.route('/cadastrar_produto', methods=['POST',])
+def cadastrar_produto():
+    produtoForm = ProdutoForm(request.form)
+    try:
+        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+        produtoForm.validarProduto()
+    except ValueError as e:
+        print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
+        return jsonify({"status": "erro" , "mensagem": str(e)})  
     
-#     produto=Produtos.query.filter_by(nome_produto=nome_produto).first()
+    nome_produto=produtoForm.nome_produto
+    categoria_produto=produtoForm.categoria_produto
+    preco_produto = produtoForm.preco_produto
+    descricao_produto=produtoForm.descricao_produto
+    incremento_minimo=produtoForm.incremento_minimo
+       
+    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo)
     
-#     if produto:
-#         flash('produto existente')
-#         return redirect(url_for('paginainicial'))
-    
-#     if not id_usuario:
-#         flash ("erro: usuario não identificado")
-#         return redirect(url_for('entrar'))
-    
-#     produto_existente = Produtos.query.filter_by(nome_produto=nome_produto).first()
-#     if produto_existente:
-#         flash('Produto já existente!')
-#         return redirect(url_for('paginainicial'))
-    
-#     # cursor.execute("INSERT INTO produtos (nome, preco, id_usuario) VALUES (%s, %s, %s)", (nome, preco, id_usuario))
-#     # conexao.commit()
-    
-#     novo_produto=Produtos(nome_produto=nome_produto, categoria_produto=categoria_produto, preco_produto=preco_produto, 
-#                           incremento_minimo=incremento_minimo, id_usuario=id_usuario)
-    
-#     db.session.add(novo_produto)
-#     db.session.commit()
-#     print("sucesso?")
-#     flash('Produto cadstrado com sucesso')
-#     return redirect(url_for('arearestrita'))
-
+    db.session.add(novo_produto)
+    db.session.commit()
+        
+    session['id_produto'] = novo_produto.id_produto
+        
+    print("sucesso?")
+    print("dados recebidos:", nome_produto, categoria_produto, preco_produto, descricao_produto, incremento_minimo)
+    print("Usuário cadastrado com sucesso:", nome_produto)
+    return jsonify({"status": True, "mensagem": "Produto cadastrado com sucesso!"}), 200
 
 
 

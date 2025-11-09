@@ -1,6 +1,59 @@
-{%extends "base.html"%}
-{%block conteudo%}
+{% extends "base.html" %}
+{% block conteudo %}
 
+<link href="{{ url_for('static', filename='/styles/style_cadastro.css')}}" rel="stylesheet">
 
+<div id="cadastrar_produto" class="formulario">
+    <form action="{{ url_for('cadastrar_produto') }}" method="post" enctype="multipart/form-data"
+        id="formulario_produto">
 
-{%endblock%}
+        <h3>Cadastrar Produto</h3>
+        <div class="form-duas-colunas">
+
+            <!-- COLUNA ESQUERDA -->
+            <div class="coluna">
+                <br><br><br>
+
+                <div class="form-group">
+                    <label for="nome_produto">Nome do produto</label>
+                    <input type="text" id="nome_produto" name="nome_produto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria_produto">Categoria</label>
+                    <input type="email" id="categoria_produto" name="categoria_produto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preco_produto">Preço inicial</label>
+                    <input type="number" id="preco_produto" name="preco_produto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="incremento_minimo">Incremento</label>
+                    <input type="number" id="incremento_minimo" name="incremento_minimo">
+                </div>
+
+                <div class="form-group">
+                    <label for="data_produto">Data final</label>
+                    <input type="text" id="data_produto" name="senha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao_produto" name="descricao_produto" required>
+                </div>
+            </div>
+
+        </div>
+        <button type="button" onclick="enviarFormularioProduto(event)" id="btn-enviar">Salvar</button>
+</div>
+
+    
+</form>
+</div>
+
+<div id="mensagem"></div>
+
+<script src="{{ url_for('static', filename='/scripts/script_cadastrarElance.js')}}"></script>
+{% endblock %}
