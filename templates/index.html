@@ -57,8 +57,14 @@
             {% for produto in produtos %}
             <div class="card-produto">
                 <a href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
+                    {% if produto.imagens and produto.imagens[0] %}
+                    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
+                        alt="{{ produto.nome_produto }}">
+                    {% else %}
                     <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}"
                         alt="{{ produto.nome_produto }}">
+                    {% endif %}
+
                     <div class="info-produto">
                         <h3>{{ produto.nome_produto }}</h3>
                         <p>R$ {{ produto.preco_produto }}</p>
@@ -72,42 +78,42 @@
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const slides = document.querySelectorAll(".carrossel-slide");
-  const btnAnterior = document.querySelector(".anterior");
-  const btnProximo = document.querySelector(".proximo");
-  let index = 0;
+    document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".carrossel-slide");
+        const btnAnterior = document.querySelector(".anterior");
+        const btnProximo = document.querySelector(".proximo");
+        let index = 0;
 
-  function mostrarSlide(n) {
-    slides.forEach((slide, i) => {
-      slide.classList.remove("active");
-      slide.style.opacity = "0";
-      slide.style.transition = "opacity 0.6s ease";
+        function mostrarSlide(n) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+                slide.style.opacity = "0";
+                slide.style.transition = "opacity 0.6s ease";
+            });
+            slides[n].classList.add("active");
+            slides[n].style.opacity = "1";
+        }
+
+        function slideAnterior() {
+            index = (index - 1 + slides.length) % slides.length;
+            mostrarSlide(index);
+        }
+
+        function slideProximo() {
+            index = (index + 1) % slides.length;
+            mostrarSlide(index);
+        }
+
+        // Botões de controle
+        btnAnterior.addEventListener("click", slideAnterior);
+        btnProximo.addEventListener("click", slideProximo);
+
+        // Troca automática
+        setInterval(slideProximo, 5000);
+
+        // Inicializa o primeiro slide
+        mostrarSlide(index);
     });
-    slides[n].classList.add("active");
-    slides[n].style.opacity = "1";
-  }
-
-  function slideAnterior() {
-    index = (index - 1 + slides.length) % slides.length;
-    mostrarSlide(index);
-  }
-
-  function slideProximo() {
-    index = (index + 1) % slides.length;
-    mostrarSlide(index);
-  }
-
-  // Botões de controle
-  btnAnterior.addEventListener("click", slideAnterior);
-  btnProximo.addEventListener("click", slideProximo);
-
-  // Troca automática
-  setInterval(slideProximo, 5000);
-
-  // Inicializa o primeiro slide
-  mostrarSlide(index);
-});
 
 
 </script>

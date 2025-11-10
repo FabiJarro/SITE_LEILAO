@@ -4,6 +4,7 @@ from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances, Imagens
 from helpers import UsuarioForm, ProdutoForm
 from werkzeug.utils import secure_filename
+import os
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -108,6 +109,10 @@ def cadastro_produto():
     return render_template('cadastrar_produto.html', produto=produtoForm)
 
 
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static/imagens')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 @app.route('/cadastrar_produto', methods=['POST',])
 def cadastrar_produto():
     
@@ -161,6 +166,13 @@ def cadastrar_produto():
             nova_img = Imagens(img=img.read(), nome_imagem=filename, mimetype=mimetype, id_produto=novo_produto.id_produto, id_usuario=id_usuario)
             db.session.add(nova_img)
             db.session.commit()  
+            
+            
+    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'))
+
+    produto_destaque = Produtos.query.order_by(Produtos.id_produto).all()
+    lista_produto = Produtos.query.order_by(Produtos.id_produto)
+
     
      
     print("sucesso?")

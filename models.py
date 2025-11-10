@@ -33,8 +33,10 @@ class Produtos(db.Model):
     incremento_minimo=db.Column(db.Float(255), nullable=False)
     descricao_produto = db.Column(db.Text, nullable=False)
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
+    imagens = db.relationship('Imagens', backref='produto', lazy=True)
     
     usuario = db.relationship('Cadastros', backref='produtos', lazy=True)
+    
     
     def __repr__(self):
         return f'<Produto {self.nome_produto}>'
