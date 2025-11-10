@@ -1,8 +1,9 @@
-from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
+from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify, Response
 from datetime import datetime, timezone
 from leilao import app,db
-from models import Cadastros, Adm, Produtos, Lances
+from models import Cadastros, Adm, Produtos, Lances, Imagens
 from helpers import UsuarioForm, ProdutoForm
+from werkzeug.utils import secure_filename
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -109,6 +110,7 @@ def cadastro_produto():
 
 @app.route('/cadastrar_produto', methods=['POST',])
 def cadastrar_produto():
+    
     produtoForm = ProdutoForm(request.form)
     try:
         print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
@@ -117,23 +119,57 @@ def cadastrar_produto():
         print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
         return jsonify({"status": "erro" , "mensagem": str(e)})  
     
+    id_usuario = session.get('id_usuario')
+    if not id_usuario:
+        email_logado = session.get('usuario_email') or session.get('usuario_logado')
+        if email_logado:
+            usuario = Cadastros.query.filter_by(email=email_logado).first()
+            if usuario:
+                id_usuario = usuario.id_usuario
+                # opcional: salvar para próximas requisições
+                session['id_usuario'] = id_usuario
+    
     nome_produto=produtoForm.nome_produto
     categoria_produto=produtoForm.categoria_produto
     preco_produto = produtoForm.preco_produto
     descricao_produto=produtoForm.descricao_produto
     incremento_minimo=produtoForm.incremento_minimo
-       
-    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo)
+    id_usuario=session.get('id_usuario')
+    
+    if not id_usuario:
+        flash ("erro: usuario não identificadooooo")
+        return redirect(url_for('paginainicial'))
+    
+    
+    produto_existente =Produtos.query.filter_by(nome_produto=nome_produto).first()
+    if produto_existente:
+        return jsonify({"status":"erro","mensagem":"Produto já existe"}), 400
+    
+    
+    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo, id_usuario=id_usuario)
     
     db.session.add(novo_produto)
+    print("o novo produto comitando")
     db.session.commit()
-        
-    session['id_produto'] = novo_produto.id_produto
-        
+    print("coomoitado:?")
+    
+    img = request.files.get('imagem_produto')
+    if img:
+        filename = secure_filename(img.filename)
+        mimetype = img.mimetype
+        if filename and mimetype:
+            nova_img = Imagens(img=img.read(), nome_imagem=filename, mimetype=mimetype, id_produto=novo_produto.id_produto, id_usuario=id_usuario)
+            db.session.add(nova_img)
+            db.session.commit()  
+    
+     
     print("sucesso?")
     print("dados recebidos:", nome_produto, categoria_produto, preco_produto, descricao_produto, incremento_minimo)
-    print("Usuário cadastrado com sucesso:", nome_produto)
-    return jsonify({"status": True, "mensagem": "Produto cadastrado com sucesso!"}), 200
+    print("Produto cadastrado com sucesso:", nome_produto)
+    return jsonify({"status": True, "mensagem": "Produto cadastrado com sucesso!"})
+
+
+
 
 
 
@@ -213,4 +249,14 @@ def fazer_lance(id_produto):
 
     flash('Lance registrado com sucesso!')
     return redirect(url_for('detalhes_produto', id_produto=id_produto))
+
+
+
+
+@app.route('/<int:id_imagem>')
+def get_img(id_imagem):
+    img= Imagens.query.filter_by(id_imagem=id_imagem).first()
+    if not img:
+        return 'Img Not Found!', 404
+    return Response(img.img, mimetype=img.mimetype)
 

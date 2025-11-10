@@ -29,9 +29,9 @@ class Produtos(db.Model):
     id_produto=db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome_produto=db.Column(db.String(255), nullable=False)
     categoria_produto=db.Column(db.String(255), nullable=False)
-    preco_produto=db.Column(db.String(255), nullable=False)
-    incremento_minimo=db.Column(db.String(255), nullable=False)
-    descricao_produto=db.Column(db.String(4000), nullable=False)
+    preco_produto=db.Column(db.Float(255), nullable=False)
+    incremento_minimo=db.Column(db.Float(255), nullable=False)
+    descricao_produto = db.Column(db.Text, nullable=False)
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
     
     usuario = db.relationship('Cadastros', backref='produtos', lazy=True)
@@ -54,3 +54,13 @@ class Lances(db.Model):
     def __repr__(self):
         return f'<Lance {self.valor_lance:.2f} - Usuario {self.id_usuario}>'
     
+class Imagens(db.Model):
+    id_imagem= db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nome_imagem=db.Column(db.String(255), nullable=False)
+    mimetype = db.Column(db.Text)
+    img = db.Column(db.LargeBinary)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario', ondelete='CASCADE'))
+    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto', ondelete='CASCADE'))
+    
+    def __repr__(self):
+        return f'<Imagens {self.nome_imagem}>'

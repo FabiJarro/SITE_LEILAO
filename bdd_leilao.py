@@ -53,7 +53,7 @@ TABLES['Produtos'] = ('''
       `categoria_produto` varchar(100),
       `preco_produto` decimal(10,2) NOT NULL,
       `incremento_minimo` decimal(10,2) NOT NULL,
-      `id_usuario` int,
+      `id_usuario` int NOT NULL,
       PRIMARY KEY (`id_produto`),
       FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) 
             ON DELETE CASCADE
@@ -74,6 +74,21 @@ TABLES['Lances'] = ('''
       
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
       
+      
+TABLES['Imagens'] = ('''
+      CREATE TABLE `imagens` (
+      `id_imagem` int NOT NULL AUTO_INCREMENT, 
+      `nome_imagem` varchar(255),
+      `mimetype` varchar(100),
+      `img` longblob,
+      `id_usuario` int,
+      `id_produto` int,
+      PRIMARY KEY (`id_imagem`),
+      FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+      FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+      
+
 
 for tabela_nome in TABLES:
       tabela_sql = TABLES[tabela_nome]
@@ -105,10 +120,10 @@ for user in cursor.fetchall():
 # inserindo usuarios no cadastro
 cadastros_sql = 'INSERT INTO cadastros (nome, cpf, data_nascimento, email, senha, cep) VALUES (%s, %s, %s, %s, %s, %s)'
 cadastros = [
-      ('Fabi', '445678678-98', '2009-09-09', 'fabis@gmail.com', 'aham10', '1234568889'),
-      ('Maria', '998776675-86', '1980-09-07', 'mria@hormail.com', 'demais4445', '098765432222'),
-      ('Julio', '098665445-87', '2009-12-16', 'hulio@gmail.com', 'senhazona', '123567899'),
-      ('nana', '845678678-58', '2010-05-30', 'nana@gmail.com', 'numerogrande', '5634568889')
+      ('Fabi', '445.678.678-98', '2009-09-09', 'fabis@gmail.com', 'aham10', '1234568889'),
+      ('Maria', '998.776.675-86', '1980-09-07', 'mria@hormail.com', 'demais4445', '098765432222'),
+      ('Julio', '098.665.445-87', '2009-12-16', 'hulio@gmail.com', 'senhazona', '123567899'),
+      ('nana', '845.678.678-58', '2010-05-30', 'nana@gmail.com', 'numerogrande', '5634568889')
       
       
 ]

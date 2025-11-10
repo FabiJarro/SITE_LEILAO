@@ -45,6 +45,15 @@
                 </div>
             </div>
 
+             <!-- COLUNA DIREITA (IMAGEM) -->
+             <div class="coluna coluna-imagem">
+                <h4>Imagem do produto</h4>
+                <div class="upload-area">
+                    <input type="file" id="imagem_produto" name="imagem_produto" accept="image/*" required>
+                    <img id="preview-imagem" src="#" alt="Prévia da imagem" style="display: none;">
+                </div>
+            </div>
+
         </div>
         <button type="button" onclick="enviarFormularioProduto(event)" id="btn-enviar">Salvar</button>
 </div>
@@ -56,4 +65,23 @@
 <div id="mensagem"></div>
 
 <script src="{{ url_for('static', filename='/scripts/script_cadastrarElance.js')}}"></script>
+
+<script>
+    document.getElementById('imagem_produto').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('preview-imagem');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+</script>
+
+
 {% endblock %}

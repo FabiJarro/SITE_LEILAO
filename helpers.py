@@ -16,13 +16,17 @@ class UsuarioForm():
         self.cep = form.get('cep')
         
     
+    def validar_cpf(self):
+        padrao = re.compile(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$')
+        return bool(re.match(padrao, self.cpf))
+    
     def validar(self):
         # print('XPTO', len(self.nome), len(self.nome) < 15 or len(self.nome) > 255)
         if len(self.nome) < 1 or len(self.nome) > 255:
             raise ValueError('O valor do nome deve ser entre 1 e 255 caracteres')
         
-        if not re.fullmatch(r'\d{11}', self.cpf):
-            raise ValueError('O CPF deve conter exatamente 11 dígitos numéricos.')
+        if not validar_cpf(self.cpf):
+            raise ValueError('CPF inválido!')
         
         if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', self.data_nascimento):  # formato do input type="date"
             raise ValueError('A data de nascimento deve estar no formato AAAA-MM-DD.')

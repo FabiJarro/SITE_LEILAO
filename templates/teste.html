@@ -1,102 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso</title>
-    <style>
-        /* Estilos para o modal de termos de uso */
-        .modal {
-            display: none; /* Escondido por padrão */
-            position: fixed; /* Posição fixa */
-            z-index: 1; /* Fica por cima de tudo */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto; /* Habilita rolagem se necessário */
-            background-color: rgba(0,0,0,0.4); /* Cor de fundo com transparência */
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* Centraliza verticalmente e horizontalmente */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Largura do modal */
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
 </head>
 <body>
 
-    <!-- Botão para abrir o modal -->
-    <button id="openModalBtn">Ler Termos de Uso</button>
-
-    <!-- O Modal -->
-    <div id="termsModal" class="modal">
-        <!-- Conteúdo do Modal -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h1>Termos de Uso</h1>
-            <p>
-                Bem-vindo aos nossos termos de uso. Este documento rege o seu uso do nosso website.
-            </p>
-            <h2>1. Aceitação dos Termos</h2>
-            <p>
-                Ao acessar ou usar o site, você concorda com estes termos. Se não concordar, não utilize o site.
-            </p>
-            <h2>2. Uso do Serviço</h2>
-            <p>
-                Você concorda em usar o serviço de forma responsável e de acordo com todas as leis aplicáveis.
-            </p>
-            <ul>
-                <li>Não poste conteúdo ilegal ou inadequado.</li>
-                <li>Não tente invadir o site.</li>
-            </ul>
-            <h2>3. Links para Outros Sites</h2>
-            <p>
-                Nosso site pode conter links para sites de terceiros que não são de nossa propriedade ou controle. Não nos responsabilizamos pelo conteúdo, políticas de privacidade ou práticas de nenhum site de terceiros.
-            </p>
-            <p>
-                <a href="#link-para-politica-privacidade">Política de Privacidade</a>
-            </p>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript para o modal
-        var modal = document.getElementById("termsModal");
-        var btn = document.getElementById("openModalBtn");
-        var span = document.getElementsByClassName("close")[0];
-
-        // Quando o usuário clica no botão, abre o modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Quando o usuário clica no (x), fecha o modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Quando o usuário clica em qualquer lugar fora do modal, fecha
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
+<form action="/upload" enctype="multipart/form-data" method="POST"> 
+   <input type="file" name="pic" />
+   <input type="submit" value="Upload a file"/>
+</form>
+ 
 </body>
 </html>

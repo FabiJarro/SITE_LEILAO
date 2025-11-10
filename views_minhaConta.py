@@ -27,20 +27,6 @@ def meus_dados():
 #DEU CERTO CARAMBA
 
 
-@app.route('/minhaconta/produtos_leiloados')
-def produtos_leiloados():
-    email_logado = session.get('usuario_email')
-    
-    if not email_logado:
-        flash("Faça login para acessar essa página.")
-        return redirect(url_for('paginainicial'))
-    
-    usuario = Cadastros.query.filter_by(email=email_logado).first()
-    produtos = Produtos.query.filter_by(id_usuario=usuario.id_usuario).all()
-    
-    return render_template('minhaContahtmls/produtos_leiloados.html', produtos=produtos)
-
-
 @app.route('/minhaconta/meus_lances')
 def meus_lances():
     email_logado = session.get('usuario_email')
@@ -54,3 +40,20 @@ def meus_lances():
     
     return render_template('minhaContahtmls/meus_lances.html', lances=lances)
     
+
+
+
+@app.route('/minhaconta/produtos_leiloados')
+def produtos_leiloados():
+    email_logado = session.get('usuario_email')
+    
+    if not email_logado:
+        flash("Faça login para acessar essa página.")
+        return redirect(url_for('page_not_found'))
+    
+    usuario = Cadastros.query.filter_by(email=email_logado).first()
+    produtos = Produtos.query.filter_by(id_usuario=usuario.id_usuario).all()
+    
+    return render_template('minhaContahtmls/produtos_leiloados.html', produtos=produtos)
+
+
