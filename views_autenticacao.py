@@ -1,6 +1,6 @@
 from leilao import app, db
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
-from models import Cadastros, Adm, Produtos
+from models import Cadastros, Adm, Produtos, Lances
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"

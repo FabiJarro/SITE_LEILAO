@@ -109,8 +109,7 @@ def cadastro_produto():
     return render_template('cadastrar_produto.html', produto=produtoForm)
 
 
-UPLOAD_FOLDER = os.path.join(app.root_path, 'static/imagens')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 
 @app.route('/cadastrar_produto', methods=['POST',])
@@ -203,26 +202,6 @@ def detalhes_produto(id_produto):
 
     return render_template('detalhes_produto.html', produto=produto, ultimo_lance=ultimo_lance, 
                            proximo_lance=proximo_lance, datetime=datetime, lance_minimo=lance_minimo)
-
-
-
-
-@app.route('/atualizar', methods=['POST',])
-def atualizar():
-    cadastro= Cadastros.query.filter_by(id_usuario=request.form['id']).first()
-    cadastro.nome= request.form['nome']
-    cadastro.cpf=request.form['cpf']
-    cadastro.data_str = request.form['data_nascimento']
-    # cadastro.data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
-    cadastro.email=request.form['email']
-    cadastro.senha=request.form['senha']
-    cadastro.cep=request.form['cep']
-
-    
-    db.session.add(cadastro)
-    db.session.commit()
-    
-    return redirect ( url_for('paginainicial'))
 
 
 

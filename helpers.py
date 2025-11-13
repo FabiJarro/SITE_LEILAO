@@ -25,7 +25,7 @@ class UsuarioForm():
         if len(self.nome) < 1 or len(self.nome) > 255:
             raise ValueError('O valor do nome deve ser entre 1 e 255 caracteres')
         
-        if not validar_cpf(self.cpf):
+        if not self.validar_cpf():
             raise ValueError('CPF inválido!')
         
         if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', self.data_nascimento):  # formato do input type="date"

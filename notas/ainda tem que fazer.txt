@@ -186,4 +186,19 @@ depois eu vejo como fica a parte do "status de um leilao"
 
 ____________
 
-4 novembro
+10 novembro
+loucura nunca mais escrevi nada
+
+eu tinha focado bastatnte no front
+
+agr fiz a iamgem no banco de dados ebaaaa
+
+oq falta,amanha vou terminar o ultimo modulo da alura e criptografar as senhass
+
+A e tinha empacado na validação de formulários, mas deu tudo cert(rusticamente massss(desisti da biblioteca lá rs, mt trabalho))
+
+ai depois que eu ver esse curso é hora de fazer a parte editar informaçõess, e deletar tbmm
+
+a parte da minha conta poderá editarrr
+espero que não mude tanto a lógica rs
+

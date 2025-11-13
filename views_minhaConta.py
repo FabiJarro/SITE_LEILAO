@@ -14,9 +14,6 @@ def minha_conta():
 def meus_dados():
     email_logado = session.get('usuario_email')
     
-    # if 'usuario_email' not in session:
-    #     return redirect(url_for('nao_autorizado'))
-    
     usuario = Cadastros.query.filter_by(email=session['usuario_logado']).first()
     cadastro = Cadastros.query.filter_by(email=email_logado).first()
     if not cadastro:

@@ -1,0 +1,130 @@
+{%extends "base.html"%}
+{%block conteudo%}
+<link href="{{ url_for('static', filename='/styles/style_cadastro.css')}}" rel="stylesheet">
+
+<div id="cadastrar" class="formulario">
+  <form action="{{ url_for('atualizarUsuario') }}" method="post" enctype="multipart/form-data" id="formulario_cadastro">
+    <input type="hidden" name="id_usuario" value="{{cadastro.id_usuario}}">
+    <h3>Dados Cadastrais</h3>
+    <div class="form-duas-colunas">
+
+      <!-- COLUNA ESQUERDA -->
+      <div class="coluna">
+        <br><br><br>
+
+        <div class="form-group">
+          <label for="nome">Nome Completo</label>
+          <input type="text" id="nome" name="nome" value="{{cadastro.nome}}" required >
+        </div>
+
+        <div class="form-group">
+          <label for="email">Seu e-mail</label>
+          <input type="email" id="email" name="email" value="{{cadastro.email}}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" name="cpf" value="{{cadastro.cpf}}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rg">RG</label>
+          <input type="text" id="rg"  name="rg">
+        </div>
+
+        <div class="form-group">
+          <label for="data_nascimento">Data de Nascimento</label>
+          <input type="date" id="data_nascimento" name="data_nascimento" value="{{cadastro.data_nascimento}}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Crie uma senha</label>
+          <input type="password" id="senha" name="senha" value="{{cadastro.senha}}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmarsenha">Confirmar Senha</label>
+          <input type="password" id="confirmarsenha" name="confirmarsenha" required>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA -->
+      <div class="coluna">
+        <h4>Endereço</h4>
+
+        <div class="form-group">
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" name="cep" value="{{cadastro.cep}}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" name="endereco" required>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="form-group">
+            <label for="numero">Número</label>
+            <input type="text" id="numero" name="numero" required>
+          </div>
+          <div class="form-group">
+            <label for="complemento">Complemento</label>
+            <input type="text" id="complemento" name="complemento">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" name="bairro">
+        </div>
+
+        <div class="form-group">
+          <label for="pais">País</label>
+          <input type="text" id="pais" name="pais" value="Brasil">
+        </div>
+
+        <div class="duas-colunas">
+          <div class="form-group">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade">
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option value="">Selecione um estado</option>
+              <option>SP</option>
+              <option>RJ</option>
+              <option>MG</option>
+              <option>RS</option>
+              <option>PR</option>
+              <option>SC</option>
+              <option>BA</option>
+              <option>PE</option>
+              <option>CE</option>
+            </select>
+          </div>
+        </div>
+
+        <h4>Telefones</h4>
+        <div class="duas-colunas">
+          <div class="form-group">
+            <label for="telefone1">Telefone Celular</label>
+            <input type="text" id="telefone1" name="telefone1" placeholder="(DD) 99999-9999">
+          </div>
+          <div class="form-group">
+            <label for="telefone2">Telefone Fixo</label>
+            <input type="text" id="telefone2" name="telefone2" placeholder="(DD) 3333-3333">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit"  id="btn-enviar">Salvar</button>
+  </form>
+</div>
+
+<div id="mensagem"></div>
+
+
+{%endblock%}

@@ -5,6 +5,23 @@ from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances
 
 
+@app.route('/atualizarUsuario', methods=['POST',])
+def atualizarUsuario():
+    cadastro=Cadastros.query.filter_by(id_usuario=request.form['id_usuario']).first()
+    cadastro.nome= request.form['nome']
+    cadastro.cpf=request.form['cpf']
+    cadastro.data_str = request.form['data_nascimento']
+    # cadastro.data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
+    cadastro.email=request.form['email']
+    cadastro.senha=request.form['senha']
+    cadastro.cep=request.form['cep']
+    db.session.add(cadastro)
+    db.session.commit()
+    return redirect (url_for('paginainicial'))
+
+
+
+
 
 
 
@@ -19,12 +36,11 @@ def deletarUsuario(id_usuario):
 
 
 
-@app.route('/editar/<int:id_usuario>')
+@app.route('/editarUsuario/<int:id_usuario>')
 def editarUsuario(id_usuario):
     cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
-    # capa_jogo=recupera_imagem(id_usuario)
-    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
-    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
+    return render_template('/editar/editarUsuario.html', cadastro=cadastro)
+
     
     
 #_______________________________________________________________________________
@@ -41,10 +57,9 @@ def deletarProduto(id_produto):
 @app.route('/editar/<int:id_produto>')
 def editarProduto(id_produto):
     cadastro=Cadastros.query.filter_by(id_usuario=id_usuario).first()
-    # capa_jogo=recupera_imagem(id_usuario)
-    return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro)
-    # return render_template('editar.html', titulo="editando o usuario", cadastro=cadastro, capa_jogo=capa_jogo)
-    
+    return render_template('editar/editarProduto.html', titulo="editando o usuario", cadastro=cadastro)
+
+
 #_______________________________________________________
 
 @app.route('/deletarLance/<int:id_lance>')

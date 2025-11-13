@@ -57,6 +57,7 @@
             {% for produto in produtos %}
             <div class="card-produto">
                 <a href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
+                    
                     {% if produto.imagens and produto.imagens[0] %}
                     <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
                         alt="{{ produto.nome_produto }}">
