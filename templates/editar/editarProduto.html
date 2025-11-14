@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<link href="{{ url_for('static', filename='/styles/style_cadastro.css')}}" rel="stylesheet">
+
+<div id="cadastrar_produto" class="formulario">
+    <form action="{{ url_for('atualizarProduto') }}" method="post" enctype="multipart/form-data" id="formulario_produto">
+    <input type="hidden" name="id_produto" value="{{produto.id_produto}}"> 
+        
+
+        <h3>Editar Produto</h3>
+        <div class="form-duas-colunas">
+
+            <!-- COLUNA ESQUERDA -->
+            <div class="coluna">
+                <br><br><br>
+
+                <div class="form-group">
+                    <label for="nome_produto">Nome do produto</label>
+                    <input type="text" id="nome_produto" name="nome_produto" value="{{produto.nome_produto}}"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria_produto">Categoria</label>
+                    <input type="text" id="categoria_produto" name="categoria_produto" value="{{produto.categoria_produto}}"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preco_produto">Preço inicial</label>
+                    <input type="number" id="preco_produto" name="preco_produto" value="{{produto.preco_produto}}"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="incremento_minimo">Incremento</label>
+                    <input type="number" id="incremento_minimo" name="incremento_minimo" value="{{produto.incremento_minimo}}"  >
+                </div>
+
+                <div class="form-group">
+                    <label for="data_produto">Data final</label>
+                    <input type="text" id="data_produto" name="senha" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao_produto" name="descricao_produto" value="{{produto.descricao_produto}}"  required>
+                </div>
+            </div>
+
+             <!-- COLUNA DIREITA (IMAGEM) -->
+             <div class="coluna coluna-imagem">
+                <h4>Imagem do produto</h4>
+                <div class="upload-area">
+                    <input type="file" id="imagem_produto" value="{{produto.imagens}}" name="imagem_produto" accept="image/*" required>
+                    <img id="preview-imagem" src="#" alt="Prévia da imagem" value="{{produto.imagens}}" style="display: none;">
+                </div>
+            </div>
+
+        </div>
+        <button type="submit"  id="btn-enviar">Salvar</button>
+</div>
+
+    
+</form>
+</div>
+
+<div id="mensagem"></div>
+
+
+<script>
+    document.getElementById('imagem_produto').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('preview-imagem');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+</script>
+
+
+{% endblock %}

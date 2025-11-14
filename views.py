@@ -68,10 +68,18 @@ def cadastrar_usuario():
     
     nome=usuarioForm.nome
     cpf=usuarioForm.cpf
+    rg=usuarioForm.rg
     data_str = usuarioForm.data_nascimento
     email=usuarioForm.email
     senha=usuarioForm.senha
     cep=usuarioForm.cep
+    rua=usuarioForm.rua
+    bairro=usuarioForm.bairro
+    complemento=usuarioForm.complemento
+    pais =usuarioForm.pais
+    cidade=usuarioForm.cidade
+    estado=usuarioForm.estado
+    telefone=usuarioForm.telefone
     
     try:
         data_nascimento = datetime.strptime(data_str, "%Y-%m-%d").date()
@@ -82,7 +90,8 @@ def cadastrar_usuario():
     if Cadastros.query.filter_by(email=email).first():
         return jsonify({"status": "erro", "mensagem": "Já existe um cadastro com esse e-mail."}), 400
             
-    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep)
+    novo_cadastro=Cadastros(nome=nome, cpf=cpf, data_nascimento=data_nascimento, email=email, senha=senha, cep=cep, rg=rg, rua=rua, bairro=bairro, complemento=complemento, 
+                            pais=pais, cidade=cidade, estado=estado, telefone=telefone)
     
     db.session.add(novo_cadastro)
     db.session.commit()

@@ -10,10 +10,19 @@ class UsuarioForm():
         self.form = form
         self.nome = form.get('nome')
         self.cpf = form.get('cpf')
+        self.rg= form.get('rg')
         self.data_nascimento = form.get('data_nascimento')
         self.senha = form.get('senha')
         self.email = form.get('email')
         self.cep = form.get('cep')
+        self.rua = form.get('rua')
+        self.bairro = form.get('bairro')
+        self.complemento= form.get('complemento')
+        self.pais= form.get('pais')
+        self.cidade= form.get('cidade')
+        self.estado= form.get('estado')
+        self.telefone = form.get('telefone')
+        
         
     
     def validar_cpf(self):
