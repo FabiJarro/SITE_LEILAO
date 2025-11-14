@@ -47,4 +47,13 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const btnMenu = document.getElementById("btnMenu");
+    const menuDropdown = document.getElementById("menuDropdown");
+
+    btnMenu.addEventListener("click", () => {
+        menuDropdown.style.display =
+            menuDropdown.style.display === "flex" ? "none" : "flex";
+    });
+});
 

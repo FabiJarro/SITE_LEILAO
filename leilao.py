@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response, flash, session, jsonify
 from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 
 
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
    
 db=SQLAlchemy(app)
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 from views import * 
 from views_autenticacao import *

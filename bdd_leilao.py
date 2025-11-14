@@ -39,7 +39,11 @@ TABLES['Cadastros'] = ('''
       `complemento` varchar(255) NOT NULL,
       `pais` varchar(255) NOT NULL,
       `cidade` varchar(255) NOT NULL,
-      `estado` varchar(255) NOT NULL,
+      `estado` Enum(
+          'AC','AL','AM','AP','BA','CE','DF','ES','GO','MA',
+          'MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN',
+          'RO','RR','RS','SC','SE','SP','TO'
+      ) NOT NULL,
       `telefone` VARCHAR(20) NOT NULL,
       
       PRIMARY KEY (`id_usuario`)

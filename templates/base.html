@@ -11,24 +11,81 @@
 </head>
 </head>
 
+<header class="header-vintage">
+
+  <!-- LOGO (ESQUERDA) -->
+  <div class="header-esquerda">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" 
+           alt="Logomarca" class="logo-vintage">
+  </div>
+
+
+  <!-- BARRA DE PESQUISA (CENTRO) -->
+  <div class="barra-pesquisa-container">
+      <form action="/buscar" method="GET" class="form-pesquisa">
+          <input type="text" name="q" placeholder="Pesquisar produtos..." class="input-pesquisa">
+          <button type="submit" class="btn-pesquisa">
+              <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+      </form>
+  </div>
+
+
+  <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
+  <div class="header-direita">
+
+      <!-- ÍCONE MINHA CONTA -->
+      <a href="#"
+         id="btnConta" class="icon-conta">
+         <i class="fa-solid fa-user"></i>
+      </a>
+
+      <!-- MENU HAMBÚRGUER -->
+      <div class="dropdown">
+          <button class="btn-menu" id="btnMenu">
+              <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <!-- MENU QUE ABRE -->
+          <div class="dropdown-menu" id="menuDropdown">
+              <a href="/">Página inicial</a>
+              <a href="/sobre">Sobre nós</a>
+
+              {% if 'usuario_logado' in session %}
+                  <a href="/minhaconta">Minha conta</a>
+              {% else %}
+                  <a href="#" id="abrirLogin">Entrar ou Cadastrar</a>
+              {% endif %}
+
+              <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
+              <a href="{{ url_for('login_AR') }}">Área restrita</a>
+          </div>
+      </div>
+
+  </div>
+
+</header>
+
+
 
 <body>
-
-  <header>
-    <h2>colecionáveis leilões</h2>
-    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo">
-  </header>
+  
 
   <nav class="navPrincipal">
     <ul>
       <li><a href="/">Página inicial</a></li>
       <li><a href="/sobre">Sobre nós</a></li>
 
+
+
       {% if 'usuario_logado' in session %}
       <li><a href="/minhaconta">Minha conta</a></li>
       {% else %}
       <li><button id="myBtn">Entrar ou Cadastrar</button></li>
       {% endif %}
+
+
+      
     </ul>
   </nav>
 

@@ -31,23 +31,6 @@ body {
   background: white;
 }
 
-header {
-  text-align: center;
-  padding: 10px 20px;
-  color: black;
-  border-bottom: 2px solid #eee;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: white;
-}
-
-header h1 {
-  font-size: 3rem;
-  margin: 0;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-
-}
 
 
 .navPrincipal {
@@ -324,3 +307,105 @@ divisão */
 .modo-escuro .botao-tema {
   border-color: #555;
 }
+
+
+/*header*/
+
+/* ------ HEADER VINTAGE ------ */
+
+.header-vintage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #f6efe4;
+  border-bottom: 3px solid #c6b49a;
+  font-family: "Georgia", serif;
+}
+
+.logo-vintage {
+  height: 60px;
+}
+
+.barra-pesquisa-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.form-pesquisa {
+  display: flex;
+  width: 420px;
+  max-width: 90%;
+  background: #fff;
+  border: 2px solid #b89d7a;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.input-pesquisa {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: #fffdf8;
+}
+
+.btn-pesquisa {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #5a4634;
+}
+
+.icon-conta {
+  font-size: 24px;
+  color: #4a392d;
+  margin-right: 20px;
+}
+
+.header-direita {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ------ DROPDOWN MENU ------ */
+
+.btn-menu {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4a392d;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 75px;
+  right: 20px;
+  background: #fdf8f1;
+  border: 2px solid #c6b49a;
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 180px;
+  display: none;
+  flex-direction: column;
+}
+
+.dropdown-menu a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #4a392d;
+  display: block;
+  font-family: Georgia;
+}
+
+.dropdown-menu a:hover {
+  background: #e9dfd1;
+}
+
