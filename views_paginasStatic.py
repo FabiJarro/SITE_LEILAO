@@ -10,11 +10,11 @@ def sobre():
     return render_template('/paginasStatic/sobre.html')
 
 
-@app.route('/como_comprar')
+@app.route('/como_vender')
 def como_vender():
     return render_template('/paginasStatic/como_comprar.html')
 
-@app.route('/como_vender')
+@app.route('/como_comprar')
 def como_comprar():
     return render_template('/paginasStatic/como_vender.html')
 

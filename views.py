@@ -260,3 +260,6 @@ def get_img(id_imagem):
         return 'Img Not Found!', 404
     return Response(img.img, mimetype=img.mimetype)
 
+@app.route('/todosProdutos')
+def todosProdutos():
+    return render_template('todosProdutos.html')

@@ -6,7 +6,7 @@
   <title>colecionáveis leilões</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <link href="{{ url_for('static', filename='/styles/style.css')}}" rel="stylesheet" >
+  <link href="{{ url_for('static', filename='/styles/style.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 </head>
@@ -15,52 +15,50 @@
 
   <!-- LOGO (ESQUERDA) -->
   <div class="header-esquerda">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" 
-           alt="Logomarca" class="logo-vintage">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo-vintage">
   </div>
 
 
   <!-- BARRA DE PESQUISA (CENTRO) -->
   <div class="barra-pesquisa-container">
-      <form action="/buscar" method="GET" class="form-pesquisa">
-          <input type="text" name="q" placeholder="Pesquisar produtos..." class="input-pesquisa">
-          <button type="submit" class="btn-pesquisa">
-              <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-      </form>
+    <form action="/buscar" method="GET" class="form-pesquisa">
+      <input type="text" name="q" placeholder="Pesquisar produtos..." class="input-pesquisa">
+      <button type="submit" class="btn-pesquisa">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
   </div>
 
 
   <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
   <div class="header-direita">
 
-      <!-- ÍCONE MINHA CONTA -->
-      <a href="#"
-         id="btnConta" class="icon-conta">
-         <i class="fa-solid fa-user"></i>
-      </a>
+    <!-- ÍCONE MINHA CONTA -->
 
-      <!-- MENU HAMBÚRGUER -->
-      <div class="dropdown">
-          <button class="btn-menu" id="btnMenu">
-              <i class="fa-solid fa-bars"></i>
-          </button>
+    {% if 'usuario_logado' in session %}
+    <a href="/minhaconta" id="btnConta" class="icon-conta"><i class="fa-solid fa-user"></i></a>
+    {% else %}
+    <button id="myBtn">Entrar ou Cadastrar</button>
+    {% endif %}
 
-          <!-- MENU QUE ABRE -->
-          <div class="dropdown-menu" id="menuDropdown">
-              <a href="/">Página inicial</a>
-              <a href="/sobre">Sobre nós</a>
 
-              {% if 'usuario_logado' in session %}
-                  <a href="/minhaconta">Minha conta</a>
-              {% else %}
-                  <a href="#" id="abrirLogin">Entrar ou Cadastrar</a>
-              {% endif %}
+    <!-- MENU HAMBÚRGUER -->
+    <div class="dropdown">
+      <button class="btn-menu" id="btnMenu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-              <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
-              <a href="{{ url_for('login_AR') }}">Área restrita</a>
-          </div>
+      <!-- MENU QUE ABRE -->
+      <div class="dropdown-menu" id="menuDropdown">
+        <a href="/">Página inicial</a>
+        <a href="/sobre">Sobre nós</a>
+
+
+
+        <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
+        <a href="{{ url_for('login_AR') }}">Área restrita</a>
       </div>
+    </div>
 
   </div>
 
@@ -68,74 +66,60 @@
 
 
 
+
 <body>
-  
-
-  <nav class="navPrincipal">
-    <ul>
-      <li><a href="/">Página inicial</a></li>
-      <li><a href="/sobre">Sobre nós</a></li>
 
 
+  <main>
+    <div id="myModal" class="modal">
 
-      {% if 'usuario_logado' in session %}
-      <li><a href="/minhaconta">Minha conta</a></li>
-      {% else %}
-      <li><button id="myBtn">Entrar ou Cadastrar</button></li>
-      {% endif %}
+      <!-- Modal content -->
+      <div class="modal-content" id="modal-login">
+        <span class="close">&times;</span>
 
+        <div id="lados">
+          <!-- Lado esquerdo: login -->
+          <div id="ladoEsquerdo">
+            <h3>Acessar a Minha Conta</h3>
+            <form id="loginForm">
+              <label for="email">Digite seu Email:</label><br>
+              <input type="email" id="email" name="email" required placeholder="ex. usuario@gmail.com"><br><br>
 
-      
-    </ul>
-  </nav>
+              <label for="senha">Digite sua Senha:</label><br>
+              <input type="password" id="senha" name="senha" required placeholder="ex. senha"><br><br>
 
-  <div id="myModal" class="modal">
+              <button type="submit" id="btnLogin" class="btn btn-primary">Fazer login</button>
+            </form>
 
-    <!-- Modal content -->
-    <div class="modal-content" id="modal-login">
-      <span class="close">&times;</span>
+            <p id="loginMsg" style="color:red; margin-top:10px;"></p>
+          </div>
 
-      <div id="lados">
-        <!-- Lado esquerdo: login -->
-        <div id="ladoEsquerdo">
-          <h3>Acessar a Minha Conta</h3>
-          <form id="loginForm">
-            <label for="email">Digite seu Email:</label><br>
-            <input type="email" id="email" name="email" required placeholder="ex. usuario@gmail.com"><br><br>
-
-            <label for="senha">Digite sua Senha:</label><br>
-            <input type="password" id="senha" name="senha" required placeholder="ex. senha"><br><br>
-
-            <button type="submit" id="btnLogin" class="btn btn-primary">Fazer login</button>
-          </form>
-
-          <p id="loginMsg" style="color:red; margin-top:10px;"></p>
-        </div>
-
-        <!-- Lado direito: cadastro -->
-        <div id="ladoDireito">
-          <p>Ainda não tem cadastro?</p>
-          <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se aqui</a>
+          <!-- Lado direito: cadastro -->
+          <div id="ladoDireito">
+            <p>Ainda não tem cadastro?</p>
+            <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se
+              aqui</a>
+          </div>
         </div>
       </div>
+
     </div>
 
-  </div>
 
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul id="messages" class="list-unstyled">
+      {% for message in messages %}
+      <li class="alert alert-success">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul id="messages" class="list-unstyled">
-    {% for message in messages %}
-    <li class="alert alert-success">{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-
-  {%block conteudo%}
-  {%endblock%}
+    {%block conteudo%}
+    {%endblock%}
+  </main>
 
 
   <footer class="rodape">
@@ -143,12 +127,13 @@
 
       <div class="rodape-secao">
         <h4>Área Restrita</h4>
-          <a href="{{ url_for('login_AR') }}">Entrar</a>
+        <a href="{{ url_for('login_AR') }}">Entrar</a>
       </div>
 
       <div class="rodape-secao">
         <h4>Contato</h4>
-        <p><i class="fa-solid fa-envelope"></i> <a href="leilao@gmail.com" style="font-size: 15px;">sac@leilao.gmail.com</a></p>
+        <p><i class="fa-solid fa-envelope"></i> <a href="leilao@gmail.com"
+            style="font-size: 15px;">sac@leilao.gmail.com</a></p>
         <p style="font-size: 15px;"><i class="fa-solid fa-phone"></i> (35) 99999-0000</p>
       </div>
 
@@ -171,9 +156,9 @@
 
       <div class="rodape-secao">
         <h4>cadastrar um produto</h4>
-          <a href="{{ url_for('cadastro_produto') }}">Cadastrar um produto</a>
+        <a href="{{ url_for('cadastro_produto') }}">Cadastrar um produto</a>
       </div>
-      
+
 
     </div>
 

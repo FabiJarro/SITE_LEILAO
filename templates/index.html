@@ -5,18 +5,37 @@
 
 
 
-{% if primeiro_nome %}
-<h3>Bem-vindo, {{ primeiro_nome }}!</h3>
-{% endif%}
+<nav class="navPrincipal">
 
+    <ul>
+        <li>
+            <a href="{{ url_for('todosProdutos') }}">Todos os produtos</a>
+        </li>
+        <li>
+            <a href="{{ url_for('como_vender') }}">Como vender</a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('como_comprar') }}">Como comprar</a>
+        </li>
+        <li>
+            <a href="{{ url_for('sobre') }}">Sobre nós</a>
+        </li>
+
+
+    </ul>
+</nav>
 
 <main>
 
-    <h3>Destaques</h3>
+    {% if primeiro_nome %}
+    <p style="font-size: 25px;">Bem-vindo, {{ primeiro_nome }}!</p>
+    {% endif%}
+
     <section class="carrossel-container">
         <div class="carrossel">
             <div class="carrossel-slide active">
-                <img src="{{ url_for('static', filename='imagens/azul.jpg') }}" alt="Slide 1">
+                <img src="{{ url_for('static', filename='imagens/carrossel5.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
                     <h2>Titulo1</h2>
                     <p>sla</p>
@@ -24,7 +43,7 @@
                 </div>
             </div>
             <div class="carrossel-slide">
-                <img src="{{ url_for('static', filename='imagens/azulmarinho.jpeg') }}" alt="Slide 2">
+                <img src="{{ url_for('static', filename='imagens/carrossel7.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
                     <h2>Titulo2</h2>
                     <p>saiba mais</p>
@@ -32,13 +51,33 @@
                 </div>
             </div>
             <div class="carrossel-slide">
-                <img src="{{ url_for('static', filename='imagens/bege.jpg') }}" alt="Slide 3">
+                <img src="{{ url_for('static', filename='imagens/carrossel8.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
                     <h2>Titulo3</h2>
+                    <p>saiba mais</p>
+                    <a href="#" class="botao-carrossel">saiba Mais</a>
+                </div>
+            </div>
+
+            <div class="carrossel-slide">
+                <img src="{{ url_for('static', filename='imagens/carrossel6.jpeg') }}" alt="Slide 3">
+                <div class="carrossel-texto">
+                    <h2>Titulo4</h2>
                     <p>colecionáveis</p>
                     <a href="#" class="botao-carrossel">ver Detalhes</a>
                 </div>
             </div>
+            <div class="carrossel-slide">
+                <img src="{{ url_for('static', filename='imagens/carrossel1.jpeg') }}" alt="Slide 3">
+                <div class="carrossel-texto">
+                    <h2>Titulo4</h2>
+                    <p>colecionáveis</p>
+                    <a href="#" class="botao-carrossel">ver Detalhes</a>
+                </div>
+            </div>
+
+
+
 
             <!-- Controles -->
             <div class="carrossel-controles">
@@ -57,7 +96,7 @@
             {% for produto in produtos %}
             <div class="card-produto">
                 <a href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
-                    
+
                     {% if produto.imagens and produto.imagens[0] %}
                     <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
                         alt="{{ produto.nome_produto }}">
@@ -78,8 +117,30 @@
 
 </main>
 
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+
+        // === NAV QUE SOME AO DESCER ===
+        let ultimaPosicaoScroll = 0;
+        const nav = document.querySelector(".navPrincipal");
+
+        window.addEventListener("scroll", function () {
+            let posicaoAtual = window.pageYOffset;
+
+            // Desceu-some
+            if (posicaoAtual > ultimaPosicaoScroll) {
+                nav.classList.add("nav-escondida");
+            }
+            // Subiu-aparece
+            else {
+                nav.classList.remove("nav-escondida");
+            }
+
+            ultimaPosicaoScroll = posicaoAtual;
+        });
+
         const slides = document.querySelectorAll(".carrossel-slide");
         const btnAnterior = document.querySelector(".anterior");
         const btnProximo = document.querySelector(".proximo");

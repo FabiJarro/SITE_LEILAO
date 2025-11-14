@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-size: 20px;
 }
 
 
@@ -35,19 +36,21 @@ body {
 
 .navPrincipal {
   display: flex;
-  justify-content: center; /* centraliza o menu na horizontal */
+  justify-content: center;
+  /* centraliza o menu na horizontal */
   margin: 10px 0;
   border-bottom: 2px solid #eee;
-  padding: 8px 
-  
+  padding: 8px
 }
 
 .navPrincipal ul {
-  list-style: none; /* tira as bolinhas */
+  list-style: none;
+  /* tira as bolinhas */
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px; /* espaçamento entre os itens */
+  gap: 30px;
+  /* espaçamento entre os itens */
   padding: 0;
   margin: 0;
   font-size: 15px;
@@ -57,7 +60,7 @@ body {
   text-decoration: none;
   color: rgb(0, 0, 0);
   transition: 0.3s;
-  font-size: 15px;
+  font-size: 18px;
 
 }
 
@@ -250,7 +253,7 @@ divisão */
 }
 
 .social-link i {
-  font-size:18px;
+  font-size: 18px;
   transition: transform 0.3s, color 0.3s;
 }
 
@@ -318,9 +321,13 @@ divisão */
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: #f6efe4;
-  border-bottom: 3px solid #c6b49a;
+  background: #ffffff;
+  border-bottom: 3px solid #918a82;
   font-family: "Georgia", serif;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  top: 0
 }
 
 .logo-vintage {
@@ -330,16 +337,17 @@ divisão */
 .barra-pesquisa-container {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 25px;
 }
 
 .form-pesquisa {
   display: flex;
   width: 420px;
   max-width: 90%;
-  background: #fff;
+  background: #fffbf0;
   border: 2px solid #b89d7a;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -358,7 +366,7 @@ divisão */
   padding: 10px 15px;
   cursor: pointer;
   font-size: 18px;
-  color: #5a4634;
+  color: #535a34;
 }
 
 .icon-conta {
@@ -372,6 +380,21 @@ divisão */
   align-items: center;
   gap: 15px;
 }
+
+#myBtn{
+  background: transparent; /* Remove o fundo padrão do botão */
+  border: none;          /* Remove a borda padrão do botão */
+  padding: 10px 20px;    /* Adiciona espaçamento interno (opcional) */
+  cursor: pointer; 
+}
+
+/* #myBtn:focus {
+  outline: 2px dashed #0072ec; 
+
+
+
+
+  
 
 /* ------ DROPDOWN MENU ------ */
 
@@ -408,4 +431,3 @@ divisão */
 .dropdown-menu a:hover {
   background: #e9dfd1;
 }
-
