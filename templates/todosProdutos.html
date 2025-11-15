@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='/styles/style_index.css')}}">
+
+ <!-- PRODUTOS RECENTES -->
+ <section class="produtos-recentes">
+    <h2>Produtos mais recentes</h2>
+    <div class="lista-produtos">
+        {% for produto in produtos %}
+        <div class="card-produto">
+            <a href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
+
+                {% if produto.imagens and produto.imagens[0] %}
+                <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
+                    alt="{{ produto.nome_produto }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}"
+                    alt="{{ produto.nome_produto }}">
+                {% endif %}
+
+                <div class="info-produto">
+                    <h3>{{ produto.nome_produto }}</h3>
+                    <p>R$ {{ produto.preco_produto }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock %}

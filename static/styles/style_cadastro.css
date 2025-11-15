@@ -1,7 +1,7 @@
 .form-control:focus {
     outline: none;
-    border: 2px solid #6b8fb4;
-    box-shadow: 0 0 8px rgba(67, 80, 95, 0.5);
+    border: 2px solid #b46b6f;
+    box-shadow: 0 0 8px rgba(95, 67, 76, 0.5);
     transition: 0.2s;
 }
 
@@ -31,8 +31,8 @@
   /* Títulos */
   h3{
     font-size: 22px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #7e4894;
+    margin-bottom: -20px;
+    border-bottom: 2px solid #946d48;
     display: inline-block;
     padding-bottom: 5px;
   }
@@ -51,7 +51,7 @@
   }
   
   label {
-    /* margin-bottom: 5px; */
+    margin-bottom: 5px;
     font-size: 13px;
   }
   
@@ -64,8 +64,8 @@
   }
   
   input:focus, select:focus {
-    border-color: #533b63;
-    box-shadow: 0 0 4px rgba(91, 41, 156, 0.4);
+    border-color: #d8b472;
+    box-shadow: 0 0 4px rgba(156, 125, 41, 0.4);
     outline: none;
   }
   
@@ -77,7 +77,7 @@
   
   /* Botão */
   #btn-enviar {
-    background-color: #7f5a86;
+    background-color: #bba26b;
     color: white;
     border: none;
     padding: 14px 32px;
@@ -90,7 +90,7 @@
   }
   
   #btn-enviar:hover {
-    background-color: #513457;
+    background-color: #91835d;
     transform: scale(1.02);
   }
   
@@ -116,18 +116,18 @@
 }
 
 .upload-area {
-  border: 2px dashed #b58cc7;
+  border: 2px dashed #944855;
   border-radius: 10px;
   padding: 20px;
   width: 100%;
   max-width: 300px;
-  background-color: #faf8fb;
+  background-color: #fbf8f9;
   transition: all 0.3s ease;
 }
 
 .upload-area:hover {
-  border-color: #7f5a86;
-  background-color: #f5f0f8;
+  border-color: #944852;
+  background-color: #fff4f4;
 }
 
 #preview-imagem {

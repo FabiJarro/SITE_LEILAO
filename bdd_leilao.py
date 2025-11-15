@@ -18,8 +18,8 @@ cursor = conn.cursor()
 
 cursor.execute('DROP DATABASE IF EXISTS `leilao`;')
 
-arquivos = ['/home/fabiana/Desktop/SITE_LEILAO/scripts/01_modelo_fisico.sql',
-            '/home/fabiana/Desktop/SITE_LEILAO/scripts/02_insercoes_basicas.sql']
+arquivos = ['/home/fabiana/Desktop/SITE_LEILAO/bd/01_modelo_fisico.sql',
+            '/home/fabiana/Desktop/SITE_LEILAO/bd/02_insercoes_basicas.sql']
 for arquivo in arquivos:
       with open(arquivo, 'r') as f:
             sql_script = f.read()

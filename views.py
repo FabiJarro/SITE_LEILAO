@@ -165,7 +165,7 @@ def cadastrar_produto():
     db.session.add(novo_produto)
     print("o novo produto comitando")
     db.session.commit()
-    print("coomoitado:?")
+    print("coomitado:?")
     
     img = request.files.get('imagem_produto')
     if img:
@@ -202,14 +202,19 @@ def detalhes_produto(id_produto):
     
     ultimo_lance = Lances.query.filter_by(id_produto=id_produto).order_by(Lances.horario_lance.desc()).first()
     
-    proximo_lance = produto.preco_produto
-    if ultimo_lance:
-        proximo_lance = ultimo_lance.valor_lance + produto.incremento_minimo
+    preco_inicial = float(produto.preco_produto)
+    incremento = float(produto.incremento_minimo)
+    valor_ultimo = float(ultimo_lance.valor_lance) if ultimo_lance else 0
 
-    lance_minimo = float(produto.preco_produto)
+    # proximo_lance = produto.preco_produto
+    
     if ultimo_lance:
-        lance_minimo = float(ultimo_lance.valor_lance) + float(produto.incremento_minimo)
-
+        proximo_lance = valor_ultimo + incremento
+        lance_minimo = valor_ultimo + incremento
+    else:
+        proximo_lance = preco_inicial
+        lance_minimo = preco_inicial
+        
     return render_template('detalhes_produto.html', produto=produto, ultimo_lance=ultimo_lance, 
                            proximo_lance=proximo_lance, datetime=datetime, lance_minimo=lance_minimo)
 
@@ -263,4 +268,7 @@ def get_img(id_imagem):
 
 @app.route('/todosProdutos')
 def todosProdutos():
-    return render_template('todosProdutos.html')
+    todosProdutos=Produtos.query.order_by(Produtos.id_produto).all()
+    lista_produto=Produtos.query.order_by(Produtos.id_produto)
+
+    return render_template('todosProdutos.html', produtos=lista_produto, todosProdutos=todosProdutos)
