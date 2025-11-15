@@ -5,6 +5,7 @@ from models import Cadastros, Adm, Produtos, Lances, Imagens
 from helpers import UsuarioForm, ProdutoForm
 from werkzeug.utils import secure_filename
 import os
+from utils import hashSenha 
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -71,7 +72,7 @@ def cadastrar_usuario():
     rg=usuarioForm.rg
     data_str = usuarioForm.data_nascimento
     email=usuarioForm.email
-    senha=usuarioForm.senha
+    senha=hashSenha(usuarioForm.senha)
     cep=usuarioForm.cep
     rua=usuarioForm.rua
     bairro=usuarioForm.bairro
@@ -222,7 +223,7 @@ def fazer_lance(id_produto):
     
     if 'usuario_logado' not in session:
         flash('login_requerido')
-    return redirect(url_for('paginainicial'))
+        return redirect(url_for('paginainicial'))
 
     valor_lance = float(request.form['valor_lance'])
     id_usuario = session.get('usuario_logado')

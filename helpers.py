@@ -1,8 +1,6 @@
 
 from leilao import app
 import re    
-
-
         
 class UsuarioForm():
     

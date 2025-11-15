@@ -1,6 +1,7 @@
 from leilao import app, db
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from models import Cadastros, Adm, Produtos, Lances
+from utils import hashSenha
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -8,7 +9,7 @@ SENHA_ADM="1234"
 @app.route('/entrar_usuario', methods=['POST', 'GET'])
 def entrar_usuario():
     email = request.form['email']
-    senha = request.form['senha']
+    senha = hashSenha(request.form['senha'])
     
     usuario=Cadastros.query.filter_by(email=email).first()
     print(request.form)
