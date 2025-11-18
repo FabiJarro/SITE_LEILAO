@@ -7,11 +7,9 @@
 
   <div class="produto-imagem">
     {% if produto.imagens and produto.imagens[0] %}
-      <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" 
-           alt="{{ produto.nome_produto }}">
+    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
     {% else %}
-      <img src="{{ url_for('static', filename='img/sem-imagem.png') }}" 
-           alt="Sem imagem disponível">
+    <img src="{{ url_for('static', filename='img/sem-imagem.png') }}" alt="Sem imagem disponível">
     {% endif %}
   </div>
 
@@ -40,16 +38,17 @@
       <button type="submit">Fazer Lance</button>
     </form>
     {% else %}
-    <form method="post" action="{{ url_for('paginainicial') }}" class="form-lance">
+    <form id="form-lance-deslogado" class="form-lance">
+
       <label for="valor_lance">Valor do lance:</label>
 
       <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
         value="{{ lance_minimo }}">
 
-      <button type="submit">Fazer Lance</button>
+      <button type="submit" id="btnLanceDeslogado">Fazer Lance</button>
+    </form>
 
-
-    {% endif %}
+      {% endif %}
 
       <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
   </section>
@@ -57,15 +56,15 @@
 </main>
 
 
-  <script>
-    const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
-    const dataLocal = new Date(horarioServidor);
-    document.getElementById("horario-lance").textContent =
-      !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
+<script>
+  const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
+  const dataLocal = new Date(horarioServidor);
+  document.getElementById("horario-lance").textContent =
+    !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
 
-    //meu deus não sei oq tá acontecendo
+  //meu deus não sei oq tá acontecendo
 
-  </script>
+</script>
 
 
 

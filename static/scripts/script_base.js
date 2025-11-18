@@ -1,3 +1,5 @@
+
+
 //modal
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
@@ -19,6 +21,29 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 };
+
+
+//abrir modal quando a pessoa estiver deslogada
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const formDeslogado = document.getElementById("form-lance-deslogado");
+    const btnLance = document.getElementById("btnLanceDeslogado");
+
+    if (formDeslogado) {
+        formDeslogado.addEventListener("submit", (e) => {
+            e.preventDefault(); 
+        });
+    }
+    if (btnLance) {
+        btnLance.addEventListener("click", () => {
+            document.getElementById("loginMsg").textContent =
+                "Você precisa estar logado para fazer um lance.";
+            modal.style.display = "block";
+        });
+    }
+
+});
 
 
 
