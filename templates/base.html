@@ -13,21 +13,40 @@
 
 <header class="header-vintage">
 
-  <!-- LOGO (ESQUERDA) -->
+  <!-- logo(na esquerda) -->
+
   <div class="header-esquerda">
-    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo-vintage">
+    <a href="{{ url_for('paginainicial') }}">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo-vintage">
+    </a>
   </div>
 
 
-  <!-- BARRA DE PESQUISA (CENTRO) -->
+  
+
   <div class="barra-pesquisa-container">
-    <form action="/buscar" method="GET" class="form-pesquisa">
-      <input type="text" name="q" placeholder="Pesquisar produtos..." class="input-pesquisa">
+
+    <form action="/produtos" method="GET" class="form-pesquisa">
+
+      <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa" >
+
+      <select name="categoria">
+        <option value="">Todas categorias</option>
+        <option value="eletronicos" {% if categoria_produto=='eletronicos' %}selected{% endif %}>Eletrônicos</option>
+        <option value="roupas" {% if categoria_produto=='roupas' %}selected{% endif %}>Roupas</option>
+        <option value="decoracao" {% if categoria_produto=='decoracao' %}selected{% endif %}>Decoração</option>
+      </select>
+
       <button type="submit" class="btn-pesquisa">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
+
+
   </div>
+
+
+
 
 
   <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
@@ -42,7 +61,7 @@
     {% endif %}
 
 
-    <!-- MENU HAMBÚRGUER -->
+    <!-- icone do menu-->
     <div class="dropdown">
       <button class="btn-menu" id="btnMenu">
         <i class="fa-solid fa-bars"></i>
@@ -50,12 +69,15 @@
 
       <!-- MENU QUE ABRE -->
       <div class="dropdown-menu" id="menuDropdown">
-        <a href="/">Página inicial</a>
-        <a href="/sobre">Sobre nós</a>
-
-
+        <a href="{{url_for('paginainicial')}}">Página inicial</a>
 
         <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
+        <a href="{{ url_for('todosProdutos') }}">Todos os produtos</a>
+
+        <a href="{{ url_for('como_vender') }}">Como vender</a>
+        <a href="{{ url_for('como_comprar') }}">Como comprar</a>
+        <a href="{{ url_for('sobre') }}">Sobre nós</a>
+
         <a href="{{ url_for('login_AR') }}">Área restrita</a>
       </div>
     </div>

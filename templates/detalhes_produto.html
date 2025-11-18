@@ -34,16 +34,16 @@
     <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}" class="form-lance">
       <label for="valor_lance">Valor do lance:</label>
 
-      <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ produto.lance_minimo }}"
+      <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
         value="{{ lance_minimo }}">
 
       <button type="submit">Fazer Lance</button>
     </form>
     {% else %}
-    <form method="post" action="{{ url_for('modal', id_produto=produto.id_produto) }}" class="form-lance">
+    <form method="post" action="{{ url_for('paginainicial') }}" class="form-lance">
       <label for="valor_lance">Valor do lance:</label>
 
-      <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ produto.lance_minimo }}"
+      <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
         value="{{ lance_minimo }}">
 
       <button type="submit">Fazer Lance</button>

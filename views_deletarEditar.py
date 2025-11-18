@@ -87,9 +87,9 @@ def editarUsuario(id_usuario):
     
 #_______________________________________________________________________________
 
-@app.route('/deletar/<int:id_produto>')
+@app.route('/deletarProduto/<int:id_produto>')
 def deletarProduto(id_produto):
-    produto=Produtos.query.get_or_404(id_lance)
+    produto=Produtos.query.get_or_404(id_produto)
     db.session.delete(produto)
     db.session.commit()
     flash('produto deletado')

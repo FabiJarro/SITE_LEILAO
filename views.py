@@ -4,6 +4,7 @@ from leilao import app,db
 from models import Cadastros, Adm, Produtos, Lances, Imagens
 from helpers import UsuarioForm, ProdutoForm
 from werkzeug.utils import secure_filename
+from sqlalchemy import or_
 import os
 from utils import hashSenha 
 
@@ -13,8 +14,8 @@ SENHA_ADM="1234"
 @app.route('/')
 def paginainicial():
     print(session)
-    produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
-    lista_produto=Produtos.query.order_by(Produtos.id_produto)
+    # produto_destaque=Produtos.query.order_by(Produtos.id_produto).all()
+    lista_produto=Produtos.query.order_by(Produtos.id_produto.desc()).limit(8).all()
     email_logado = session.get('usuario_email')
     primeiro_nome = None
     
@@ -26,9 +27,9 @@ def paginainicial():
     else:
         email_cookie=request.cookies.get('usuario_email')
         if email_cookie:
-            session['usuario_logado'] = email_cookie
+            session['usuario_email'] = email_cookie
             email_logado = email_cookie
-    return render_template('index.html', produtos=lista_produto, produto_destaque=produto_destaque, primeiro_nome=primeiro_nome)
+    return render_template('index.html', produtos=lista_produto, primeiro_nome=primeiro_nome)
 
 
 
@@ -49,11 +50,11 @@ def arearestrita():
 #esse referer é tipo um atalho que obtem a URL de onde que o usuario veio
 
 
-@app.route('/produtos', methods=['GET'])
-def getProdutos():
-    #lista=Cadastros.query.order_by(Cadastros.id_usuario)
-    produtos=Produtos.query.all()
-    return jsonify(produtos)
+# @app.route('/produtos', methods=['GET'])
+# def getProdutos():
+#     #lista=Cadastros.query.order_by(Cadastros.id_usuario)
+#     produtos=Produtos.query.all()
+#     return jsonify(produtos)
 
 
 
@@ -179,7 +180,7 @@ def cadastrar_produto():
             
     id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'))
 
-    produto_destaque = Produtos.query.order_by(Produtos.id_produto).all()
+    # produto_destaque = Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto = Produtos.query.order_by(Produtos.id_produto)
 
     
@@ -272,3 +273,24 @@ def todosProdutos():
     lista_produto=Produtos.query.order_by(Produtos.id_produto)
 
     return render_template('todosProdutos.html', produtos=lista_produto, todosProdutos=todosProdutos)
+
+
+
+@app.route('/produtos')
+def produtos():
+    nome_produto = request.args.get('nome_produto', '').strip()        
+    # categoria_produto = request.args.get('categoria_produto', '').strip() 
+
+    query = Produtos.query
+
+    if nome_produto: query = query.filter(or_(Produtos.nome_produto.ilike(f"%{nome_produto}%"), Produtos.categoria_produto.ilike(f"%{nome_produto}%")))
+
+
+    lista = query.order_by(Produtos.id_produto).all()
+
+    return render_template('todosProdutos.html', produtos=lista, nome_produto=nome_produto)
+
+
+
+
+

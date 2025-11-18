@@ -89,31 +89,32 @@
         </div>
     </section>
 
-
-
-    <!-- PRODUTOS RECENTES -->
+<!-- produtos recentes -->
     <section class="produtos-recentes">
         <h2>Produtos mais recentes</h2>
-        <div class="lista-produtos">
+    
+        <div class="grid-produtos-recentes">
+    
             {% for produto in produtos %}
-            <div class="card-produto">
-                <a href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
-
+            <a class="card-recente" href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
+    
+                <div class="card-img">
                     {% if produto.imagens and produto.imagens[0] %}
-                    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
-                        alt="{{ produto.nome_produto }}">
+                    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
                     {% else %}
-                    <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}"
-                        alt="{{ produto.nome_produto }}">
+                    <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}" alt="{{ produto.nome_produto }}">
                     {% endif %}
-
-                    <div class="info-produto">
-                        <h3>{{ produto.nome_produto }}</h3>
-                        <p>R$ {{ produto.preco_produto }}</p>
-                    </div>
-                </a>
-            </div>
+                </div>
+    
+                <div class="card-info">
+                    <h3 class="marca">{{ produto.marca_produto }}</h3>
+                    <p class="titulo">{{ produto.nome_produto }}</p>
+                    <p class="preco">R$ {{ produto.preco_produto }}</p>
+                </div>
+    
+            </a>
             {% endfor %}
+    
         </div>
     </section>
 
