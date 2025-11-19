@@ -32,13 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (formDeslogado) {
         formDeslogado.addEventListener("submit", (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
         });
     }
     if (btnLance) {
         btnLance.addEventListener("click", () => {
             document.getElementById("loginMsg").textContent =
                 "Você precisa estar logado para fazer um lance.";
+            const urlAtual = window.location.pathname;
+            sessionStorage.setItem("redirecionar_para", urlAtual);
             modal.style.display = "block";
         });
     }
@@ -61,13 +63,19 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
     });
 
     if (resposta.redirected) {
-        // Login OK: fecha modal e recarrega página
+
         modal.style.display = "none";
-        window.location.href = resposta.url;
-    } else {
-        const msg = document.getElementById("loginMsg");
-        msg.textContent = "Usuário ou senha incorretos!";
+    
+        const voltar = sessionStorage.getItem("redirecionar_para");
+    
+        if (voltar) {
+            sessionStorage.removeItem("redirecionar_para");
+            window.location.href = voltar;   // VOLTA AUTOMATICAMENTE
+        } else {
+            window.location.href = resposta.url;
+        }
     }
+    
 });
 
 
@@ -82,3 +90,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+  

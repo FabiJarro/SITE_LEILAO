@@ -59,6 +59,7 @@ class ProdutoForm():
         self.descricao_produto = form.get('descricao_produto')
         self.preco_produto = form.get('preco_produto')
         self.incremento_minimo = form.get('incremento_minimo')
+        self.data_final= form.get('data_final')
         
     
     def validarProduto(self):

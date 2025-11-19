@@ -5,11 +5,12 @@
   <meta charset="UTF-8">
   <title>colecionáveis leilões</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> -->
   <link href="{{ url_for('static', filename='/styles/style.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-</head>
+
+<body>
 
 <header class="header-vintage">
 
@@ -22,20 +23,20 @@
   </div>
 
 
-  
+
 
   <div class="barra-pesquisa-container">
 
     <form action="/produtos" method="GET" class="form-pesquisa">
 
-      <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa" >
+      <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa">
 
-      <select name="categoria">
+      <!-- <select name="categoria">
         <option value="">Todas categorias</option>
         <option value="eletronicos" {% if categoria_produto=='eletronicos' %}selected{% endif %}>Eletrônicos</option>
         <option value="roupas" {% if categoria_produto=='roupas' %}selected{% endif %}>Roupas</option>
         <option value="decoracao" {% if categoria_produto=='decoracao' %}selected{% endif %}>Decoração</option>
-      </select>
+      </select> -->
 
       <button type="submit" class="btn-pesquisa">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -52,6 +53,7 @@
   <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
   <div class="header-direita">
 
+
     <!-- ÍCONE MINHA CONTA -->
 
     {% if 'usuario_logado' in session %}
@@ -66,6 +68,8 @@
       <button class="btn-menu" id="btnMenu">
         <i class="fa-solid fa-bars"></i>
       </button>
+      
+
 
       <!-- MENU QUE ABRE -->
       <div class="dropdown-menu" id="menuDropdown">
@@ -85,11 +89,8 @@
   </div>
 
 </header>
+<div id="menuBackdrop" class="menu-backdrop">
 
-
-
-
-<body>
 
 
   <main>
@@ -126,6 +127,7 @@
       </div>
 
     </div>
+  </div>
 
 
 
@@ -147,20 +149,44 @@
   <footer class="rodape">
     <div class="rodape-container">
 
+      <!-- Selo grande à esquerda -->
+      <div class="footer-selo">
+        <a href="{{ url_for('paginainicial') }}">
+          <img src="{{ url_for('static', filename='imagens/selo.jpeg') }}" alt="selo">
+        </a>
+      </div>
+
+      <!-- Navegação e Ajuda -->
       <div class="rodape-secao">
-        <h4>Área Restrita</h4>
-        <a href="{{ url_for('login_AR') }}">Entrar</a>
+        <h4>Atendimento</h4>
+        <p><i class="fa-solid fa-envelope"></i> sac@leilao.gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> (35) 99999-0000</p>
       </div>
 
       <div class="rodape-secao">
-        <h4>Contato</h4>
-        <p><i class="fa-solid fa-envelope"></i> <a href="leilao@gmail.com"
-            style="font-size: 15px;">sac@leilao.gmail.com</a></p>
-        <p style="font-size: 15px;"><i class="fa-solid fa-phone"></i> (35) 99999-0000</p>
+        <h4>Área restrita</h4>
+        <p><a href="{{ url_for('arearestrita') }}">Entrar</a></p>
       </div>
 
       <div class="rodape-secao">
-        <h4>Redes Sociais</h4>
+        <h4>Navegação</h4>
+        <p><a href="{{ url_for('todosProdutos') }}">Todos os produtos</a></p>
+        <p><a href="{{ url_for('cadastro_produto') }}">Cadastrar produto</a></p>
+      </div>
+
+      <div class="rodape-secao">
+        <h4>Ajuda</h4>
+        <p><a href="{{ url_for('como_vender') }}">Como vender</a></p>
+        <p><a href="{{ url_for('como_comprar') }}">Como comprar</a></p>
+        <p><a href="{{ url_for('sobre') }}">Sobre nós</a></p>
+      </div>
+
+      <!-- Tema + redes sociais à direita -->
+      <div class="rodape-secao rodape-direita">
+        <button class="botao-tema" onclick="trocarTema()">
+          <i class="fa-regular fa-moon"></i>
+        </button>
+
         <div class="social-icons">
           <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
@@ -168,30 +194,18 @@
         </div>
       </div>
 
-      <!-- tema -->
-      <div class="rodape-secao tema">
-        <h4>Tema</h4>
-        <button class="botao-tema" onclick="trocarTema()">
-          <i class="fa-regular fa-moon"></i>
-        </button>
-      </div>
-
-      <div class="rodape-secao">
-        <h4>cadastrar um produto</h4>
-        <a href="{{ url_for('cadastro_produto') }}">Cadastrar um produto</a>
-      </div>
-
-
     </div>
 
-    <p class="direitos"> &#169leilao 2025</p>
+    <p class="direitos">© leilao 2025 — Todos os direitos reservados</p>
   </footer>
 
-</body>
 
 
-</html>
+
+
+
 <script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
+
 <script>
   // funçção que troca o tema(n funciona direito)
   function trocarTema() {
@@ -199,3 +213,9 @@
   }
 
 </script>
+
+
+
+
+</body>
+</html>

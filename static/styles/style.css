@@ -1,20 +1,148 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+
 * {
   box-sizing: border-box;
   font-size: 20px;
+  font-family: "Lora", serif;
 }
 
 
-footer {
 
-  padding: 20px;
-  /* background: #868686; */
-  color: rgb(0, 0, 0);
-  font-size: 14px;
+
+ul {
+  list-style-type: none;
+}
+
+/* --- FOOTER NOVO E ELEGANTE --- */
+
+
+.footer-selo {
+  flex: 1 1 250px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-selo img {
+  width: 180px;       /* aumenta o tamanho */
+  height: auto;
+  border-radius: 8px; /* opcional: deixa mais elegante */
+}
+
+.rodape {
+  background-color: #fdfaf7;   /* off-white sofisticado */
+  padding: 50px 80px;
+  border-top: 1px solid #ddd;
+  color: #333;
+  font-family: "Lora", serif;
+}
+
+.rodape-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.rodape-secao {
+  flex: 1 1 250px;
+  min-width: 220px;
+}
+
+.rodape-secao h4 {
+  font-size: 17px;
+  margin-bottom: 15px;
+  color: #311f05;   /* vinho elegante */
+  font-weight: 600;
+}
+
+.rodape-secao a {
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.rodape-secao a:hover {
+  color: #8f300a;
+}
+
+.rodape-secao p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+
+.rodape-direita {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.rodape-direita .social-icons {
+  margin-top: 25px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-link i {
+  font-size: 20px;
+  transition: .3s;
+}
+
+.social-link:hover i {
+  color: #8f300a;
+  transform: scale(1.1);
+}
+
+.direitos {
+  text-align: center;
   margin-top: 40px;
-  bottom: 0;
-  width: 100%;
-
+  font-size: 14px;
+  color: #666;
 }
+
+
+.botao-tema {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.botao-tema:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+/* modo escuro atualizado */
+/* .modo-escuro .rodape {
+  background-color: #222;
+  border-color: #444;
+}
+
+.modo-escuro .rodape-secao h4 {
+  color: #e0bbbb;
+}
+
+.modo-escuro a {
+  color: #ddd;
+}
+
+.modo-escuro .direitos {
+  color: #bbb;
+} */
+
 
 main {
   padding: 70px;
@@ -210,86 +338,6 @@ body {
 divisão */
 
 
-/* Rodapé */
-.rodape {
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  padding: 30px 60px;
-  color: #444;
-}
-
-.rodape-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 25px;
-}
-
-.rodape-secao {
-  flex: 1 1 200px;
-  min-width: 180px;
-  font-size: 15px;
-}
-
-.rodape-secao h4 {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #b41c1c;
-  font-weight: 600;
-}
-
-.rodape-secao a {
-  color: #444;
-  text-decoration: none;
-}
-
-.rodape-secao a:hover {
-  color: #b41c1c;
-}
-
-.social-icons {
-  display: flex;
-  gap: 12px;
-}
-
-.social-link i {
-  font-size: 18px;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.social-link:hover i {
-  color: #b41c1c;
-  transform: scale(1.1);
-}
-
-.botao-tema {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px 10px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.botao-tema:hover {
-  background-color: #f5f5f5;
-}
-
-.direitos {
-  text-align: center;
-  font-size: 13px;
-  color: #777;
-  margin-top: 30px;
-}
-
-
-.botao-sair {
-  background: #f5f5f5;
-  color: #000;
-  margin-left: 11px;
-}
-
 
 
 /* Modo escuro*/
@@ -323,7 +371,6 @@ divisão */
   padding: 12px 20px;
   background: #ffffff;
   border-bottom: 3px solid #918a82;
-  font-family: "Georgia", serif;
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -398,7 +445,7 @@ divisão */
 
 /* ------ DROPDOWN MENU ------ */
 
-.btn-menu {
+ .btn-menu {
   font-size: 26px;
   background: none;
   border: none;
@@ -430,4 +477,5 @@ divisão */
 
 .dropdown-menu a:hover {
   background: #e9dfd1;
-}
+} 
+

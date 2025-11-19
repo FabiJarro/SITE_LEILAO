@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
         `nome_produto` varchar(255) NOT NULL,
         `descricao_produto` text,
         `categoria_produto` varchar(100),
+        `data_final` date NOT NULL,
         `preco_produto` decimal(10, 2) NOT NULL,
         `incremento_minimo` decimal(10, 2) NOT NULL,
         `id_usuario` int NOT NULL,

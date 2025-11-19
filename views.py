@@ -6,7 +6,7 @@ from helpers import UsuarioForm, ProdutoForm
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 import os
-from utils import hashSenha 
+from uteis import hashSenha 
 
 ADMINISTRADOR="admin"
 SENHA_ADM="1234"
@@ -146,6 +146,7 @@ def cadastrar_produto():
     
     nome_produto=produtoForm.nome_produto
     categoria_produto=produtoForm.categoria_produto
+    data_final=produtoForm.data_final
     preco_produto = produtoForm.preco_produto
     descricao_produto=produtoForm.descricao_produto
     incremento_minimo=produtoForm.incremento_minimo
@@ -161,7 +162,7 @@ def cadastrar_produto():
         return jsonify({"status":"erro","mensagem":"Produto já existe"}), 400
     
     
-    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo, id_usuario=id_usuario)
+    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo,data_final=data_final, id_usuario=id_usuario)
     
     db.session.add(novo_produto)
     print("o novo produto comitando")
@@ -289,8 +290,5 @@ def produtos():
     lista = query.order_by(Produtos.id_produto).all()
 
     return render_template('todosProdutos.html', produtos=lista, nome_produto=nome_produto)
-
-
-
 
 

@@ -26,10 +26,10 @@ VALUES
         'Brasil', 'Salvador', '71987654321', 'BA'
     );
 
-INSERT INTO produtos (nome_produto, categoria_produto, preco_produto, incremento_minimo, descricao_produto, id_usuario) 
+INSERT INTO produtos (nome_produto, categoria_produto, data_final, preco_produto, incremento_minimo, descricao_produto, id_usuario) 
 VALUES 
-    ('caneca', 'casual', 20.99, 5.00,'descricao muitolongaaaaaaaaaaaaaa', 2),
-    ('flor', 'casual', 45.99, 10.00, 'descricao mais longa aindaaaaaaaa',3);
+    ('caneca', 'casual', '2009-09-09', 20.99, 5.00,'descricao muitolongaaaaaaaaaaaaaa', 2),
+    ('flor', 'casual','2008-08-08', 45.99, 10.00, 'descricao mais longa aindaaaaaaaa',3);
 
 INSERT INTO lances (valor_lance, horario_lance, id_usuario, id_produto) 
 VALUES 
