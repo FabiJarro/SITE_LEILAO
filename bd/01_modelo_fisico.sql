@@ -2,7 +2,8 @@ CREATE DATABASE IF NOT EXISTS `leilao`;
 
 USE `leilao`;
 
-CREATE TABLE IF NOT EXISTS `cadastros` (
+CREATE TABLE
+    IF NOT EXISTS `cadastros` (
         `id_usuario` int NOT NULL AUTO_INCREMENT,
         `nome` varchar(255) NOT NULL,
         `cpf` char(14) NOT NULL,
@@ -16,47 +17,21 @@ CREATE TABLE IF NOT EXISTS `cadastros` (
         `complemento` varchar(255) NOT NULL,
         `pais` varchar(255) NOT NULL,
         `cidade` varchar(255) NOT NULL,
-        `estado` Enum (
-            'AC',
-            'AL',
-            'AM',
-            'AP',
-            'BA',
-            'CE',
-            'DF',
-            'ES',
-            'GO',
-            'MA',
-            'MG',
-            'MS',
-            'MT',
-            'PA',
-            'PB',
-            'PE',
-            'PI',
-            'PR',
-            'RJ',
-            'RN',
-            'RO',
-            'RR',
-            'RS',
-            'SC',
-            'SE',
-            'SP',
-            'TO'
-        ) NOT NULL,
+        `estado` varchar (2) NOT NULL,
         `telefone` VARCHAR(20) NOT NULL,
         PRIMARY KEY (`id_usuario`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE IF NOT EXISTS `adm` (
+CREATE TABLE
+    IF NOT EXISTS `adm` (
         `id_adm` int NOT NULL AUTO_INCREMENT,
         `email` varchar(320) NOT NULL,
         `senha` varchar(255) NOT NULL,
         PRIMARY KEY (`id_adm`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE IF NOT EXISTS `produtos` (
+CREATE TABLE
+    IF NOT EXISTS `produtos` (
         `id_produto` int NOT NULL AUTO_INCREMENT,
         `nome_produto` varchar(255) NOT NULL,
         `descricao_produto` text,
@@ -69,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `produtos` (
         FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE IF NOT EXISTS `lances` (
+CREATE TABLE
+    IF NOT EXISTS `lances` (
         `id_lance` int NOT NULL AUTO_INCREMENT,
         `valor_lance` decimal(10, 2) NOT NULL,
         `horario_lance` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -80,7 +56,8 @@ CREATE TABLE IF NOT EXISTS `lances` (
         FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
 
-CREATE TABLE IF NOT EXISTS `imagens` (
+CREATE TABLE
+    IF NOT EXISTS `imagens` (
         `id_imagem` int NOT NULL AUTO_INCREMENT,
         `nome_imagem` varchar(255),
         `mimetype` varchar(100),

@@ -128,7 +128,6 @@ def cadastrar_produto():
     
     produtoForm = ProdutoForm(request.form)
     try:
-        print('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
         produtoForm.validarProduto()
     except ValueError as e:
         print('mensagem de errrrrrrrrrrrrrrrrrrro', e)
@@ -141,7 +140,6 @@ def cadastrar_produto():
             usuario = Cadastros.query.filter_by(email=email_logado).first()
             if usuario:
                 id_usuario = usuario.id_usuario
-                # opcional: salvar para próximas requisições
                 session['id_usuario'] = id_usuario
     
     nome_produto=produtoForm.nome_produto

@@ -1,6 +1,6 @@
 from leilao import db
 from datetime import datetime, timezone
-from sqlalchemy import Enum
+# from sqlalchemy import Enum
 
 
 
@@ -19,12 +19,7 @@ class Cadastros(db.Model):
     pais= db.Column(db.String(255), nullable=False)
     cidade= db.Column(db.String(255), nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
-    estado = db.Column(Enum(
-    'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO',
-    'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI',
-    'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO',
-    name="estado_enum"
-    ), nullable=False)
+    estado = db.Column(db.String(2), nullable=False)
 
     def __repr__(self):
         return f'<Cadastro {self.nome}>'
