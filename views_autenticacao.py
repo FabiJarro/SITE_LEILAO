@@ -3,8 +3,6 @@ from flask import render_template, request, redirect, session, flash, url_for, m
 from models import Cadastros, Adm, Produtos, Lances
 from uteis import hashSenha
 
-ADMINISTRADOR="admin"
-SENHA_ADM="1234"
 
 @app.route('/entrar_usuario', methods=['POST', 'GET'])
 def entrar_usuario():
@@ -35,41 +33,25 @@ def entrar():
     return render_template('entrar.html', titulo="Login", proxima=proxima)
 
 
-# @app.route('/login_AR')
-# def login_AR():
-#     proxima=request.args.get('proxima')
-#     return render_template('arearestrita.html', proxima=proxima)
-
-
-# @app.route('/autenticar_AR', methods=['POST',])
-# def autenticar_AR():
-#     adm=Adm.query.filter_by(email=request.form['adm']).first()
-
-#     if adm and request.form['senha'] == adm.senha:
-#         session['adm_logado'] = adm.email
-#         flash(adm.email + ' logado com sucesso!')
-#         proxima_pagina = request.form.get('proxima')
-#         return redirect(proxima_pagina)
-#     else:
-#         flash('Usuário ou senha incorretos!')
-#         return redirect(url_for('login_AR'))
 
 
 @app.route("/login_AR", methods=['GET', 'POST'])
 def login_AR():
-    proxima=request.args.get('proxima') or url_for('arearestrita')
-    
-    if request.method == "POST":
-        adm= request.form.get('adm_login')
-        senha = request.form.get('pass_login')
+    proxima = request.args.get('proxima') or url_for('arearestrita')
 
-        if adm== ADMINISTRADOR and senha == SENHA_ADM:
+    if request.method == "POST":
+        email_adm = request.form['email_adm']
+        senha_adm = hashSenha(request.form['senha_adm'])
+        adm = Adm.query.filter_by(email=email_adm).first()
+        
+        if adm and senha_adm == adm.senha:
             return redirect(proxima)
         else:
             flash('Usuário ou senha inválidos. Tente novamente.', "erro")
             return redirect(url_for('login_AR'))
 
-    return render_template('login_AR.html', titulo="login- area restrita", proxima=proxima)
+    return render_template('login_AR.html', proxima=proxima)
+
 
 
 @app.route('/logout')

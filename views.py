@@ -278,12 +278,9 @@ def todosProdutos():
 @app.route('/produtos')
 def produtos():
     nome_produto = request.args.get('nome_produto', '').strip()        
-    # categoria_produto = request.args.get('categoria_produto', '').strip() 
-
     query = Produtos.query
 
     if nome_produto: query = query.filter(or_(Produtos.nome_produto.ilike(f"%{nome_produto}%"), Produtos.categoria_produto.ilike(f"%{nome_produto}%")))
-
 
     lista = query.order_by(Produtos.id_produto).all()
 

@@ -12,122 +12,123 @@
 
 <body>
 
-<header class="header-vintage">
+  <header class="header-vintage">
 
-  <!-- logo(na esquerda) -->
+    <!-- logo(na esquerda) -->
 
-  <div class="header-esquerda">
-    <a href="{{ url_for('paginainicial') }}">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo-vintage">
-    </a>
-  </div>
-
-
+    <div class="header-esquerda">
+      <a href="{{ url_for('paginainicial') }}">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logomarca" class="logo-vintage">
+      </a>
+    </div>
 
 
-  <div class="barra-pesquisa-container">
 
-    <form action="/produtos" method="GET" class="form-pesquisa">
 
-      <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa">
+    <div class="barra-pesquisa-container">
 
-      <!-- <select name="categoria">
+      <form action="/produtos" method="GET" class="form-pesquisa">
+
+        <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa">
+
+        <!-- <select name="categoria">
         <option value="">Todas categorias</option>
         <option value="eletronicos" {% if categoria_produto=='eletronicos' %}selected{% endif %}>Eletrônicos</option>
         <option value="roupas" {% if categoria_produto=='roupas' %}selected{% endif %}>Roupas</option>
         <option value="decoracao" {% if categoria_produto=='decoracao' %}selected{% endif %}>Decoração</option>
       </select> -->
 
-      <button type="submit" class="btn-pesquisa">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </form>
+        <button type="submit" class="btn-pesquisa">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
 
 
-  </div>
-
-
-
-
-
-  <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
-  <div class="header-direita">
-
-
-    <!-- ÍCONE MINHA CONTA -->
-
-    {% if 'usuario_logado' in session %}
-    <a href="/minhaconta" id="btnConta" class="icon-conta"><i class="fa-solid fa-user"></i></a>
-    {% else %}
-    <button id="myBtn">Entrar ou Cadastrar</button>
-    {% endif %}
-
-
-    <!-- icone do menu-->
-    <div class="dropdown">
-      <button class="btn-menu" id="btnMenu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      
-
-
-      <!-- MENU QUE ABRE -->
-      <div class="dropdown-menu" id="menuDropdown">
-        <a href="{{url_for('paginainicial')}}">Página inicial</a>
-
-        <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
-        <a href="{{ url_for('todosProdutos') }}">Todos os produtos</a>
-
-        <a href="{{ url_for('como_vender') }}">Como vender</a>
-        <a href="{{ url_for('como_comprar') }}">Como comprar</a>
-        <a href="{{ url_for('sobre') }}">Sobre nós</a>
-
-        <a href="{{ url_for('login_AR') }}">Área restrita</a>
-      </div>
     </div>
 
-  </div>
-
-</header>
-<div id="menuBackdrop" class="menu-backdrop">
 
 
 
-  <main>
-    <div id="myModal" class="modal">
 
-      <!-- Modal content -->
-      <div class="modal-content" id="modal-login">
-        <span class="close">&times;</span>
+    <!-- ÍCONE MINHA CONTA + MENU DROPDOWN (DIREITA) -->
+    <div class="header-direita">
 
-        <div id="lados">
-          <!-- Lado esquerdo: login -->
-          <div id="ladoEsquerdo">
-            <h3>Acessar a Minha Conta</h3>
-            <form id="loginForm">
-              <label for="email">Digite seu Email:</label><br>
-              <input type="email" id="email" name="email" required placeholder="ex. usuario@gmail.com"><br><br>
 
-              <label for="senha">Digite sua Senha:</label><br>
-              <input type="password" id="senha" name="senha" required placeholder="ex. senha"><br><br>
+      <!-- ÍCONE MINHA CONTA -->
 
-              <button type="submit" id="btnLogin" class="btn btn-primary">Fazer login</button>
-            </form>
+      {% if 'usuario_logado' in session %}
+      <a href="/minhaconta" id="btnConta" class="icon-conta"><i class="fa-solid fa-user"></i></a>
+      {% else %}
+      <button id="myBtn">Entrar ou Cadastrar</button>
+      {% endif %}
 
-            <p id="loginMsg" style="color:red; margin-top:10px;"></p>
-          </div>
 
-          <!-- Lado direito: cadastro -->
-          <div id="ladoDireito">
-            <p>Ainda não tem cadastro?</p>
-            <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se
-              aqui</a>
-          </div>
+      <!-- icone do menu-->
+      <div class="dropdown">
+        <button class="btn-menu" id="btnMenu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+
+        <!-- MENU QUE ABRE -->
+        <div class="dropdown-menu" id="menuDropdown">
+          <a href="{{url_for('paginainicial')}}">Página inicial</a>
+
+          <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
+          <a href="{{ url_for('todosProdutos') }}">Todos os produtos</a>
+
+          <a href="{{ url_for('como_vender') }}">Como vender</a>
+          <a href="{{ url_for('como_comprar') }}">Como comprar</a>
+          <a href="{{ url_for('sobre') }}">Sobre nós</a>
+
+          <a href="{{ url_for('login_AR') }}">Área restrita</a>
         </div>
       </div>
 
     </div>
-  </div>
+
+  </header>
+
+  <div id="menuBackdrop" class="menu-backdrop">
+
+
+
+    <main>
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="modal-login">
+          <span class="close">&times;</span>
+
+          <div id="lados">
+            <!-- Lado esquerdo: login -->
+            <div id="ladoEsquerdo">
+              <h3>Acessar a Minha Conta</h3>
+              <form id="loginForm">
+                <label for="email">Digite seu Email:</label><br>
+                <input type="email" id="email" name="email" required placeholder="ex. usuario@gmail.com"><br><br>
+
+                <label for="senha">Digite sua Senha:</label><br>
+                <input type="password" id="senha" name="senha" required placeholder="ex. senha"><br><br>
+
+                <button type="submit" id="btnLogin" class="btn btn-primary">Fazer login</button>
+              </form>
+
+              <p id="loginMsg" style="color:red; margin-top:10px;"></p>
+            </div>
+
+            <!-- Lado direito: cadastro -->
+            <div id="ladoDireito">
+              <p>Ainda não tem cadastro?</p>
+              <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se
+                aqui</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
 
 
 
@@ -143,6 +144,8 @@
 
     {%block conteudo%}
     {%endblock%}
+
+
   </main>
 
 
@@ -201,21 +204,18 @@
 
 
 
-
-
-
-<script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
-
-<script>
-  // funçção que troca o tema(n funciona direito)
-  function trocarTema() {
-    document.body.classList.toggle('modo-escuro');
-  }
-
-</script>
-
-
-
-
 </body>
+
+
+  <script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
+
+  <script>
+    // funçção que troca o tema(n funciona direito)
+    function trocarTema() {
+      document.body.classList.toggle('modo-escuro');
+    }
+
+  </script>
+
+
 </html>

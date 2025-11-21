@@ -11,10 +11,10 @@
             <th>ID</th>
             <th>nome</th>
             <th>CPF</th>
+            <th>RG</th>
             <th>data de nascimento</th>
             <th>email</th>
-            <th>senha</th>
-            <th>endereço</th>
+            <th>CEP</th>
             <th></th>
             <th></th>
         </tr>
@@ -25,9 +25,9 @@
             <td>{{ cadastro.id_usuario }}</td>
             <td>{{ cadastro.nome }}</td>
             <td>{{ cadastro.cpf }}</td>
+            <td>{{ cadastro.rg}}</td>
             <td>{{ cadastro.data_nascimento }}</td>
             <td>{{ cadastro.email }}</td>
-            <td>{{ cadastro.senha }}</td>
             <td>{{ cadastro.cep }}</td>
             <td><a href="{{ url_for('editarUsuario', id_usuario=cadastro.id_usuario) }}">Editar</a></td>
             <td><a href="{{ url_for('deletarUsuario', id_usuario=cadastro.id_usuario) }}">Deletar</a></td>
@@ -44,11 +44,12 @@
         <tr>
             <th>ID Produto</th>
             <th>ID Usuário</th>
-            <th>nome Usuário</th>
             <th>nome Produto</th>
             <th>categoria</th>
             <th>preço</th>
-            <th>incremento_minimo</th>
+            <th>incremento minimo</th>
+            <th>data final</th>
+            <th>imagem</th>
             <th></th>
             <th></th>
 
@@ -60,11 +61,11 @@
         <tr>
             <td>{{ produto.id_produto }}</td>
             <td>{{ produto.id_usuario }}</td>
-            <td>{{ produto.usuario.nome }}</td>
             <td>{{ produto.nome_produto }}</td>
             <td>{{ produto.categoria_produto }}</td>
             <td>{{ produto.preco_produto }}</td>
             <td>{{ produto.incremento_minimo}}</td>
+            <td>{{ produto.data_final}}</td>
             <td>{{ produto.imagens}}</td>
             <td><a href="{{ url_for('editarProduto', id_produto=produto.id_produto) }}">Editar</a></td>
             <td><a href="{{ url_for('deletarProduto', id_produto=produto.id_produto) }}">Deletar</a></td>

@@ -115,6 +115,5 @@ _____________________________
 Depois:
 -sql injection
 -tenho que proteger esse banco e código aff
--ORM
 
 

@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 
@@ -8,6 +7,11 @@
   font-family: "Lora", serif;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 
 
 
@@ -25,17 +29,21 @@ ul {
 }
 
 .footer-selo img {
-  width: 180px;       /* aumenta o tamanho */
+  width: 180px;
+  /* aumenta o tamanho */
   height: auto;
-  border-radius: 8px; /* opcional: deixa mais elegante */
+  border-radius: 8px;
+  /* opcional: deixa mais elegante */
 }
 
 .rodape {
-  background-color: #fdfaf7;   /* off-white sofisticado */
+  background-color: #fdfaf7;
+  /* off-white sofisticado */
   padding: 50px 80px;
   border-top: 1px solid #ddd;
   color: #333;
   font-family: "Lora", serif;
+  margin-top: auto;
 }
 
 .rodape-container {
@@ -55,7 +63,8 @@ ul {
 .rodape-secao h4 {
   font-size: 17px;
   margin-bottom: 15px;
-  color: #311f05;   /* vinho elegante */
+  color: #311f05;
+  /* vinho elegante */
   font-weight: 600;
 }
 
@@ -146,6 +155,7 @@ ul {
 
 main {
   padding: 70px;
+  flex: 1;
 
 }
 
@@ -158,7 +168,11 @@ body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
   background: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
 
 
 
@@ -428,11 +442,14 @@ divisão */
   gap: 15px;
 }
 
-#myBtn{
-  background: transparent; /* Remove o fundo padrão do botão */
-  border: none;          /* Remove a borda padrão do botão */
-  padding: 10px 20px;    /* Adiciona espaçamento interno (opcional) */
-  cursor: pointer; 
+#myBtn {
+  background: transparent;
+  /* Remove o fundo padrão do botão */
+  border: none;
+  /* Remove a borda padrão do botão */
+  padding: 10px 20px;
+  /* Adiciona espaçamento interno (opcional) */
+  cursor: pointer;
 }
 
 /* #myBtn:focus {
@@ -445,7 +462,7 @@ divisão */
 
 /* ------ DROPDOWN MENU ------ */
 
- .btn-menu {
+.btn-menu {
   font-size: 26px;
   background: none;
   border: none;
@@ -477,5 +494,4 @@ divisão */
 
 .dropdown-menu a:hover {
   background: #e9dfd1;
-} 
-
+}
