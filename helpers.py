@@ -1,6 +1,7 @@
 
 from leilao import app
 import re    
+
         
 class UsuarioForm():
     
@@ -75,3 +76,5 @@ class ProdutoForm():
         if self.incremento_minimo.isalpha():
             raise ValueError('Digite um valor válido')
         return True
+    
+    

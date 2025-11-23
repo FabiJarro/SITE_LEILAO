@@ -14,7 +14,6 @@ body {
 }
 
 
-
 ul {
   list-style-type: none;
 }
@@ -33,11 +32,10 @@ ul {
   /* aumenta o tamanho */
   height: auto;
   border-radius: 8px;
-  /* opcional: deixa mais elegante */
 }
 
 .rodape {
-  background-color: #fdfaf7;
+  background-color: #f5f5f5ee;
   /* off-white sofisticado */
   padding: 50px 80px;
   border-top: 1px solid #ddd;
@@ -63,9 +61,9 @@ ul {
 .rodape-secao h4 {
   font-size: 17px;
   margin-bottom: 15px;
-  color: #311f05;
-  /* vinho elegante */
+  color: #4d1814;
   font-weight: 600;
+  font-family: "Lora", serif;
 }
 
 .rodape-secao a {
@@ -134,28 +132,12 @@ ul {
 
 
 
-/* modo escuro atualizado */
-/* .modo-escuro .rodape {
-  background-color: #222;
-  border-color: #444;
-}
-
-.modo-escuro .rodape-secao h4 {
-  color: #e0bbbb;
-}
-
-.modo-escuro a {
-  color: #ddd;
-}
-
-.modo-escuro .direitos {
-  color: #bbb;
-} */
 
 
 main {
   padding: 70px;
   flex: 1;
+  background-color: #fdfaf6;
 
 }
 
@@ -332,7 +314,7 @@ divisão */
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: #f7f6f1;
+  background: #faf8f2;
   border-bottom: 3px solid #918a82;
   position: fixed;
   width: 100%;
@@ -411,39 +393,3 @@ divisão */
 
 
   
-
-/* ------ DROPDOWN MENU ------ */
-
-.btn-menu {
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #4a392d;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 75px;
-  right: 20px;
-  background: #fdf8f1;
-  border: 2px solid #c6b49a;
-  border-radius: 10px;
-  padding: 10px 0;
-  width: 180px;
-  display: none;
-  flex-direction: column;
-}
-
-.dropdown-menu a {
-  padding: 10px 15px;
-  text-decoration: none;
-  font-size: 16px;
-  color: #4a392d;
-  display: block;
-  font-family: Georgia;
-}
-
-.dropdown-menu a:hover {
-  background: #e9dfd1;
-}

@@ -26,9 +26,22 @@
     </ul>
 </nav>
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul id="messages" class="list-unstyled">
+  {% for message in messages %}
+  <li class="alert alert-success" style="font-size: 23px;">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 
 
 <main>
+
+   
+    
+
 
     {% if primeiro_nome %}
     <p style="font-size: 25px0; margin-left: -40px; font-size:25px;">Bem-vindo, {{ primeiro_nome }}!</p>
@@ -39,17 +52,17 @@
             <div class="carrossel-slide active">
                 <img src="{{ url_for('static', filename='imagens/carrossel8.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
-                    <h2>Titulo1</h2>
-                    <p>sla</p>
-                    <a href="#" class="botao-carrossel">catálogo do Leilão</a>
+                    <h2>Todo o Catálogo</h2>
+                    <p>confira todo nosso catálogo!</p>
+                    <a href="{{ url_for('todosProdutos') }}" class="botao-carrossel"> ver tudo</a>
                 </div>
             </div>
             <div class="carrossel-slide">
                 <img src="{{ url_for('static', filename='imagens/carrossel5.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
-                    <h2>Titulo2</h2>
-                    <p>saiba mais</p>
-                    <a href="#" class="botao-carrossel">saiba Mais</a>
+                    <h2>Como vender?</h2>
+                    <p>comece hoje seu leilão!</p>
+                    <a href="{{ url_for('como_vender') }}" class="botao-carrossel">saiba mais</a>
                 </div>
             </div>
 

@@ -74,6 +74,20 @@
     display: flex;
     gap: 15px;
   }
+
+
+  #btnCadastroDeslogado{
+    background-color: #bba26b;
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 30px;
+    transition: all 0.25s ease;
+  }
   
   /* Botão */
   #btn-enviar {
@@ -136,4 +150,18 @@
   margin-top: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+.linha-salvar {
+  display: flex;
+  align-items: center;
+  gap: 430px; /* espaço entre botão e mensagem */
+  margin-top: 20px;
+}
+
+#mensagem {
+  font-size: 18px;
+  color: rgb(104, 9, 9);
+  
 }

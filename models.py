@@ -39,10 +39,11 @@ class Produtos(db.Model):
     id_produto=db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome_produto=db.Column(db.String(255), nullable=False)
     categoria_produto=db.Column(db.String(255), nullable=False)
-    data_final = db.Column(db.Date, nullable=False)
+    data_final = db.Column(db.DateTime, nullable=False)
     preco_produto=db.Column(db.Float(255), nullable=False)
     incremento_minimo=db.Column(db.Float(255), nullable=False)
     descricao_produto = db.Column(db.Text, nullable=False)
+    # finalizado = db.Column(db.Boolean, default=False)
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
     imagens = db.relationship('Imagens', backref='produto', lazy=True)
     

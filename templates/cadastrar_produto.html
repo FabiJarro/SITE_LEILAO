@@ -4,6 +4,7 @@
 <link href="{{ url_for('static', filename='/styles/style_cadastro.css')}}" rel="stylesheet">
 
 <div id="cadastrar_produto" class="formulario">
+
     <form action="{{ url_for('cadastrar_produto') }}" method="post" enctype="multipart/form-data"
         id="formulario_produto">
         <h3>Cadastrar Produto</h3>
@@ -47,7 +48,8 @@
 
                 <div class="form-group">
                     <label for="data_final">Data final</label>
-                    <input type="date" id="data_final" name="data_final" required>
+                    <input type="datetime-local" id="data_final" name="data_final" required>
+
                 </div>
 
                 <div class="form-group">
@@ -66,7 +68,22 @@
             </div>
 
         </div>
+
+        {% if 'usuario_logado' in session and session['usuario_logado'] %}
+
+        <div class="linha-salvar">
         <button type="button" onclick="enviarFormularioProduto(event)" id="btn-enviar">Salvar</button>
+            <div id="mensagem"></div>
+        </div>
+
+        {% else %}
+        <form id="form-cadastro-deslogado" class="form-lance">
+
+            <button type="button" id="btnCadastroDeslogado">Salvar</button>
+        </form>
+        <input type="hidden" id="redirect_atual" value="{{ request.path }}">
+
+        {% endif %}
 </div>
 
 

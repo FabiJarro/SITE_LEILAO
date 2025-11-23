@@ -1,7 +1,8 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 main{
     margin-top: 20px;
+    font-family: "Lora", serif;
 
 }
 
@@ -56,6 +57,7 @@ main{
 .carrossel-texto h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    font-family: "Lora", serif;
 }
 
 .carrossel-texto p {
@@ -192,6 +194,7 @@ main{
     margin-bottom: 50px;
     font-weight: 500;
     letter-spacing: 1px;
+    font-family: "Lora", serif;
 
 }
 

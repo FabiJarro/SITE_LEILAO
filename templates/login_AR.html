@@ -7,12 +7,26 @@
     font-size: 25px;
   }
 
-  main{
-  min-height: 80vh;
+  main {
+    min-height: 80vh;
 
   }
 </style>
+
 <main>
+
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul id="messages" class="list-unstyled">
+    {% for message in messages %}
+    <li class="alert alert-success" style="font-size: 23px;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <br>
 
   <h1>Entrar- Área Restrita</h1>
 

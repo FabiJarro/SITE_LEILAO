@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+
+
 <head>
   <meta charset="UTF-8">
   <title>Vintage Gallery</title>
@@ -8,11 +10,23 @@
   <!-- <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet"> -->
   <link href="{{ url_for('static', filename='/styles/style.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 </head>
 
 <body>
 
   <header class="header-vintage">
+
+    <div id="sidebar-backdrop" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.2);
+  z-index:5;">
+    </div>
+
 
     <!-- logo(na esquerda) -->
 
@@ -32,11 +46,11 @@
         <input type="text" name="nome_produto" placeholder="Pesquisar produtos, categorias..." class="input-pesquisa">
 
         <!-- <select name="categoria">
-        <option value="">Todas categorias</option>
-        <option value="eletronicos" {% if categoria_produto=='eletronicos' %}selected{% endif %}>Eletrônicos</option>
-        <option value="roupas" {% if categoria_produto=='roupas' %}selected{% endif %}>Roupas</option>
-        <option value="decoracao" {% if categoria_produto=='decoracao' %}selected{% endif %}>Decoração</option>
-      </select> -->
+          <option value="">Todas categorias</option>
+          <option value="eletronicos" {% if categoria_produto=='eletronicos' %}selected{% endif %}>Eletrônicos</option>
+          <option value="roupas" {% if categoria_produto=='roupas' %}selected{% endif %}>Roupas</option>
+          <option value="decoracao" {% if categoria_produto=='decoracao' %}selected{% endif %}>Decoração</option>
+        </select> -->
 
         <button type="submit" class="btn-pesquisa">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -63,28 +77,28 @@
       {% endif %}
 
 
-      <!-- icone do menu-->
-      <div class="dropdown">
-        <button class="btn-menu" id="btnMenu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
 
+      <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right:0; top:0; z-index:10; background-color: rgb(252, 250, 244);"
+        id="rightMenu">
 
+        <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">&times;</button>
 
-        <!-- MENU QUE ABRE -->
-        <div class="dropdown-menu" id="menuDropdown">
-          <a href="{{url_for('paginainicial')}}">Página inicial</a>
+        <a href="{{url_for('paginainicial')}}" class="w3-bar-item w3-button">Página inicial</a>
 
-          <a href="{{ url_for('cadastro_produto') }}">Cadastrar Produto</a>
-          <a href="{{ url_for('todosProdutos') }}">Todos os produtos</a>
+        <a href="{{ url_for('cadastro_produto') }}" class="w3-bar-item w3-button">Cadastrar Produto</a>
+        <a href="{{ url_for('todosProdutos') }}" class="w3-bar-item w3-button">Todos os produtos</a>
 
-          <a href="{{ url_for('como_vender') }}">Como vender</a>
-          <a href="{{ url_for('como_comprar') }}">Como comprar</a>
-          <a href="{{ url_for('sobre') }}">Sobre nós</a>
+        <a href="{{ url_for('como_vender') }}" class="w3-bar-item w3-button">Como vender</a>
+        <a href="{{ url_for('como_comprar') }}" class="w3-bar-item w3-button">Como comprar</a>
+        <a href="{{ url_for('sobre') }}" class="w3-bar-item w3-button">Sobre nós</a>
 
-          <a href="{{ url_for('login_AR') }}">Área restrita</a>
-        </div>
+        <a href="{{ url_for('login_AR') }}" class="w3-bar-item w3-button">Área restrita</a>
       </div>
+
+      <button class="w3-button w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+
+
+
 
     </div>
 
@@ -132,18 +146,11 @@
 
 
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul id="messages" class="list-unstyled">
-      {% for message in messages %}
-      <li class="alert alert-success">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+
 
     {%block conteudo%}
     {%endblock%}
+
 
 
   </main>
@@ -162,8 +169,8 @@
       <!-- Navegação e Ajuda -->
       <div class="rodape-secao">
         <h4>Atendimento</h4>
-        <p><i class="fa-solid fa-envelope"></i> sac@leilao.gmail.com</p>
-        <p><i class="fa-solid fa-phone"></i> (35) 99999-0000</p>
+        <p><i class="fa-solid fa-envelope"></i> sacvintagegallery@gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> (11) 99000-0000</p>
       </div>
 
       <div class="rodape-secao">
@@ -199,7 +206,7 @@
 
     </div>
 
-    <p class="direitos">© leilao 2025 — Todos os direitos reservados</p>
+    <p class="direitos">© Vintage Gallery — Todos os direitos reservados</p>
   </footer>
 
 
@@ -209,6 +216,25 @@
 
 <script src="{{ url_for('static', filename='/scripts/script_base.js')}}"></script>
 
+
+<script>
+  const menu = document.getElementById("rightMenu");
+  const backdrop = document.getElementById("sidebar-backdrop");
+
+  function openRightMenu() {
+    menu.style.display = "block";
+    backdrop.style.display = "block";
+  }
+
+  function closeRightMenu() {
+    menu.style.display = "none";
+    backdrop.style.display = "none";
+  }
+
+  backdrop.addEventListener("click", closeRightMenu);
+</script>
+
+
 <script>
   // funçção que troca o tema(n funciona direito)
   function trocarTema() {
@@ -216,6 +242,5 @@
   }
 
 </script>
-
 
 </html>

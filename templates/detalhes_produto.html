@@ -5,6 +5,8 @@
 
 <main class="detalhes-produto">
 
+
+<div class="coluna-imagem">
   <div class="produto-imagem">
     {% if produto.imagens and produto.imagens[0] %}
     <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
@@ -13,21 +15,35 @@
     {% endif %}
   </div>
 
+  <div class="acoes-imagem">
+    <button id="btn-acoes" class="btn-acoes">⋯</button>
+
+    <div id="dropdown-acoes" class="dropdown-acoes">
+      <button class="acao-item" id="compartilharBtn">Compartilhar</button>
+      <button class="acao-item" id="denunciarBtn"> Denunciar</button>
+    </div>
+  </div>
+
+</div>
+
   <section class="produto-info">
+
+
     <h2>{{ produto.nome_produto }}</h2>
+
     <p><b>Categoria:</b> {{ produto.categoria_produto }}</p>
+    <p><b>Descrição:</b> {{ produto.descricao_produto }}</p>
 
     <p><b>Valor inicial:</b> R$ {{ produto.preco_produto }}</p>
     <p><b>Lance mínimo:</b> R$ {{ lance_minimo }}</p>
     <p><b>Incremento:</b> R$ {{ produto.incremento_minimo }}</p>
 
-    <p><b>Valor atual:</b> R${{lance_minimo}}</p>
-    <!-- <p><b>Tempo restante:</b> —</p> -->
-    <p><b>Data dinal:</b> {{produto.data_final}}</p>
+    <p><b>Valor atual:</b> R$ {{ lance_minimo }}</p>
+    <p><b>Data final:</b> {{ produto.data_final }}</p>
 
     <hr>
 
-    <h3>Fazer um lance</h3>
+    <h4>Fazer um lance</h4>
 
     {% if 'usuario_logado' in session and session['usuario_logado'] %}
     <form method="post" action="{{ url_for('fazer_lance', id_produto=produto.id_produto) }}" class="form-lance">
@@ -36,11 +52,10 @@
       <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
         value="{{ lance_minimo }}">
 
-      <button type="submit">Fazer Lance</button>
+      <button type="submit" >Fazer Lance</button>
     </form>
     {% else %}
     <form id="form-lance-deslogado" class="form-lance">
-
       <label for="valor_lance">Valor do lance:</label>
 
       <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
@@ -49,23 +64,49 @@
       <button type="submit" id="btnLanceDeslogado">Fazer Lance</button>
     </form>
     <input type="hidden" id="redirect_atual" value="{{ request.path }}">
+    {% endif %}
 
-      {% endif %}
+    <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
 
-      <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
   </section>
 
 </main>
 
 
+
 <script>
+  // Mostrar horário local
   const horarioServidor = "{{ datetime.utcnow().isoformat() }}Z";
   const dataLocal = new Date(horarioServidor);
   document.getElementById("horario-lance").textContent =
     !isNaN(dataLocal) ? dataLocal.toLocaleString() : "Erro ao converter horário";
 
-  //meu deus não sei oq tá acontecendo
+  // Abrir menu ⋯
+  const btnAcoes = document.getElementById("btn-acoes");
+  const dropdown = document.getElementById("dropdown-acoes");
 
+  btnAcoes.addEventListener("click", () => {
+    dropdown.style.display =
+      dropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Fechar ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!btnAcoes.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
+  // Compartilhar
+  document.getElementById("compartilharBtn").addEventListener("click", () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Link copiado!");
+  });
+
+  // Denunciar
+  document.getElementById("denunciarBtn").addEventListener("click", () => {
+    alert(" Sua denúncia foi registrada!");
+  });
 </script>
 
 

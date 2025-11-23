@@ -47,7 +47,7 @@ def login_AR():
         if adm and senha_adm == adm.senha:
             return redirect(proxima)
         else:
-            flash('Usuário ou senha inválidos. Tente novamente.', "erro")
+            flash('Usuário ou senha inválidos. Tente novamente.')
             return redirect(url_for('login_AR'))
 
     return render_template('login_AR.html', proxima=proxima)

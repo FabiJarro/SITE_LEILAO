@@ -28,8 +28,8 @@ VALUES
 
 INSERT INTO produtos (nome_produto, categoria_produto, data_final, preco_produto, incremento_minimo, descricao_produto, id_usuario) 
 VALUES 
-    ('caneca', 'casual', '2009-09-09', 20.99, 5.00,'descricao muitolongaaaaaaaaaaaaaa', 2),
-    ('flor', 'casual','2008-08-08', 45.99, 10.00, 'descricao mais longa aindaaaaaaaa',3);
+    ('caneca', 'casual', '2025-11-25 14:30:00', 20.99, 5.00,'descricao muitolongaaaaaaaaaaaaaa', 2),
+    ('flor', 'casual','2025-11-25 14:30:00', 45.99, 10.00, 'descricao mais longa aindaaaaaaaa',3);
 
 INSERT INTO lances (valor_lance, horario_lance, id_usuario, id_produto) 
 VALUES 

@@ -94,7 +94,31 @@ async function enviarFormularioProduto(event) {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
 
+  const formDeslogado = document.getElementById("form-cadastro-deslogado");
+  const btnLance = document.getElementById("btnCadastroDeslogado");
+
+  if (formDeslogado) {
+      formDeslogado.addEventListener("submit", (e) => {
+          e.preventDefault();
+      });
+  }
+
+  if (btnLance) {
+      btnLance.addEventListener("click", () => {
+          document.getElementById("loginMsg").textContent =
+              "Você precisa estar logado para cadastrar um produto";
+
+          // Redirecionar sempre para a página inicial
+          const urlInicial = "/";
+          sessionStorage.setItem("redirecionar_para", urlInicial);
+
+          modal.style.display = "block";
+      });
+  }
+
+});
 
 
 
