@@ -1,0 +1,1 @@
+O presente projeto tem como finalidade o desenvolvimento do site Vintage Gallery, uma plataforma fictícia de leilões focada na venda de itens vintage e diversos objetos antigos classificados como “antiguidades”. 
