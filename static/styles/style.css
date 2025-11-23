@@ -176,57 +176,6 @@ body {
 
 
 
-.navPrincipal {
-  display: flex;
-  justify-content: center;
-  /* centraliza o menu na horizontal */
-  margin: 10px 0;
-  border-bottom: 2px solid #eee;
-  padding: 8px
-}
-
-.navPrincipal ul {
-  list-style: none;
-  /* tira as bolinhas */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  /* espaçamento entre os itens */
-  padding: 0;
-  margin: 0;
-  font-size: 15px;
-}
-
-.navPrincipal a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-  transition: 0.3s;
-  font-size: 18px;
-
-}
-
-
-
-.navPrincipal button {
-  background-color: white;
-  /* border: 2px solid rgb(0, 0, 0); */
-  color: rgb(0, 0, 0);
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: 'Quicksand';
-}
-
-.navPrincipal button:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
-
-
-
-
 .abraangecards {
   /* background: white; */
   display: grid;
@@ -383,7 +332,7 @@ divisão */
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: #ffffff;
+  background: #f7f6f1;
   border-bottom: 3px solid #918a82;
   position: fixed;
   width: 100%;
@@ -391,9 +340,12 @@ divisão */
   top: 0
 }
 
-.logo-vintage {
-  height: 60px;
+
+.logotipo{
+  height:90px;
+  margin-left: 20px;
 }
+
 
 .barra-pesquisa-container {
   flex-grow: 1;

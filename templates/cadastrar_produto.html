@@ -20,12 +20,18 @@
 
                 <div class="form-group">
                     <label for="categoria_produto">Categoria</label>
-                    <input type="email" id="categoria_produto" name="categoria_produto" required>
-                    <select name="categoria">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value="" ></option>
-                        <option value="" ></option>
+                    <select id="categoria_produto" name="categoria_produto" required>
+                        <option value="quadro">Quadros</option>
+                        <option value="escultura">Escultura</option>
+                        <option value="arte_decoracao">Arte & Decoração</option>
+                        <option value="antiguidades">Antiguidades</option>
+                        <option value="moveis_vintage">Móveis Vintage</option>
+                        <option value="moda_retro">Moda Retrô</option>
+                        <option value="tecnologia_antiga">Tecnologia Antiga</option>
+                        <option value="raridades">Raridades</option>
+                        <option value="moeda">Moeda</option>
+                        <option value="miniatura">Miniatura</option>
+                        <option value="outro">Outro</option>
                     </select>
                 </div>
 
@@ -50,8 +56,8 @@
                 </div>
             </div>
 
-             <!-- COLUNA DIREITA (IMAGEM) -->
-             <div class="coluna coluna-imagem">
+            <!-- COLUNA DIREITA (IMAGEM) -->
+            <div class="coluna coluna-imagem">
                 <h4>Imagem do produto</h4>
                 <div class="upload-area">
                     <input type="file" id="imagem_produto" name="imagem_produto" accept="image/*" required>
@@ -63,7 +69,7 @@
         <button type="button" onclick="enviarFormularioProduto(event)" id="btn-enviar">Salvar</button>
 </div>
 
-    
+
 </form>
 </div>
 
@@ -72,12 +78,12 @@
 <script src="{{ url_for('static', filename='/scripts/script_cadastrarElance.js')}}"></script>
 
 <script>
-    document.getElementById('imagem_produto').addEventListener('change', function(event) {
+    document.getElementById('imagem_produto').addEventListener('change', function (event) {
         const file = event.target.files[0];
         const preview = document.getElementById('preview-imagem');
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 preview.src = e.target.result;
                 preview.style.display = 'block';
             };

@@ -31,7 +31,7 @@
 <main>
 
     {% if primeiro_nome %}
-    <p style="font-size: 25px;">Bem-vindo, {{ primeiro_nome }}!</p>
+    <p style="font-size: 25px0; margin-left: -40px; font-size:25px;">Bem-vindo, {{ primeiro_nome }}!</p>
     {% endif%}
 
     <section class="carrossel-container">
@@ -100,25 +100,6 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-
-        // === NAV QUE SOME AO DESCER ===
-        let ultimaPosicaoScroll = 0;
-        const nav = document.querySelector(".navPrincipal");
-
-        window.addEventListener("scroll", function () {
-            let posicaoAtual = window.pageYOffset;
-
-            // Desceu-some
-            if (posicaoAtual > ultimaPosicaoScroll) {
-                nav.classList.add("nav-escondida");
-            }
-            // Subiu-aparece
-            else {
-                nav.classList.remove("nav-escondida");
-            }
-
-            ultimaPosicaoScroll = posicaoAtual;
-        });
 
         const slides = document.querySelectorAll(".carrossel-slide");
         const btnAnterior = document.querySelector(".anterior");

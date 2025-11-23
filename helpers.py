@@ -65,9 +65,6 @@ class ProdutoForm():
     def validarProduto(self):
         if len(self.nome_produto) < 1 or len(self.nome_produto) > 255:
             raise ValueError('O valor do nome do produto deve ser entre 1 e 255 caracteres')
-        
-        if len(self.categoria_produto) < 1 or len(self.categoria_produto) > 100:
-            raise ValueError('O valor da categoria do produto deve ser entre 1 e 100 caracteres')
 
         if len(self.descricao_produto) < 1:
             raise ValueError('A descrição do produto é obrigatória')
