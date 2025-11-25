@@ -28,25 +28,6 @@ def atualizarUsuario():
     return redirect (url_for('paginainicial'))
 
 
-
-# @app.route('/atualizarProduto', methods=['POST',])
-# def atualizarProduto():
-#     produto=Produtos.query.filter_by(id_produto=request.form['id_produto']).first()
-#     produto.nome_produto= request.form['nome_produto']
-#     produto.categoria_produto=request.form['categoria_produto']
-#     produto.preco_produto = request.form['preco_produto']
-#     produto.incremento_minimo=request.form['incremento_minimo']
-#     produto.descricao_produto=request.form['descricao_produto']
-
-#     img=Imagens.query.filter_by(id_imagem=request.form['id_imagem']).first()
-#     img.imagem_produto= request.form['imagem_produto']
-    
-#     db.session.add(produto)
-#     db.session.add(img)
-#     db.session.commit()
-    
-#     return redirect (url_for('paginainicial'))
-
 @app.route('/atualizarProduto', methods=['POST',])
 def atualizarProduto():
     produto=Produtos.query.filter_by(id_produto=request.form['id_produto']).first()
@@ -62,9 +43,6 @@ def atualizarProduto():
     db.session.commit()
     
     return redirect (url_for('paginainicial'))
-
-
-
 
 
 @app.route('/deletar/<int:id_usuario>')

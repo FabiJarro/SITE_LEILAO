@@ -137,7 +137,7 @@ ul {
 main {
   padding: 70px;
   flex: 1;
-  background-color: #fdfaf6;
+  background-color: #fffcf9;
 
 }
 
@@ -148,7 +148,7 @@ p {
 
 body {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Lora", serif;
   background: white;
   display: flex;
   flex-direction: column;

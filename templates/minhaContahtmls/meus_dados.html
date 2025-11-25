@@ -1,11 +1,17 @@
+<style>
+    h2{
+        font-family: "Lora", serif;
+    }
+</style>
 
-<body>
+
+
     <h2>Meus dados</h2>
     <p><b>Nome:</b> {{ cadastro.nome }}</p>
     <p><b>Email:</b> {{ cadastro.email }}</p>
     <p><b>CPF:</b> {{ cadastro.cpf }}</p>
 
     <a href="{{ url_for('editarUsuario', id_usuario=cadastro.id_usuario) }}">Editar</a>
-</body>
+
 
 

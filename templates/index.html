@@ -26,7 +26,7 @@
     </ul>
 </nav>
 
-{% with messages = get_flashed_messages() %}
+<!-- {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul id="messages" class="list-unstyled">
     {% for message in messages %}
@@ -34,7 +34,7 @@
     {% endfor %}
 </ul>
 {% endif %}
-{% endwith %}
+{% endwith %} -->
 
 
 <main>
@@ -43,9 +43,9 @@
 
 
 
-    {% if primeiro_nome %}
+    <!-- {% if primeiro_nome %}
     <p style="font-size: 25px0; margin-left: -40px; font-size:25px;">Bem-vindo, {{ primeiro_nome }}!</p>
-    {% endif%}
+    {% endif%} -->
 
     <section class="carrossel-container">
         <div class="carrossel">
@@ -83,77 +83,77 @@
 
             <div class="carousel-container">
                 <!-- Cada categoria -->
-                <a href="{{ url_for('produtos', nome_produto='eletronicos') }}" class="categoria-item">
+                <a href="{{ url_for('produtos', nome_produto='quadro') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/quadro.jpeg') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/quadro3.jpg') }}" alt="">
                     </div>
                     <p>Quadros</p>
                 </a>
 
-                <a href="{{ url_for('produtos', nome_produto='colecionaveis') }}" class="categoria-item">
+                <a href="{{ url_for('produtos', nome_produto='escultura') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/colecionaveis.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/escultura.jpg') }}" alt="">
                     </div>
                     <p>Escultura</p>
                 </a>
 
-                <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
+                <a href="{{ url_for('produtos', nome_produto='arte_decoracao') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/dec.jpg') }}" alt="">
                     </div>
                     <p>Arte & Decoração</p>
                 </a>
                 <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/antt.jpg') }}" alt="">
                     </div>
-                    <p>Antiguidades</p>
+                    <p>Antiguidades</p> 
                 </a>
                 <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/movel.jpg') }}" alt="">
                     </div>
                     <p>Móveis Vintage</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='antiguidades') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/antiguidades.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/moda.jpg') }}" alt="">
                     </div>
                     <p>Moda Retrô</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='joias') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/joias.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/tec.jpg') }}" alt="">
                     </div>
                     <p>Tecnologia Antiga</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='veiculos') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/veiculos.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/raro.jpg') }}" alt="">
                     </div>
                     <p>Raridades</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/moeda.jpg') }}" alt="">
                     </div>
                     <p>Moeda</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/mini.jpg') }}" alt="">
                     </div>
                     <p>Miniatura</p>
                 </a>
 
                 <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
                     <div class="icon-wrapper">
-                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                        <img src="{{ url_for('static', filename='imagens/icones/outros.jpg') }}" alt="">
                     </div>
                     <p>Outros</p>
                 </a>

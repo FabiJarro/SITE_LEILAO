@@ -5,23 +5,26 @@
     margin: 2rem auto;
     border-radius: 12px;
     background: #fafafa;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 100px;
 }
 
 .menu-conta {
     width: 220px;
-    background: #fff;
+    background-color: #fcfaf8;
     border-right: 1px solid #eaeaea;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    
 }
 
 .menu-conta h2 {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     color: #333;
+    font-family: "Lora", serif;
 }
 
 .menu-conta ul {
@@ -62,8 +65,8 @@
 }
 
 .conteudo-dinamico {
-    background: #fff;
+    background-color: #fffbf8;
     border-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
 }

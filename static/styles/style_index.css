@@ -7,14 +7,31 @@ main{
 }
 
 /* ----- CARROSSEL ----- */
-.carrossel-container {
+
+
+
+/* .carrossel-container {
     position: relative;
     overflow: hidden;
     max-width: 100%;
     height: 58vh;
-    /* margin-top: 40px; */
+    margin-top: -88px;
     z-index: 2;
     border-radius: 10px;
+
+} */
+    /* margin-top: 20px; */
+
+
+.carrossel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;               /* ocupa toda a tela */
+    margin-left: 50%;           /* truque para anular padding do main */
+    transform: translateX(-50%); /* centraliza de novo */
+    border-radius: 0 !important; /* caso queira sem bordas */
+    margin-top: -87px;
+    z-index:2;
 }
 
 .carrossel {
@@ -115,7 +132,7 @@ main{
     padding: 25px 0;
     background: rgba(248, 248, 243, 0.6);
     backdrop-filter: blur(3px);
-    margin-top: 27px;
+    margin-top: 25px;
     position: relative;
     left: 49%;
     right: 50%; 
@@ -157,7 +174,7 @@ main{
 .produtos-recentes {
     width: 100%;
     padding: 40px 80px;
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 .produtos-recentes h2 {
