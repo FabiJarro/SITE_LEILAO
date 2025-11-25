@@ -108,21 +108,6 @@ main{
 
 /*nav*/
 
-/* .navPrincipal {
-    top: 190px;
-    width: 100%;
-    background: rgba(53, 25, 25, 0.9), 0,3s ease;
-    padding: 25px 0;
-    z-index: 999;
-    transition: top 0.4s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    margin-top: 32px;
-    margin-left: -70px;
-    margin-right: -70px;
-
-}  */
-
-
 
 .navPrincipal {
     width: 100vw;         
@@ -139,20 +124,6 @@ main{
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 } 
-
-
-/* .navPrincipal {
-    width: 100%;           
-    margin: 0;
-    padding: 25px 0;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(3px);
-    
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-
-    text-align: center;
-    position: relative;
-} */
 
 
 .navPrincipal ul {
@@ -257,4 +228,102 @@ main{
 .card-info .preco {
     font-size: 16px;
     font-weight: 600;
+}
+
+
+
+.categorias-carousel {
+    width: 100%;
+    margin-top: 45px;
+    padding: 40px 80px;
+}
+
+.categorias-carousel h2 {
+    font-size: 32px;
+    margin-bottom: 50px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: "Lora", serif;
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 40px;
+    padding: 20px;
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.categoria-item {
+    min-width: 150px;
+    text-decoration: none;
+    color: black;
+}
+
+
+.categoria-item p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.icon-wrapper {
+    width: 120px;
+    height: 120px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    overflow: hidden;
+    border: 2px solid #ccc;
+}
+
+/* NOVO: imagem ocupando o círculo inteiro */
+.icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.carousel-btn {
+    background: none;
+    border: none;
+    font-size: 40px;
+    color: #806e3f;
+    cursor: pointer;
+    padding: 0 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    user-select: none;
+    transition: opacity 0.2s ease;
+}
+
+.carousel-btn:hover {
+    opacity: 0.6;
+}
+
+.left-btn {
+    left: 10px;
+}
+
+.right-btn {
+    right: 10px;
 }

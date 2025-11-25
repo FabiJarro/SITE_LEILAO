@@ -2,5 +2,100 @@
 {% block conteudo %}
 
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style_como.css') }}">
+
+<section class="secao-como">
+    
+    <h1 class="titulo-principal">Como Comprar na Vintage Gallery</h1>
+    <p class="subtitulo">
+        Participar de um leilão é simples, seguro e rápido. Siga os passos abaixo para entender 
+        como adquirir peças únicas em nossa plataforma.
+    </p>
+
+    <!-- PASSO 1 -->
+    <div class="bloco">
+        <div class="texto">
+            <h2>1. Crie sua conta</h2>
+            <p>
+                Para dar lances, você precisa ter um cadastro válido.  
+                Clique em <strong>“Entrar ou Cadastrar”</strong> no topo do site e preencha seus dados.  
+                Após o cadastro, você estará apto a participar dos leilões imediatamente.
+            </p>
+
+            <p class="observacao">
+                *Se necessário, confirme seu e-mail antes de começar.  
+                  <span class="em-breve">[Aqui você pode adicionar o processo real se houver confirmação por e-mail.]</span>
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/seo.jpeg') }}" alt="Cadastro">
+        </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div class="bloco invertido">
+        <div class="texto">
+            <h2>2. Explore os produtos</h2>
+            <p>
+                Navegue pelas categorias ou use a barra de pesquisa para encontrar obras de arte,
+                antiguidades, peças decorativas e itens raros disponíveis.  
+            </p>
+
+            <ul class="lista">
+                <li>Fotos reais de cada item;</li>
+                <li>Descrição completa;</li>
+                <li>Preço inicial e incremento mínimo;</li>
+                <li>Tempo restante do leilão.</li>
+            </ul>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/seo.jpeg') }}" alt="Cadastro">
+        </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div class="bloco">
+        <div class="texto">
+            <h2>3. Dê seus lances</h2>
+            <p>
+                Ao encontrar um item desejado, insira seu lance respeitando o valor mínimo exibido.  
+                Você pode aumentar o lance quantas vezes quiser enquanto o leilão estiver ativo.
+            </p>
+
+            <p class="observacao">
+                *Aqui você deve explicar a regra real do seu sistema, por exemplo:<br>
+                <span class="em-breve">“O lance deve ser no mínimo R$ X acima do lance atual”</span>
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/how/comprar3.jpg') }}" alt="Dar lance">
+        </div>
+    </div>
+
+    <!-- PASSO 4 -->
+    <div class="bloco invertido">
+        <div class="texto">
+            <h2>4. Acompanhe o resultado</h2>
+            <p>
+                Quando o tempo do leilão chega ao fim, o sistema identifica automaticamente
+                o maior lance. Se você for o ganhador, receberá uma notificação ao acessar o site.
+            </p>
+
+            <p class="observacao">
+                *Aqui você pode adicionar o que realmente acontece no seu sistema:<br>
+                <span class="em-breve">“O usuário vencedor verá um aviso verde ao acessar a página inicial.”</span>
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/how/comprar4.jpg') }}" alt="Resultado">
+        </div>
+    </div>
+
+</section>
+
 
 {% endblock %}

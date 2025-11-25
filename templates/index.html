@@ -29,9 +29,9 @@
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul id="messages" class="list-unstyled">
-  {% for message in messages %}
-  <li class="alert alert-success" style="font-size: 23px;">{{ message }}</li>
-  {% endfor %}
+    {% for message in messages %}
+    <li class="alert alert-success" style="font-size: 23px;">{{ message }}</li>
+    {% endfor %}
 </ul>
 {% endif %}
 {% endwith %}
@@ -39,8 +39,8 @@
 
 <main>
 
-   
-    
+
+
 
 
     {% if primeiro_nome %}
@@ -75,41 +75,148 @@
         </div>
     </section>
 
-<!-- produtos recentes -->
+    <section class="categorias-carousel">
+        <h2>Categorias</h2>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-btn left-btn">&#10094;</button>
+
+            <div class="carousel-container">
+                <!-- Cada categoria -->
+                <a href="{{ url_for('produtos', nome_produto='eletronicos') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/quadro.jpeg') }}" alt="">
+                    </div>
+                    <p>Quadros</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='colecionaveis') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/colecionaveis.png') }}" alt="">
+                    </div>
+                    <p>Escultura</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                    </div>
+                    <p>Arte & Decoração</p>
+                </a>
+                <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                    </div>
+                    <p>Antiguidades</p>
+                </a>
+                <a href="{{ url_for('produtos', nome_produto='arte') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/arte.png') }}" alt="">
+                    </div>
+                    <p>Móveis Vintage</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='antiguidades') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/antiguidades.png') }}" alt="">
+                    </div>
+                    <p>Moda Retrô</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='joias') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/joias.png') }}" alt="">
+                    </div>
+                    <p>Tecnologia Antiga</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='veiculos') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/veiculos.png') }}" alt="">
+                    </div>
+                    <p>Raridades</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                    </div>
+                    <p>Moeda</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                    </div>
+                    <p>Miniatura</p>
+                </a>
+
+                <a href="{{ url_for('produtos', nome_produto='outras') }}" class="categoria-item">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='imagens/icones/outras.png') }}" alt="">
+                    </div>
+                    <p>Outros</p>
+                </a>
+
+            </div>
+
+            <button class="carousel-btn right-btn">&#10095;</button>
+        </div>
+    </section>
+
+
+    <!-- produtos recentes -->
     <section class="produtos-recentes">
         <h2>Produtos mais recentes</h2>
-    
+
         <div class="grid-produtos-recentes">
-    
+
             {% for produto in produtos %}
             <a class="card-recente" href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
-    
+
                 <div class="card-img">
                     {% if produto.imagens and produto.imagens[0] %}
-                    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
+                    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
+                        alt="{{ produto.nome_produto }}">
                     {% else %}
-                    <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}" alt="{{ produto.nome_produto }}">
+                    <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}"
+                        alt="{{ produto.nome_produto }}">
                     {% endif %}
                 </div>
-    
+
                 <div class="card-info">
                     <h3 class="marca">{{ produto.marca_produto }}</h3>
                     <p class="titulo">{{ produto.nome_produto }}</p>
                     <p class="preco">R$ {{ produto.preco_produto }}</p>
                 </div>
-    
+
             </a>
             {% endfor %}
-    
+
         </div>
     </section>
 
 
-    
+
+
+
 
 </main>
 
 
+<script>
+    const container = document.querySelector(".carousel-container");
+    const leftBtn = document.querySelector(".left-btn");
+    const rightBtn = document.querySelector(".right-btn");
+
+    leftBtn.addEventListener("click", () => {
+        container.scrollBy({ left: -300, behavior: "smooth" });
+    });
+
+    rightBtn.addEventListener("click", () => {
+        container.scrollBy({ left: 300, behavior: "smooth" });
+    });
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

@@ -12,11 +12,11 @@ def sobre():
 
 @app.route('/como_vender')
 def como_vender():
-    return render_template('/paginasStatic/como_comprar.html')
+    return render_template('/paginasStatic/como_vender.html')
 
 @app.route('/como_comprar')
 def como_comprar():
-    return render_template('/paginasStatic/como_vender.html')
+    return render_template('/paginasStatic/como_comprar.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

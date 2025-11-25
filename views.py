@@ -1,15 +1,13 @@
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify, Response
 from datetime import datetime, timezone
-from leilao import app,db
+from leilao import app,db,scheduler
 from models import Cadastros, Adm, Produtos, Lances, Imagens
-from helpers import UsuarioForm, ProdutoForm
+from helpers import UsuarioForm, ProdutoForm, finalizar_leilao
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 import os
 from uteis import hashSenha 
 
-ADMINISTRADOR="admin"
-SENHA_ADM="1234"
 
 @app.route('/')
 def paginainicial():
@@ -144,7 +142,9 @@ def cadastrar_produto():
     
     nome_produto=produtoForm.nome_produto
     categoria_produto=produtoForm.categoria_produto
-    data_final=produtoForm.data_final
+    # data_final=produtoForm.data_final
+    data_final_str = produtoForm.data_final   # vem como '2025-11-04T20:03'
+    data_final = datetime.strptime(data_final_str, "%Y-%m-%dT%H:%M")
     preco_produto = produtoForm.preco_produto
     descricao_produto=produtoForm.descricao_produto
     incremento_minimo=produtoForm.incremento_minimo
@@ -160,12 +160,21 @@ def cadastrar_produto():
         return jsonify({"status":"erro","mensagem":"Produto já existe"}), 400
     
     
-    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo,data_final=data_final, id_usuario=id_usuario)
+    novo_produto=Produtos(nome_produto=nome_produto,categoria_produto=categoria_produto, preco_produto=preco_produto, descricao_produto=descricao_produto, incremento_minimo=incremento_minimo, data_final=data_final, id_usuario=id_usuario)
     
     db.session.add(novo_produto)
     print("o novo produto comitando")
     db.session.commit()
     print("coomitado:?")
+    
+    scheduler.add_job(
+    func=finalizar_leilao,
+    trigger='date',
+    run_date=data_final,
+    args=[novo_produto.id_produto],
+    id=f"leilao_{novo_produto.id_produto}",
+    replace_existing=True
+    )
     
     img = request.files.get('imagem_produto')
     if img:
@@ -176,8 +185,6 @@ def cadastrar_produto():
             db.session.add(nova_img)
             db.session.commit()  
             
-            
-    id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'))
 
     # produto_destaque = Produtos.query.order_by(Produtos.id_produto).all()
     lista_produto = Produtos.query.order_by(Produtos.id_produto)
@@ -193,7 +200,6 @@ def cadastrar_produto():
 
 
 
-
 @app.route('/detalhes_produto/<int:id_produto>')
 def detalhes_produto(id_produto): 
     produto=Produtos.query.get_or_404(id_produto)
@@ -201,6 +207,18 @@ def detalhes_produto(id_produto):
     lance_minimo = request.args.get('lance_minimo')
     
     ultimo_lance = Lances.query.filter_by(id_produto=id_produto).order_by(Lances.horario_lance.desc()).first()
+    
+    if datetime.now() > produto.data_final:
+        if ultimo_lance:
+            id_ganhador = ultimo_lance.id_usuario
+
+            # Se quem está vendo é o ganhador
+            if session.get('id_usuario') == id_ganhador:
+                flash(f"🎉 Você venceu o leilão do produto: {produto.nome_produto}!")
+            else:
+                flash(f"O leilão foi encerrado! Ganhador: Usuário {id_ganhador}")
+        else:
+            flash("O leilão foi encerrado sem lances.")
     
     preco_inicial = float(produto.preco_produto)
     incremento = float(produto.incremento_minimo)
@@ -229,9 +247,18 @@ def fazer_lance(id_produto):
     if 'usuario_logado' not in session:
         flash('login_requerido')
         return redirect(url_for('paginainicial'))
+    
+    if datetime.now() > produto.data_final:
+        flash("Este leilão já foi encerrado!")
+        return redirect(url_for('detalhes_produto', id_produto=id_produto))
+
 
     valor_lance = float(request.form['valor_lance'])
     id_usuario = session.get('usuario_logado')
+
+    if not id_usuario:
+        flash("Erro: usuário não identificado.")
+        return redirect(url_for('paginainicial'))
 
 
     ultimo_lance = (
@@ -254,7 +281,7 @@ def fazer_lance(id_produto):
     db.session.commit()
 
     flash('Lance registrado com sucesso!')
-    return redirect(url_for('detalhes_produto', id_produto=id_produto))
+    return redirect(url_for('paginainicial', id_produto=id_produto))
 
 
 

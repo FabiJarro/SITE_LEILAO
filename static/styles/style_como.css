@@ -1,0 +1,75 @@
+.secao-como {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "Lora", serif;
+}
+
+.titulo-principal {
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitulo {
+    text-align: center;
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    color: #444;
+}
+
+.bloco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.bloco.invertido {
+    flex-direction: row-reverse;
+}
+
+.texto {
+    flex: 1;
+}
+
+.texto h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.texto p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.lista li {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.observacao {
+    font-size: 15px;
+    color: #555;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.em-breve {
+    color: #7d6d45;
+    font-weight: bold;
+}
+
+.imagem {
+    flex: 1;
+}
+
+.imagem img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}

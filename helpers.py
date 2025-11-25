@@ -1,6 +1,8 @@
 
 from leilao import app
 import re    
+from models import Cadastros, Adm, Produtos, Lances, Imagens
+from leilao import db
 
         
 class UsuarioForm():
@@ -78,3 +80,34 @@ class ProdutoForm():
         return True
     
     
+    
+def finalizar_leilao(id_produto):
+    with app.app_context(): 
+        produto = Produtos.query.get(id_produto)
+
+        if not produto:
+            print("Produto não encontrado")
+            return
+
+        # Já está finalizado?
+        # if produto.status == "finalizado":
+        #     return
+
+        print(f"Finalizando leilão do produto {produto.nome_produto}")
+
+        ultimo_lance = (
+            Lances.query.filter_by(id_produto=id_produto)
+            .order_by(Lances.valor_lance.desc(), Lances.horario_lance.desc())
+            .first()
+        )
+
+        if ultimo_lance:
+            produto.id_ganhador = ultimo_lance.id_usuario
+            produto.lance_final = ultimo_lance.valor_lance
+            print(f"Ganhador: usuario {ultimo_lance.id_usuario}")
+        else:
+            print("Nenhum lance foi feito")
+
+        # produto.status = "finalizado"
+        db.session.commit()
+        print("Leilão finalizado com sucesso!")

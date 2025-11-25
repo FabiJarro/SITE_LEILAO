@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 
@@ -10,6 +11,10 @@ app.config.from_pyfile('config.py')
    
 db=SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+scheduler = BackgroundScheduler()
+scheduler.start()
+
 
 from views import * 
 from views_autenticacao import *

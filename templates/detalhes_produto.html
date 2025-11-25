@@ -6,25 +6,25 @@
 <main class="detalhes-produto">
 
 
-<div class="coluna-imagem">
-  <div class="produto-imagem">
-    {% if produto.imagens and produto.imagens[0] %}
-    <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
-    {% else %}
-    <img src="{{ url_for('static', filename='img/sem-imagem.png') }}" alt="Sem imagem disponível">
-    {% endif %}
-  </div>
-
-  <div class="acoes-imagem">
-    <button id="btn-acoes" class="btn-acoes">⋯</button>
-
-    <div id="dropdown-acoes" class="dropdown-acoes">
-      <button class="acao-item" id="compartilharBtn">Compartilhar</button>
-      <button class="acao-item" id="denunciarBtn"> Denunciar</button>
+  <div class="coluna-imagem">
+    <div class="produto-imagem">
+      {% if produto.imagens and produto.imagens[0] %}
+      <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
+      {% else %}
+      <img src="{{ url_for('static', filename='img/sem-imagem.png') }}" alt="Sem imagem disponível">
+      {% endif %}
     </div>
-  </div>
 
-</div>
+    <div class="acoes-imagem">
+      <button id="btn-acoes" class="btn-acoes">⋯</button>
+
+      <div id="dropdown-acoes" class="dropdown-acoes">
+        <button class="acao-item" id="compartilharBtn">Compartilhar</button>
+        <button class="acao-item" id="denunciarBtn"> Denunciar</button>
+      </div>
+    </div>
+
+  </div>
 
   <section class="produto-info">
 
@@ -52,7 +52,7 @@
       <input id="valor_lance" name="valor_lance" type="number" step="0.01" required min="{{ lance_minimo }}"
         value="{{ lance_minimo }}">
 
-      <button type="submit" >Fazer Lance</button>
+      <button type="submit">Fazer Lance</button>
     </form>
     {% else %}
     <form id="form-lance-deslogado" class="form-lance">
@@ -69,6 +69,16 @@
     <h5><b>Horário do lance (local):</b> <span id="horario-lance"></span></h5>
 
   </section>
+
+  {% if produto.status == 'finalizado' %}
+  <p><strong>Leilão encerrado!</strong></p>
+  {% if produto.id_ganhador %}
+  <p>Vencedor: {{ produto.ganhador.nome }}</p>
+  <p>Lance final: R$ {{ produto.lance_final }}</p>
+  {% else %}
+  <p>Nenhum lance foi feito.</p>
+  {% endif %}
+  {% endif %}
 
 </main>
 
