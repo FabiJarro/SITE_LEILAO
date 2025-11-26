@@ -4,14 +4,86 @@
     }
 </style>
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style_minhaConta.css')}}">
 
+<div class="dados-container">
 
-    <h2>Meus dados</h2>
-    <p><b>Nome:</b> {{ cadastro.nome }}</p>
-    <p><b>Email:</b> {{ cadastro.email }}</p>
-    <p><b>CPF:</b> {{ cadastro.cpf }}</p>
+    <h2 class="titulo-dados">Meus Dados</h2>
 
-    <a href="{{ url_for('editarUsuario', id_usuario=cadastro.id_usuario) }}">Editar</a>
+    <div class="dados-grid">
 
+        <div class="grupo-dado">
+            <label>Nome Completo</label>
+            <p>{{ cadastro.nome }}</p>
+        </div>
 
+        <div class="grupo-dado">
+            <label>Email</label>
+            <p>{{ cadastro.email }}</p>
+        </div>
 
+        <div class="grupo-dado">
+            <label>CPF</label>
+            <p>{{ cadastro.cpf }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>RG</label>
+            <p>{{ cadastro.rg }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Data de Nascimento</label>
+            <p>{{ cadastro.data_nascimento }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Telefone</label>
+            <p>{{ cadastro.telefone }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>CEP</label>
+            <p>{{ cadastro.cep }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Rua</label>
+            <p>{{ cadastro.rua }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Número</label>
+            <p>{{ cadastro.telefone }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Complemento</label>
+            <p>{{ cadastro.complemento }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Bairro</label>
+            <p>{{ cadastro.bairro }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Cidade</label>
+            <p>{{ cadastro.cidade }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>Estado</label>
+            <p>{{ cadastro.estado }}</p>
+        </div>
+
+        <div class="grupo-dado">
+            <label>País</label>
+            <p>{{ cadastro.pais }}</p>
+        </div>
+
+    </div>
+
+    <a href="{{ url_for('editarUsuario', id_usuario=cadastro.id_usuario) }}" class="botao-editar">Editar</a>
+
+</div>

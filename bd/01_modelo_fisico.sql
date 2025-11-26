@@ -40,6 +40,7 @@ CREATE TABLE
         `preco_produto` decimal(10, 2) NOT NULL,
         `incremento_minimo` decimal(10, 2) NOT NULL,
         `id_usuario` int NOT NULL,
+        
         PRIMARY KEY (`id_produto`),
         FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;

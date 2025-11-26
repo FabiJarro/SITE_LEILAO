@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
 }
 
 .menu-conta h2 {
@@ -69,4 +69,95 @@
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+
+
+}
+/* 
+MEUS DADOS */
+
+/* Container geral dos dados */
+.dados-container {
+    background: #fdfdfb;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    font-family: "Lora", serif;
+    width: 100%;
+    max-width: 100%;  
+    box-sizing: border-box;
+}
+
+/* Título */
+.titulo-dados {
+    font-size: 26px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #946d48;
+    display: inline-block;
+    padding-bottom: 6px;
+    color: #333;
+}
+
+/* Grid dos dados */
+.dados-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 60px; /* aumentei o espaço entre as colunas */
+    width: 100%;
+}
+
+/* Cada dado */
+.grupo-dado label {
+    font-size: 13px;
+    color: #3b3b3b;
+}
+
+.grupo-dado p {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Botão editar */
+.botao-editar {
+    display: inline-block;
+    margin-top: 35px;
+    background-color: #bba26b;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.botao-editar:hover {
+    background-color: #91835d;
+    transform: scale(1.02);
+}
+
+.botao-sair{
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Responsivo */
+@media (max-width: 700px) {
+    .dados-grid {
+        grid-template-columns: 1fr;
+    }
 }
