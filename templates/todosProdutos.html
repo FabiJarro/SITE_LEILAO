@@ -29,29 +29,29 @@
 
         </a> -->
 
-        <div class="card-imagem clean">
-            {% if produto.imagens and produto.imagens[0] %}
-                <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
-            {% else %}
-                <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}" alt="{{ produto.nome_produto }}">
-            {% endif %}
-        </div>
-        
-    
-        <div class="card-conteudo clean">
-            <h2>{{ produto.nome_produto }}</h2>
-    
-            <p class="descricao">
-                {{ produto.descricao_produto[:90] if produto.descricao_produto else 'Sem descrição.' }}...
-            </p>
-    
-            <div class="info-leilao">
-                <span>Preço inicial:</span>
-                <strong>R$ {{ '%.2f'|format(produto.preco_produto) }}</strong>
-            </div>
-    
-            <span class="btn-ver-mais">Ver detalhes</span>
-        </div>
+                        <div class="card-imagem clean">
+                    {% if produto.imagens and produto.imagens[0] %}
+                        <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}" alt="{{ produto.nome_produto }}">
+                    {% endif %}
+                </div>
+                
+            
+                <div class="card-conteudo clean">
+                    <h2>{{ produto.nome_produto }}</h2>
+            
+                    <p class="descricao">
+                        {{ produto.descricao_produto[:90] if produto.descricao_produto else 'Sem descrição.' }}...
+                    </p>
+            
+                    <div class="info-leilao">
+                        <span>Preço inicial:</span>
+                        <strong>R$ {{ '%.2f'|format(produto.preco_produto) }}</strong>
+                    </div>
+            
+                    <span class="btn-ver-mais">Ver detalhes</span>
+                </div>
 
         {% endfor %}
 

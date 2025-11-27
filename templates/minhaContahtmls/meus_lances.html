@@ -67,8 +67,8 @@
                 <th>Produto</th>
                 <th>Valor do Lance</th>
                 <th>Data/Hora</th>
-                <th>Status</th>
-                <th>Ações</th>
+                <!-- <th>Status</th>
+                <th>Ações</th> -->
             </tr>
         </thead>
         <tbody>
@@ -77,13 +77,13 @@
                 <td>{{ lance.produto.nome_produto }}</td>
                 <td>R$ {{ "%.2f"|format(lance.valor_lance) }}</td>
                 <td>{{ lance.horario_lance.strftime("%d/%m/%Y %H:%M") }}</td>
-                <td>
+                <!-- <td>
                     {% if lance.produto.ativo %}
                     <span class="status ativo">Em andamento</span>
                     {% else %}
                     <span class="status finalizado">Finalizado</span>
                     {% endif %}
-                </td>
+                </td> -->
                 <td>
 
                 </td>

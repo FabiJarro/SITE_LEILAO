@@ -169,13 +169,12 @@ h5 {
 
 .btn-acoes:hover {
     color: #000;
-    transform: rotate(90deg);
 }
 
 
 .dropdown-acoes {
-    display: none;
-    position: absolute;
+    /* display: none;
+    position: absolute; */
     top: 40px;
     right: 0;
     background: linear-gradient(135deg, #ffffff 0%, #f9f6f0 100%);
