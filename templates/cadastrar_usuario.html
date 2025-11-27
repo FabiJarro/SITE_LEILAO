@@ -67,8 +67,8 @@
 
         <div class="duas-colunas">
           <div class="form-group">
-            <label for="telefone">Número</label>
-            <input type="text" id="telefone" name="telefone" required>
+            <label for="numero_casa">Número</label>
+            <input type="text" id="numero_casa" name="numero_casa" required>
           </div>
 
           <div class="form-group">
@@ -152,4 +152,71 @@
 
 
 <script src="{{ url_for('static', filename='/scripts/script_cadastrarElance.js')}}"></script>
+<script>
+  // / ----- CPF -----
+  const cpf = document.querySelector("#cpf");
+  cpf.addEventListener("input", function () {
+    let v = cpf.value.replace(/\D/g, "");
+    if (v.length > 11) v = v.slice(0, 11);
+
+    if (v.length >= 3) v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    if (v.length >= 6) v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    if (v.length >= 9) v = v.replace(/(\d{3})(\d{2})$/, "$1-$2");
+
+    cpf.value = v;
+  });
+
+  // ----- TELEFONE -----
+  const telefone = document.querySelector("#telefone");
+  telefone.addEventListener("input", function () {
+    let v = telefone.value.replace(/\D/g, "");
+    if (v.length > 11) v = v.slice(0, 11);
+
+    if (v.length >= 2) v = v.replace(/(\d{2})(\d)/, "($1) $2");
+    if (v.length >= 7) v = v.replace(/(\d{5})(\d)/, "$1-$2");
+
+    telefone.value = v;
+  });
+
+  // ----- CEP (xxxxx-xxx) -----
+  const cep = document.querySelector("#cep");
+  cep.addEventListener("input", function () {
+    let v = cep.value.replace(/\D/g, "");
+    if (v.length > 8) v = v.slice(0, 8);
+
+    if (v.length >= 6) v = v.replace(/(\d{5})(\d)/, "$1-$2");
+
+    cep.value = v;
+  });
+
+  // ----- RG (xx.xxx.xxx-x) -----
+  const rg = document.querySelector("#rg");
+  rg.addEventListener("input", function () {
+    let v = rg.value.replace(/\D/g, "");
+    if (v.length > 9) v = v.slice(0, 9);
+
+    if (v.length >= 2) v = v.replace(/(\d{2})(\d)/, "$1.$2");
+    if (v.length >= 5) v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    if (v.length >= 8) v = v.replace(/(\d{3})(\d)$/, "$1-$2");
+
+    rg.value = v;
+  });
+
+  
+  const dataNasc = document.querySelector("#data_nascimento");
+
+  dataNasc.addEventListener("input", function () {
+    let v = dataNasc.value.replace(/\D/g, "");
+    if (v.length > 8) v = v.slice(0, 8);
+
+    if (v.length >= 2) v = v.replace(/(\d{2})(\d)/, "$1/$2");
+    if (v.length >= 2) v = v.replace(/(\d{2})(\d)/, "$1/$2");
+
+    dataNasc.value = v;
+  });
+
+  
+
+</script>
+
 {% endblock %}

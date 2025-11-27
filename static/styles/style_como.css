@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 .secao-como {
     max-width: 1200px;
@@ -6,30 +6,63 @@
     padding: 0 20px;
     font-family: "Lora", serif;
     margin-top: 120px;
+    background: linear-gradient(180deg, #fffcf9 0%, #faf8f2 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
 }
 
 .titulo-principal {
     font-size: 42px;
     font-family: "Lora", serif;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 15px;
     text-align: center;
+    color: #4d1814;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.titulo-principal::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #b89d7a 0%, #918a82 100%);
+    border-radius: 2px;
 }
 
 .subtitulo {
     text-align: center;
     font-size: 18px;
     max-width: 800px;
-    margin: 0 auto 60px;
-    color: #444;
+    margin: 0 auto 80px;
+    color: #666;
+    line-height: 1.6;
+    font-style: italic;
 }
 
 .bloco {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40px;
-    margin-bottom: 180px;
+    gap: 50px;
+    margin-bottom: 120px;
+    background: linear-gradient(145deg, #ffffff 0%, #f9f6f0 100%);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e8e0d4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bloco:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .bloco.invertido {
@@ -39,44 +72,129 @@
 .texto {
     flex: 1;
     font-family: "Lora", serif;
-
 }
 
 .texto h2 {
-    font-size: 30px;
-    margin-bottom: 15px;
+    font-size: 32px;
+    margin-bottom: 20px;
     font-family: "Lora", serif;
+    font-weight: 600;
+    color: #4d1814;
+    position: relative;
+}
+
+.texto h2::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    width: 5px;
+    height: 25px;
+    background: linear-gradient(180deg, #b89d7a 0%, #8f300a 100%);
+    border-radius: 2px;
 }
 
 .texto p {
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 20px;
+    color: #333;
+}
+
+.texto strong {
+    color: #8f300a;
+    font-weight: 700;
 }
 
 .lista li {
     font-size: 17px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    color: #555;
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+}
+
+.lista li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #b89d7a;
+    font-size: 20px;
 }
 
 .observacao {
     font-size: 15px;
-    color: #555;
-    margin-top: 10px;
+    color: #777;
+    margin-top: 15px;
     font-style: italic;
+    border-left: 3px solid #e8e0d4;
+    padding-left: 15px;
 }
 
 .em-breve {
     color: #7d6d45;
-    font-weight: bold;
+    font-weight: 700;
+    text-decoration: underline;
 }
 
 .imagem {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imagem img {
     width: 100%;
-    border-radius: 10px;
+    max-width: 400px;
+    border-radius: 15px;
     object-fit: cover;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border: 2px solid #f5f0e8;
+}
+
+.imagem img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1) contrast(1.05);
+}
+
+@media (max-width: 768px) {
+    .secao-como {
+        margin-top: 80px;
+        padding: 20px 10px;
+    }
+
+    .titulo-principal {
+        font-size: 32px;
+    }
+
+    .subtitulo {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .bloco {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 80px;
+        padding: 20px;
+    }
+
+    .bloco.invertido {
+        flex-direction: column;
+    }
+
+    .texto h2 {
+        font-size: 24px;
+    }
+
+    .texto p {
+        font-size: 16px;
+    }
+
+    .imagem img {
+        max-width: 100%;
+    }
 }

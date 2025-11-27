@@ -1,6 +1,106 @@
 {% extends "base.html" %}
 {% block conteudo %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style_como.css') }}">
 
+<section class="secao-como">
+
+    <h1 class="titulo-principal">Como Vender na Vintage Gallery</h1>
+    <p class="subtitulo">
+        Deseja transformar suas peças antigas, raras ou colecionáveis em algo valioso?  
+        Veja como é simples anunciar e vender seus itens em nossa plataforma de leilões.
+    </p>
+
+    <!-- PASSO 1 -->
+    <div class="bloco">
+        <div class="texto">
+            <h2>1. Faça login ou crie sua conta</h2>
+            <p>
+                Antes de anunciar um produto, você precisa ter um cadastro ativo.  
+                Clique em <strong>“Entrar ou Cadastrar”</strong> e preencha seus dados.  
+                Assim que sua conta estiver ativa, você já pode criar seus leilões.
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/passo1.1.png') }}" alt="Cadastro">
+        </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div class="bloco invertido">
+        <div class="texto">
+            <h2>2. Cadastre seu produto</h2>
+            <p>
+                Acesse o menu e clique em <strong>“Cadastrar Produto”</strong>.  
+                Preencha as informações, envie fotos reais do item e escolha um título chamativo.  
+                Quanto mais detalhes você fornecer, mais confiança o comprador terá.
+            </p>
+            <!-- <ul class="lista">
+                <li>Título e descrição detalhada;</li>
+                <li>Estado de conservação;</li>
+                <li>Fotos em boa qualidade;</li>
+                <li>Categoria do item.</li>
+            </ul> -->
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/passo1.png') }}" alt="Cadastro Produto">
+        </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div class="bloco">
+        <div class="texto">
+            <h2>3. Defina as regras do leilão</h2>
+            <p>
+                Escolha o <strong>preço inicial</strong> e o <strong>incremento mínimo</strong> de cada lance.  
+                Você também pode definir a <strong>duração do leilão</strong>, permitindo que os usuários tenham tempo suficiente para disputar sua peça.
+            </p>
+            <p>
+                O incremento é o valor mínimo que cada lance deve aumentar automaticamente — garantindo que o produto valorize a cada oferta.
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/passo1.png') }}" alt="Regras do Leilão">
+        </div>
+    </div>
+
+    <!-- PASSO 4 -->
+    <div class="bloco invertido">
+        <div class="texto">
+            <h2>4. Acompanhe os lances</h2>
+            <p>
+                Assim que o leilão estiver ativo, outros usuários poderão dar lances.  
+                Você pode acompanhar tudo acessando a página do produto.
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/passo1.png') }}" alt="Acompanhar">
+        </div>
+    </div>
+
+    <!-- PASSO 5 -->
+    <div class="bloco">
+        <div class="texto">
+            <h2>5. Finalização da venda</h2>
+            <p>
+                Quando o tempo do leilão terminar, o sistema identificará o maior lance.  
+                Se o seu item tiver sido arrematado, você verá uma notificação ao acessar o site.
+            </p>
+            <p>
+                A partir daí, basta combinar a entrega com o comprador.  
+                Nossa plataforma atua apenas como intermediadora do leilão.
+            </p>
+        </div>
+
+        <div class="imagem">
+            <img src="{{ url_for('static', filename='imagens/passo1.png') }}" alt="Venda Finalizada">
+        </div>
+    </div>
+
+</section>
 
 {% endblock %}

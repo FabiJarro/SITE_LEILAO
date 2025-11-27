@@ -2,11 +2,11 @@ from flask import render_template, request, redirect, session, flash, url_for, m
 from datetime import datetime, timezone
 from leilao import app,db,scheduler
 from models import Cadastros, Adm, Produtos, Lances, Imagens
-from helpers import UsuarioForm, ProdutoForm, finalizar_leilao
+from helpers import UsuarioForm, ProdutoForm, finalizar_leilao, hashSenha 
 from werkzeug.utils import secure_filename
 from sqlalchemy import or_
 import os
-from uteis import hashSenha 
+
 
 
 @app.route('/')
@@ -73,6 +73,7 @@ def cadastrar_usuario():
     email=usuarioForm.email
     senha=hashSenha(usuarioForm.senha)
     cep=usuarioForm.cep
+    numero_casa=usuarioForm.numero_casa
     rua=usuarioForm.rua
     bairro=usuarioForm.bairro
     complemento=usuarioForm.complemento
@@ -312,5 +313,34 @@ def produtos():
     lista = query.order_by(Produtos.id_produto).all()
 
     return render_template('todosProdutos.html', produtos=lista, nome_produto=nome_produto)
+
+
+
+
+@app.route('/denunciar/<int:id_produto>', methods=['POST'])
+def denunciar(id_produto):
+    if 'usuario_logado' not in session:
+        return redirect('/login')
+
+    denuncia= f"denuncia_{id_produto}"
+
+    if session.get(denuncia):
+        flash("Você já denunciou este produto.")
+        return redirect(url_for('detalhes_produto', id_produto=id_produto))
+
+    produto = Produtos.query.get(id_produto)
+
+    if not produto:
+        flash("Produto não encontrado.")
+        return redirect('/')
+
+    produto.denuncias += 1
+    db.session.commit()
+
+    session[denuncia] = True  
+
+    flash("Denúncia enviada com sucesso.")
+    return redirect(url_for('detalhes_produto', id_produto=id_produto))
+
 
 

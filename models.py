@@ -9,6 +9,7 @@ class Cadastros(db.Model):
     nome = db.Column(db.String(255), nullable=False)          
     cpf = db.Column(db.String(14), nullable=False, unique=True) 
     rg= db.Column(db.String(14), nullable=False, unique=True) 
+    numero_casa= db.Column(db.String(10), nullable=False, unique=True) 
     data_nascimento = db.Column(db.Date, nullable=False)
     email=db.Column(db.String(320), nullable=False)
     senha = db.Column(db.String(255), nullable=False)         
@@ -43,6 +44,7 @@ class Produtos(db.Model):
     preco_produto=db.Column(db.Float(255), nullable=False)
     incremento_minimo=db.Column(db.Float(255), nullable=False)
     descricao_produto = db.Column(db.Text, nullable=False)
+    denuncias = db.Column(db.Integer, default=0)
     id_usuario = db.Column(db.Integer, db.ForeignKey('cadastros.id_usuario'))
     imagens = db.relationship('Imagens', backref='produto', lazy=True)
 

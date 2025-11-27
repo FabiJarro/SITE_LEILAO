@@ -16,6 +16,20 @@
 
 <body>
 
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="toast-container">
+    {% for category, message in messages %}
+    <div class="toast {{ category }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+
+
   <header class="header-vintage">
 
     <div id="sidebar-backdrop" style="
@@ -78,8 +92,8 @@
 
 
 
-      <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none; right:0; top:0; z-index:10; background-color: rgb(255, 254, 252);"
-        id="rightMenu">
+      <div class="w3-sidebar w3-bar-block w3-card w3-animate-right"
+        style="display:none; right:0; top:0; z-index:10; background-color: rgb(255, 254, 252);" id="rightMenu">
 
         <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">&times;</button>
 
@@ -135,7 +149,8 @@
           <!-- Lado direito: cadastro -->
           <div id="ladoDireito">
             <p>Ainda não tem cadastro?</p>
-            <a href="{{ url_for('cadastro_usuario') }}" style="color: blue; text-decoration: underline;">Cadastre-se
+            <a href="{{ url_for('cadastro_usuario') }}"
+              style="color: rgb(167, 123, 57); text-decoration: underline;">Cadastre-se
               aqui</a>
           </div>
         </div>

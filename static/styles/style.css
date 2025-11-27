@@ -387,9 +387,55 @@ divisão */
 }
 
 /* #myBtn:focus {
-  outline: 2px dashed #0072ec; 
+  outline: 2px dashed #0072ec; */
+
+  .toast-container {
+    position: fixed;
+    top: 120px;
+    right: 20px; /* mude para 'left: 20px' se quiser no canto esquerdo */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    padding: 12px 18px;
+    border-radius: 8px;
+    color: rgb(22, 8, 8);
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    animation: slide-in 0.4s forwards, fade-out 0.5s ease-in-out 4s forwards;
+}
+
+/* Cores por categoria (suporta flash(category, message)) */
+.toast.success { background: #2ecc71; }
+.toast.error { background: #e74c3c; }
+.toast.warning { background: #f1c40f; color: black; }
+.toast.info { background: #3498db; }
+
+/* Animação de entrada (tipo prompt moderno) */
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Sai suavemente */
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
 
 
 
 
-  
+

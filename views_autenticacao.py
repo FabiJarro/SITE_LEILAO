@@ -1,7 +1,7 @@
 from leilao import app, db
 from flask import render_template, request, redirect, session, flash, url_for, make_response, jsonify
 from models import Cadastros, Adm, Produtos, Lances
-from uteis import hashSenha
+from helpers import hashSenha
 
 
 @app.route('/entrar_usuario', methods=['POST', 'GET'])
@@ -57,7 +57,7 @@ def login_AR():
 @app.route('/logout')
 def logout():
     session.clear()
-    flash("Você foi deslogado", "info")
+    flash("Você foi deslogado")
     resposta = make_response(redirect(url_for('paginainicial')))
     resposta.set_cookie('usuario_email', '', expires=0)
     return resposta

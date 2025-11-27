@@ -36,6 +36,19 @@
 {% endif %}
 {% endwith %} -->
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="toast-container">
+      {% for category, message in messages %}
+        <div class="toast {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
 
 <main>
 
@@ -50,19 +63,27 @@
     <section class="carrossel-container">
         <div class="carrossel">
             <div class="carrossel-slide active">
-                <img src="{{ url_for('static', filename='imagens/carrossel8.jpeg') }}" alt="Slide 2">
+                <img src="{{ url_for('static', filename='imagens/carro1.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
-                    <h2>Todo o Catálogo</h2>
-                    <p>confira todo nosso catálogo!</p>
-                    <a href="{{ url_for('todosProdutos') }}" class="botao-carrossel"> ver tudo</a>
+                    <!-- <h2>Todo o Catálogo</h2>
+                    <p>confira todo nosso catálogo!</p> -->
+                    <!-- <a href="{{ url_for('todosProdutos') }}" class="botao-carrossel"> ver tudo</a> -->
                 </div>
             </div>
             <div class="carrossel-slide">
-                <img src="{{ url_for('static', filename='imagens/carrossel5.jpeg') }}" alt="Slide 2">
+                <img src="{{ url_for('static', filename='imagens/carro2.jpeg') }}" alt="Slide 2">
                 <div class="carrossel-texto">
-                    <h2>Como vender?</h2>
-                    <p>comece hoje seu leilão!</p>
-                    <a href="{{ url_for('como_vender') }}" class="botao-carrossel">saiba mais</a>
+                    <!-- <h2>Como vender?</h2>
+                    <p>comece hoje seu leilão!</p> -->
+                    <!-- <a href="{{ url_for('como_vender') }}" class="botao-carrossel">saiba mais</a> -->
+                </div>
+            </div>
+            <div class="carrossel-slide">
+                <img src="{{ url_for('static', filename='imagens/carro3.jpeg') }}" alt="Slide 2">
+                <div class="carrossel-texto">
+                    <!-- <h2>Como vender?</h2>
+                    <p>comece hoje seu leilão!</p> -->
+                    <!-- <a href="{{ url_for('como_vender') }}" class="botao-carrossel">saiba mais</a> -->
                 </div>
             </div>
 
@@ -160,6 +181,8 @@
 
             </div>
 
+            
+
             <button class="carousel-btn right-btn">&#10095;</button>
         </div>
     </section>
@@ -174,7 +197,7 @@
             {% for produto in produtos %}
             <a class="card-recente" href="{{ url_for('detalhes_produto', id_produto=produto.id_produto) }}">
 
-                <div class="card-img">
+                <!-- <div class="card-img">
                     {% if produto.imagens and produto.imagens[0] %}
                     <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}"
                         alt="{{ produto.nome_produto }}">
@@ -188,12 +211,40 @@
                     <h3 class="marca">{{ produto.marca_produto }}</h3>
                     <p class="titulo">{{ produto.nome_produto }}</p>
                     <p class="preco">R$ {{ produto.preco_produto }}</p>
+                </div> -->
+
+                <div class="card-imagem clean">
+                    {% if produto.imagens and produto.imagens[0] %}
+                        <img src="{{ url_for('get_img', id_imagem=produto.imagens[0].id_imagem) }}" alt="{{ produto.nome_produto }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='imagens/capa_padrao.jpeg') }}" alt="{{ produto.nome_produto }}">
+                    {% endif %}
+                </div>
+                
+            
+                <div class="card-conteudo clean">
+                    <h2>{{ produto.nome_produto }}</h2>
+            
+                    <p class="descricao">
+                        {{ produto.descricao_produto[:90] if produto.descricao_produto else 'Sem descrição.' }}...
+                    </p>
+            
+                    <div class="info-leilao">
+                        <span>Preço inicial:</span>
+                        <strong>R$ {{ '%.2f'|format(produto.preco_produto) }}</strong>
+                    </div>
+            
+                    <span class="btn-ver-mais">Ver detalhes</span>
                 </div>
 
             </a>
             {% endfor %}
 
+
         </div>
+
+        </a>
+        
     </section>
 
 

@@ -19,10 +19,17 @@
       <button id="btn-acoes" class="btn-acoes">⋯</button>
 
       <div id="dropdown-acoes" class="dropdown-acoes">
+
         <button class="acao-item" id="compartilharBtn">Compartilhar</button>
-        <button class="acao-item" id="denunciarBtn"> Denunciar</button>
+
+        <form action="{{ url_for('denunciar', id_produto=produto.id_produto) }}" method="POST">
+          <button class="acao-item" type="submit" id="denunciarBtn">Denunciar</button>
+        </form>
       </div>
     </div>
+
+
+
 
   </div>
 
@@ -113,10 +120,6 @@
     alert("Link copiado!");
   });
 
-  // Denunciar
-  document.getElementById("denunciarBtn").addEventListener("click", () => {
-    alert(" Sua denúncia foi registrada!");
-  });
 </script>
 
 

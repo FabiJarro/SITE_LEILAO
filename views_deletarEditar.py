@@ -19,6 +19,7 @@ def atualizarUsuario():
     cadastro.rua=request.form['rua']
     cadastro.bairro=request.form['bairro']
     cadastro.complemento=request.form['complemento']
+    cadastro.numero_casa=request.form['numero_casa']
     cadastro.pais=request.form['pais']
     cadastro.cidade=request.form['cidade']
     cadastro.telefone=request.form['telefone']

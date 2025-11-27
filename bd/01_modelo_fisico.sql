@@ -12,6 +12,7 @@ CREATE TABLE
         `email` varchar(320) NOT NULL,
         `senha` varchar(255) NOT NULL,
         `cep` char(9) NOT NULL,
+        `numero_casa` varchar(10),
         `rua` varchar(255) NOT NULL,
         `bairro` varchar(255) NOT NULL,
         `complemento` varchar(255) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE
         `preco_produto` decimal(10, 2) NOT NULL,
         `incremento_minimo` decimal(10, 2) NOT NULL,
         `id_usuario` int NOT NULL,
-        
+        `denuncias` int DEFAULT 0,
         PRIMARY KEY (`id_produto`),
         FOREIGN KEY (`id_usuario`) REFERENCES `cadastros` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;

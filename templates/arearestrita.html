@@ -49,7 +49,6 @@
             <th>preço</th>
             <th>incremento minimo</th>
             <th>data final</th>
-            <th>imagem</th>
             <th></th>
             <th></th>
 
@@ -66,7 +65,6 @@
             <td>{{ produto.preco_produto }}</td>
             <td>{{ produto.incremento_minimo}}</td>
             <td>{{ produto.data_final}}</td>
-            <td>{{ produto.imagens}}</td>
             <td><a href="{{ url_for('editarProduto', id_produto=produto.id_produto) }}">Editar</a></td>
             <td><a href="{{ url_for('deletarProduto', id_produto=produto.id_produto) }}">Deletar</a></td>
 
@@ -88,6 +86,7 @@
             <th>ID produto</th>
             <th>horario do lance</th>
             <th>valor do lance</th>
+            <th>data do lance</th>
             <th></th>
             <th></th>
 

@@ -1,8 +1,15 @@
 
 from leilao import app
 import re    
+import hashlib
 from models import Cadastros, Adm, Produtos, Lances, Imagens
 from leilao import db
+
+
+def hashSenha(senha):
+    texto_bytes = senha.encode('utf-8')
+    hash_sha256 = hashlib.sha256(texto_bytes)
+    return hash_sha256.hexdigest()
 
         
 class UsuarioForm():
@@ -12,6 +19,7 @@ class UsuarioForm():
         self.nome = form.get('nome')
         self.cpf = form.get('cpf')
         self.rg= form.get('rg')
+        self.numero_casa= form.get('numero_casa')
         self.data_nascimento = form.get('data_nascimento')
         self.senha = form.get('senha')
         self.email = form.get('email')
@@ -38,17 +46,31 @@ class UsuarioForm():
         if not self.validar_cpf():
             raise ValueError('CPF inválido!')
         
-        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', self.data_nascimento):  # formato do input type="date"
-            raise ValueError('A data de nascimento deve estar no formato AAAA-MM-DD.')
+        # if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', self.data_nascimento):  
+        #     raise ValueError('A data de nascimento deve estar no formato AAAA-MM-DD.')
+        # Aceita DD/MM/YYYY e converte para YYYY-MM-DD
+        if re.fullmatch(r'\d{2}/\d{2}/\d{4}', self.data_nascimento):
+            dia, mes, ano = self.data_nascimento.split('/')
+            self.data_nascimento = f"{ano}-{mes}-{dia}"  # converte para AAAA-MM-DD
+        else:
+            raise ValueError('A data de nascimento deve estar no formato DD/MM/AAAA.')
+
         
         if '@' not in self.email or '.' not in self.email:
             raise ValueError('O email informado é inválido.')
 
-        if not re.fullmatch(r'\d{8}', self.cep):
-            raise ValueError('O CEP deve conter exatamente 8 dígitos numéricos.')
+        # if not re.fullmatch(r'\d{8}', self.cep):
+        #     raise ValueError('O CEP deve conter exatamente 8 dígitos numéricos.')
         
         if len(self.senha) < 1 or len(self.senha) > 255:
             raise ValueError('O valor da senha deve ser entre 1 e 255 caracteres')
+        
+        cep_limpo = re.sub(r'\D', '', self.cep)
+
+        if not re.fullmatch(r'\d{8}', cep_limpo):
+            raise ValueError('O CEP deve conter exatamente 8 dígitos numéricos.')
+
+        self.cep = cep_limpo
         
         return True
 
@@ -63,6 +85,7 @@ class ProdutoForm():
         self.preco_produto = form.get('preco_produto')
         self.incremento_minimo = form.get('incremento_minimo')
         self.data_final= form.get('data_final')
+        
         
     
     def validarProduto(self):
